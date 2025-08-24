@@ -1,0 +1,95 @@
+/* Typography utilities and components layers (no Tailwind import here) */
+
+@layer utilities {
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+}
+
+/*
+Do not use @layer components anymore. See rationale in typo.tsx
+See context-css-theme.ia.md for more info
+*/
+
+/* @layer components {
+  .typo-body {
+    @apply font-sans text-base leading-normal tracking-normal font-normal text-foreground;
+  }
+
+  .typo-label {
+    @apply font-sans text-sm leading-snug tracking-wide font-medium text-foreground;
+  }
+
+  .typo-subtle {
+    @apply font-sans text-md leading-normal tracking-wide font-normal text-low-contrast-higher-contrast;
+  }
+
+  .typo-hint {
+    @apply font-sans text-sm leading-normal tracking-wide font-normal text-low-contrast-higher-contrast;
+  }
+
+  .typo-caption {
+    @apply font-sans text-xs leading-normal tracking-wide font-normal text-light-higher-contrast;
+  }
+
+  .typo-code {
+    @apply font-mono text-sm leading-snug tracking-normal font-normal text-foreground;
+  }
+
+  .typo-number {
+    @apply text-4xl text-foreground;
+  }
+
+  .typo-p,
+  .typo-paragraph {
+    @apply font-sans text-md leading-relaxed tracking-normal font-normal text-foreground;
+  }
+
+  .typo-blockquote {
+    @apply font-serif text-md leading-relaxed tracking-normal font-normal text-low-contrast-higher-contrast italic;
+  }
+
+  .typo-link {
+    @apply font-sans text-md leading-normal tracking-normal font-normal text-primary-higher-contrast underline-offset-6 hover:underline;
+  }
+
+  .typo-main-title {
+    @apply font-heading text-5xl leading-tight tracking-tighter font-medium text-foreground;
+  }
+
+  .typo-main-subtitle {
+    @apply font-heading text-2xl leading-snug tracking-normal font-medium text-foreground;
+  }
+
+  .typo-section-title {
+    @apply font-heading text-3xl leading-tight tracking-normal font-medium text-foreground;
+  }
+
+  .typo-section-subtitle {
+    @apply font-heading text-xl leading-normal tracking-normal font-medium text-foreground;
+  }
+
+  .typo-subsection-title {
+    @apply font-heading text-xl leading-normal tracking-normal font-semibold text-foreground;
+  }
+
+  .typo-subsection-subtitle {
+    @apply font-heading text-lg leading-normal tracking-normal font-medium text-foreground;
+  }
+
+  .typo-card-title {
+    @apply font-heading text-lg leading-snug tracking-normal font-semibold text-foreground;
+  }
+
+  .typo-card-subtitle {
+    @apply font-heading text-base leading-normal tracking-normal font-medium text-foreground;
+  }
+} */

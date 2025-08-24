@@ -1,0 +1,5 @@
+@layer utilities {
+
+  /* No-op size class to bypass parent selector [&_svg:not([class*='size-'])] */
+  .size-empty {}
+}

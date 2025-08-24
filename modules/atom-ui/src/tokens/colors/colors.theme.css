@@ -1,0 +1,300 @@
+/* ==========================================================================
+   1) TOKENS (runtime) — Tailwind-named variables
+   ==========================================================================
+  CSS Variables are used to define the token values.
+    - Source of truth
+    - Will be transformed into Tailwind classes using (@theme and @layer utilities)
+    - Use CSS variables to enable overrides based on theme modes: dark, mobile (smaller), etc.
+        -> This will override classes created from the variables without requiring additional handling.
+
+  Note:
+    - Do NOT take care of others domain color (example foreground-card or caption-color, ..)
+    - They'll defie them in the corresponding domain.css file.
+        By either re-using as generic color, or defining a new one (design specific request
+*/
+
+
+:root {
+  /* ---------- Global foreground/background (LIGHT & DARK sources) ---------- */
+
+  /* Sources (overridable by themes/modes) */
+  --color-foreground-light: oklch(0.145 0 0);
+  /* near-black for light mode text */
+  --color-background-light: oklch(0.985 0 0);
+  /* near-white for light mode bg  */
+  --color-foreground-dark: oklch(0.985 0 0);
+  /* near-white for dark mode text */
+  --color-background-dark: oklch(0.215 0 0);
+  /* near-black for dark mode bg   */
+
+  /* Effective roles (default = light) */
+  --color-foreground: var(--color-foreground-light);
+  --color-foreground-inverse: var(--color-foreground-dark);
+  --color-background: var(--color-background-light);
+  --color-background-inverse: var(--color-background-dark);
+
+  /* Common roles */
+  --color-border: oklch(.5 0 0 / 20%);
+  --color-ring: oklch(0.708 0 0);
+  --color-overlay: color-mix(in oklab, black 75%, transparent);
+  --color-accent: oklch(0 0 0 / 8%);
+
+
+  /* ---------- Neutrals (utility) ---------- */
+  /* Pure black/white */
+  --color-white-pure: oklch(1 0 0);
+  --color-black-pure: oklch(0 0 0);
+
+  /* Subtle black/white (zinc) */
+  --color-white: var(--color-zinc-50);
+  --color-black: var(--color-zinc-950);
+
+  /* ---------- Brand & Primary (triplets) ---------- */
+  --color-brand: oklch(0.5197 0.2095 28.84);
+  --color-brand-foreground: var(--color-zinc-50);
+  --color-brand-higher-contrast: var(--color-brand);
+
+  /* Primary defaults -> brand (triplet intact) */
+  --color-primary: var(--color-brand);
+  --color-primary-foreground: var(--color-brand-foreground);
+  --color-primary-higher-contrast: var(--color-brand);
+
+  /* ---------- Contrast roles (triplets) ---------- */
+  --color-full-contrast: var(--color-black);
+  --color-full-contrast-foreground: var(--color-white);
+  --color-full-contrast-higher-contrast: var(--color-full-contrast);
+
+  --color-high-contrast: var(--color-zinc-500);
+  --color-high-contrast-foreground: var(--color-white);
+  --color-high-contrast-higher-contrast: var(--color-zinc-800);
+
+  /* --color-zinc-350:  */
+  --color-low-contrast: oklch(0.788 0.0105 286.176);
+  --color-low-contrast-foreground: var(--color-black);
+  --color-low-contrast-higher-contrast: var(--color-zinc-500);
+
+  --color-light: var(--color-zinc-200);
+  --color-light-foreground: var(--color-black);
+  --color-light-higher-contrast: var(--color-zinc-500);
+
+  /* Useless, use light instead
+
+  --color-gray: var(--color-zinc-300);
+  --color-gray-foreground: var(--color-zinc-800);
+  --color-gray-higher-contrast: var(--color-zinc-500);
+  */
+  --color-muted: var(--color-zinc-200);
+  --color-muted-foreground: var(--color-zinc-500);
+  --color-muted-higher-contrast: var(--color-zinc-500);
+
+  /* ---------- Status (triplets) ---------- */
+  --color-success: var(--color-lime-600);
+  --color-success-foreground: var(--color-white);
+  --color-success-higher-contrast: var(--color-success);
+
+  --color-warning: var(--color-amber-600);
+  --color-warning-foreground: var(--color-white);
+  --color-warning-higher-contrast: var(--color-warning);
+
+  --color-error: var(--color-red-600);
+  --color-error-foreground: var(--color-white);
+  --color-error-higher-contrast: var(--color-error);
+
+  --color-destructive: oklch(0.65 0.2 21.99);
+  --color-destructive-foreground: var(--color-white);
+  --color-destructive-higher-contrast: var(--color-destructive);
+
+  --color-info: var(--color-sky-500);
+  --color-info-foreground: var(--color-white);
+  --color-info-higher-contrast: var(--color-info);
+
+  /* ---------- Crypto (triplets) ---------- */
+  --color-bitcoin: oklch(0.7538 0.1673 63.64);
+  --color-bitcoin-foreground: var(--color-white);
+  --color-bitcoin-higher-contrast: var(--color-bitcoin);
+
+  --color-lightning: oklch(0.5232 0.2813 293.61);
+  --color-lightning-foreground: var(--color-white);
+  --color-lightning-higher-contrast: var(--color-lightning);
+
+  --color-liquid: oklch(0.7335 0.114 181.91);
+  --color-liquid-foreground: var(--color-black);
+  --color-liquid-higher-contrast: oklch(0.65 0.1 181.91);
+  /* var(--color-liquid); */
+
+  --color-fiat: oklch(0.54 0.11 134);
+  --color-fiat-foreground: var(--color-white);
+  --color-fiat-higher-contrast: var(--color-fiat);
+
+}
+
+/* ==========================================================================
+   2) MODE OVERRIDES
+   ========================================================================== */
+
+.dark {
+
+  /* Effective roles switch to dark */
+  --color-foreground: var(--color-foreground-dark);
+  --color-foreground-inverse: var(--color-foreground-light);
+  --color-background: var(--color-background-dark);
+  --color-background-inverse: var(--color-background-light);
+
+  /* Common roles */
+  --color-border: oklch(.4 0 0 / 50%);
+  /* --color-input: var(--surface-card); Replaced by new "input" surface */
+  --color-ring: oklch(0.458 0 0);
+  /* oklch(0.956 6 0); */
+  /* For things like select keyboard cursor */
+  --color-accent: oklch(1 0 0 / 8%);
+
+
+  /* Contrast roles */
+  --color-full-contrast: var(--color-white);
+  --color-full-contrast-foreground: var(--color-black);
+
+  --color-high-contrast: var(--color-zinc-400);
+  --color-high-contrast-foreground: var(--color-black);
+  --color-high-contrast-higher-contrast: var(--color-zinc-200);
+
+  --color-low-contrast: var(--color-zinc-600);
+  --color-low-contrast-foreground: var(--color-zinc-100);
+  --color-low-contrast-higher-contrast: var(--color-zinc-500);
+
+  --color-light: var(--color-zinc-700);
+  --color-light-foreground: var(--color-white);
+  --color-light-higher-contrast: var(--color-zinc-500);
+
+  /* --color-gray: var(--color-zinc-700);
+  --color-gray-foreground: var(--color-zinc-100);
+  --color-gray-higher-contrast: var(--color-zinc-500); */
+
+  --color-muted: var(--color-zinc-800);
+  --color-muted-foreground: var(--color-zinc-400);
+  --color-muted-higher-contrast: var(--color-zinc-500);
+
+}
+
+/* ==========================================================================
+   3) @theme — Tailwind classes
+   ==========================================================================
+   Use @theme directive to generate all Tailwind classes from the CSS variables.
+      (color => text-*, bg-*, border-*, shadow-*, etc.)
+
+*/
+
+@theme {
+  /* Define both foreground/background */
+  --color-foreground-light: var(--color-foreground-light);
+  --color-background-light: var(--color-background-light);
+  --color-foreground-dark: var(--color-foreground-dark);
+  --color-background-dark: var(--color-background-dark);
+
+  /* Effective roles */
+  --color-foreground: var(--color-foreground);
+  --color-foreground-inverse: var(--color-foreground-inverse);
+  --color-background: var(--color-background);
+  --color-background-inverse: var(--color-background-inverse);
+
+  --color-border: var(--color-border);
+  --color-input: var(--color-input);
+  --color-ring: var(--color-ring);
+  --color-overlay: var(--color-overlay);
+  /* For things like select keyboard cursor */
+  --color-accent: var(--color-accent);
+  /* --color-accent-foreground: var(--color-light-foreground); */
+
+
+  /* Brand / Primary */
+  --color-brand: var(--color-brand);
+  --color-brand-foreground: var(--color-brand-foreground);
+  --color-brand-higher-contrast: var(--color-brand-higher-contrast);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-higher-contrast: var(--primary-higher-contrast);
+
+  /* Status */
+  --color-success: var(--color-success);
+  --color-success-foreground: var(--color-success-foreground);
+  --color-success-higher-contrast: var(--color-success-higher-contrast);
+
+  --color-warning: var(--color-warning);
+  --color-warning-foreground: var(--color-warning-foreground);
+  --color-warning-higher-contrast: var(--color-warning-higher-contrast);
+
+  --color-error: var(--color-error);
+  --color-error-foreground: var(--color-error-foreground);
+  --color-error-higher-contrast: var(--color-error-higher-contrast);
+
+  --color-destructive: var(--color-destructive);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+  --color-destructive-higher-contrast: var(--color-destructive-higher-contrast);
+
+  --color-info: var(--color-info);
+  --color-info-foreground: var(--color-info-foreground);
+  --color-info-higher-contrast: var(--color-info-higher-contrast);
+
+  /* Crypto */
+  --color-bitcoin: var(--color-bitcoin);
+  --color-bitcoin-foreground: var(--color-bitcoin-foreground);
+  --color-bitcoin-higher-contrast: var(--color-bitcoin-higher-contrast);
+
+  --color-lightning: var(--color-lightning);
+  --color-lightning-foreground: var(--color-lightning-foreground);
+  --color-lightning-higher-contrast: var(--color-lightning-higher-contrast);
+
+  --color-liquid: var(--color-liquid);
+  --color-liquid-foreground: var(--color-liquid-foreground);
+  --color-liquid-higher-contrast: var(--color-liquid-higher-contrast);
+
+  --color-fiat: var(--color-fiat);
+  --color-fiat-foreground: var(--color-fiat-foreground);
+  --color-fiat-higher-contrast: var(--color-fiat-higher-contrast);
+
+
+  /* Neutrals & Contrast */
+
+  --color-foreground-light: var(--color-foreground-light);
+  --color-foreground-dark: var(--color-foreground-dark);
+  --color-background-light: var(--color-background-light);
+  --color-background-dark: var(--color-background-dark);
+
+
+  --color-foreground: var(--color-foreground);
+  --color-foreground-inverse: var(--color-foreground-inverse);
+  --color-background: var(--color-background);
+  --color-background-inverse: var(--color-background-inverse);
+
+  --color-border: var(--color-border);
+  --color-ring: var(--color-ring);
+  --color-overlay: var(--color-overlay);
+
+  --color-full-contrast: var(--color-full-contrast);
+  --color-full-contrast-foreground: var(--color-full-contrast-foreground);
+  --color-full-contrast-higher-contrast: var(--color-full-contrast-higher-contrast);
+
+  --color-high-contrast: var(--color-high-contrast);
+  --color-high-contrast-foreground: var(--color-high-contrast-foreground);
+  --color-high-contrast-higher-contrast: var(--color-high-contrast-higher-contrast);
+
+  --color-low-contrast: var(--color-low-contrast);
+  --color-low-contrast-foreground: var(--color-low-contrast-foreground);
+  --color-low-contrast-higher-contrast: var(--color-low-contrast-higher-contrast);
+
+  --color-light: var(--color-light);
+  --color-light-foreground: var(--color-light-foreground);
+  --color-light-higher-contrast: var(--color-light-higher-contrast);
+
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-muted-higher-contrast: var(--color-muted-higher-contrast);
+
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+  --color-white-pure: var(--color-white-pure);
+  --color-black-pure: var(--color-black-pure);
+
+
+
+}

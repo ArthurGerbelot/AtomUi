@@ -1,0 +1,47 @@
+:root {
+  /* Independent surface tokens (light) */
+  --surface-card: oklch(1 0 0);
+  --surface-card-foreground: oklch(0.145 0 0);
+  --surface-card-border: oklch(0.922 0 0 / 75%);
+
+  --surface-secondary: oklch(0.94 0 0);
+  --surface-secondary-foreground: oklch(0.205 0 0);
+  --surface-secondary-border: oklch(0.922 0 0 / 75%);
+
+  /* Popover */
+  --surface-popover: oklch(1 0 0);
+  --surface-popover-foreground: oklch(0.145 0 0);
+  --surface-popover-border: oklch(0.922 0 0 / 75%);
+}
+
+.dark {
+  /* Independent surface tokens (dark) */
+  --surface-card: oklch(0.255 0 0);
+  --surface-card-foreground: oklch(0.985 0 0);
+  --surface-card-border: oklch(.3 0 0 / 75%);
+
+  --surface-secondary: oklch(0.309 0 0);
+  --surface-secondary-foreground: oklch(0.985 0 0);
+  --surface-secondary-border: oklch(.3 0 0 / 10%);
+
+  /* Popover */
+  --surface-popover: oklch(0.205 0 0);
+  --surface-popover-foreground: oklch(0.985 0 0);
+  --surface-popover-border: oklch(1 0 0 / 10%);
+}
+
+@theme {
+  /* Tailwind color tokens for surfaces */
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-foreground: var(--surface-card-foreground);
+  --color-surface-card-border: var(--surface-card-border);
+
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-secondary-foreground: var(--surface-secondary-foreground);
+  --color-surface-secondary-border: var(--surface-secondary-border);
+
+  /* Popover */
+  --color-surface-popover: var(--surface-popover);
+  --color-surface-popover-foreground: var(--surface-popover-foreground);
+  --color-surface-popover-border: var(--surface-popover-border);
+}

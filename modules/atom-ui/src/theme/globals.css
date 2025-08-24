@@ -1,0 +1,81 @@
+@import "./tailwind-tokens.css";
+@import "./shadcn-tokens.css";
+
+/* Import only variable/token definitions BEFORE Tailwind */
+@import "../tokens/index.theme.css";
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+
+/* Import utility aliases that use @layer/@apply AFTER Tailwind */
+@import "../tokens/index.layer.css";
+@import "tw-animate-css";
+
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Base typographic scale */
+  --text-base-size: 1rem;
+
+  /* Fonts */
+  --font-golos: "Golos Text", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+  --font-jetbrains-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-bebas-neue: "Bebas Neue", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+
+  /* Radius base (used to derive radius tokens below) */
+  --radius: 0.625rem;
+}
+
+html {
+  font-size: var(--text-base-size);
+}
+
+@theme inline {
+  /* Derive radius tokens only (colors come from colors.theme.css) */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+
+  /* ================================
+      Unify focus visible (remove browser default and replace by a ring)
+  ================================ */
+
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+
+
+/* ================================
+      Helpers
+  ================================ */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

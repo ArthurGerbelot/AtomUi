@@ -1,0 +1,45 @@
+/*
+Do not use @layer components anymore. See rationale in surface.tsx
+See context-css-theme.ia.md for more info
+*/
+
+/*
+@layer components {
+
+  .surface-card {
+    @apply bg-surface-card text-surface-card-foreground rounded-xl border border-surface-card-border;
+  }
+
+  .surface-solid {
+    @apply bg-primary text-primary-foreground shadow-xs;
+  }
+
+  .surface-secondary {
+    @apply bg-surface-secondary text-surface-secondary-foreground shadow-xs;
+  }
+
+  .surface-outline {
+    @apply border border-primary-higher-contrast text-primary-higher-contrast shadow-xs;
+  }
+
+  .surface-subtle {
+    @apply bg-primary/20 text-primary-higher-contrast shadow-xs border-0;
+  }
+
+  .surface-subtle-outline {
+    @apply bg-primary/20 border border-primary-higher-contrast text-primary-higher-contrast shadow-xs;
+  }
+
+  .surface-input {
+    @apply bg-transparent border border-low-contrast-higher-contrast rounded-md w-full flex;
+    @apply placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground;
+    @apply transition-colors outline-none;
+    @apply file:inline-flex file:bg-muted file:text-muted-foreground file:cursor-pointer file:py-1 file:-ml-2 file:px-2 file:rounded-md;
+    @apply focus-visible:border-ring focus-visible:ring-ring/40 focus-visible:ring-[4px];
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+  }
+
+
+}
+*/

@@ -1,0 +1,31 @@
+/* Create alias token */
+@layer utilities {
+
+  /* Gap */
+  /* -------------------------- */
+
+  .gap-xs {
+    @apply gap-1;
+  }
+
+  .gap-sm {
+    @apply gap-2;
+  }
+
+  .gap-md {
+    @apply gap-4;
+  }
+
+  .gap-lg {
+    @apply gap-6;
+  }
+
+  .gap-xl {
+    @apply gap-8;
+  }
+
+  /* Padding (+X/Y + L/R/T/B) */
+  /* -------------------------- */
+
+
+}

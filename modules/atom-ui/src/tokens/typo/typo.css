@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   1) TOKENS (runtime) — Tailwind-named variables
+   ==========================================================================
+  CSS Variables are used to define the token values.
+    - Source of truth
+    - Will be transformed into Tailwind classes using (@theme and @layer utilities)
+    - Use CSS variables to enable overrides based on theme modes: dark, mobile (smaller), etc.
+        -> This will override classes created from the variables without requiring additional handling.
+  */
+
+
+
+:root {
+  /* --------------------------------------------------------------------------
+    1.1) GENERIC TOKENS (sm, md, .. tight, normal, ...)
+    -------------------------------------------------------------------------- */
+
+
+  /* Families */
+  /* -------------------------- */
+  --font-sans: var(--font-golos), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-heading:
+    /*var(--font-bebas-neue),*/
+    var(--font-golos), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+
+  /* Text sizes (Tailwind scale) */
+  /* -------------------------- */
+  /* Following the (weird) Tailwind norm:
+      font-size use text-* keyword.. */
+  /* 12px */
+  --text-xs: 0.75rem;
+  /* 14px */
+  --text-sm: 0.875rem;
+  /* 16px */
+  --text-md: 1rem;
+  /* alias tailwind text-base to text-md */
+  --text-base: var(--text-md);
+  /* 18px */
+  --text-lg: 1.125rem;
+  /* 20px */
+  --text-xl: 1.25rem;
+  /* 24px */
+  --text-2xl: 1.5rem;
+  /* 30px */
+  --text-3xl: 1.875rem;
+  /* 36px */
+  --text-4xl: 2.25rem;
+  /* 48px */
+  --text-5xl: 3rem;
+
+  /* Line-heights */
+  /* -------------------------- */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 1.75;
+
+  /* Letter spacing */
+  /* -------------------------- */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+
+
+  /* Font weights */
+  /* -------------------------- */
+  /* Tailwind use font-* for weights AND familly...
+    We want to keep it as close as possible to the original Tailwind tokens.
+      but to be able to create aloias like font-title, font-body we need to know if we talk about family or weight.
+    ==>  Use: `weight` instead;
+  */
+  /* --weight-light: 300; /* Not available in any font */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* --------------------------------------------------------------------------
+    1.2) RELATED ALIAS TOKENS (body, main-title, label, ..)
+    --------------------------------------------------------------------------
+
+    We can re-use the generic token:
+      -text-body: -text-md       //   md is the default size, and body is the default typo alias so link them.
+      -text-main-title: 34px;    //   design rules, even is 34px isn't a generic value, it's the requested main-title sizes.
+    */
+
+
+  /* -----------------------
+  NO NEED TO CREATE A VARIABLE  + CLASSES FOR EVERY PROPS...
+  ONLY CREATE THE @apply
+  -----------------------
+
+  CON:
+   - Cannot do something like: <Atom textColor="body" weigth="label"/>
+  PRO:
+   - We don't care.. We'll only use <Atom typo="main-title" /> or override using Atomic Props: <Atom typo="main-title" weight="bold" />
+        (Way enought.. We'll never need to do that, and way easier to do than create hundreds of variables)
+  */
+
+  /* --text-body: var(--text-md);
+  --leading-body: var(--leading-normal);
+  --tracking-body: var(--tracking-normal);
+  --weight-body: var(--weight-normal);
+  --font-body: var(--font-sans);
+  --color-body: var(--color-foreground);
+
+  --text-label: var(--text-sm);
+  --leading-label: var(--leading-snug);
+  [...]
+}
+
+
+
+/* -----------------------------------------------------------------------------
+   2) @theme — expose variables as Tailwind classes
+   (keys == Tailwind class suffixes)
+   -------------------------------------------------------------------------- */
+  @theme {
+    /* Families */
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --font-heading: var(--font-heading);
+
+    /* Text scale (xs..4xl defined above) */
+    --text-xs: var(--text-xs);
+    --text-sm: var(--text-sm);
+    --text-md: var(--text-md);
+    --text-lg: var(--text-lg);
+    --text-xl: var(--text-xl);
+    --text-2xl: var(--text-2xl);
+    --text-3xl: var(--text-3xl);
+    --text-4xl: var(--text-4xl);
+    --text-5xl: var(--text-5xl);
+
+    /* Line-heights */
+    --leading-tight: var(--leading-tight);
+    --leading-snug: var(--leading-snug);
+    --leading-normal: var(--leading-normal);
+    --leading-relaxed: var(--leading-relaxed);
+    --leading-loose: var(--leading-loose);
+
+    /* Letter-spacing */
+    --tracking-tighter: var(--tracking-tighter);
+    --tracking-tight: var(--tracking-tight);
+    --tracking-normal: var(--tracking-normal);
+    --tracking-wide: var(--tracking-wide);
+
+    /* Weights */
+    --weight-normal: var(--weight-normal);
+    --weight-medium: var(--weight-medium);
+    --weight-semibold: var(--weight-semibold);
+    --weight-bold: var(--weight-bold);
+
+    /* -----------------------
+  NO NEED TO CREATE A VARIABLE  + CLASSES FOR EVERY PROPS...
+  ONLY CREATE THE @apply
+  -----------------------*/
+
+
+  }
+
+
+  /* -----------------------------------------------------------------------------
+   3) Utilities
+   -------------------------------------------------------------------------- */
+  @layer utilities {
+    /* ---------------------------------------------------------------------------
+   3.1) Utilities Atomic classes
+   - Classes not handled by Tailwind using @theme (families, colors per category)
+  --------------------------------------------------------------------------- */
+
+    /* Family helpers */
+    .font-sans {
+      font-family: var(--font-sans);
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+    }
+
+    .font-heading {
+      font-family: var(--font-heading);
+    }
+
+  }
+
+}
+
+/* We do not use @later components anymore.
+  See why in context-css-theme.ia.md
+
+
+  @layer components {
+
+    .typo-body {
+      @apply font-sans text-base leading-normal tracking-normal font-normal text-foreground;
+    }
+
+    .typo-label {
+      @apply font-sans text-sm leading-snug tracking-wide font-medium text-foreground;
+    }
+
+    .typo-subtle {
+      @apply font-sans text-md leading-normal tracking-wide font-normal text-low-contrast-higher-contrast;
+    }
+
+    .typo-hint {
+      @apply font-sans text-sm leading-normal tracking-wide font-normal text-low-contrast-higher-contrast;
+    }
+
+    .typo-caption {
+      @apply font-sans text-xs leading-normal tracking-wide font-normal text-light-higher-contrast;
+    }
+
+    .typo-code {
+      @apply font-mono text-sm leading-snug tracking-normal font-normal text-foreground;
+    }
+
+    .typo-number {
+      @apply text-4xl text-foreground;
+    }
+
+    .typo-p,
+    .typo-paragraph {
+      @apply font-sans text-md leading-relaxed tracking-normal font-normal text-foreground;
+    }
+
+    .typo-blockquote {
+      @apply font-serif text-md leading-relaxed tracking-normal font-normal text-low-contrast-higher-contrast italic;
+    }
+
+    .typo-link {
+      @apply font-sans text-md leading-normal tracking-normal font-normal text-primary-higher-contrast hover:underline;
+    }
+
+    .typo-main-title {
+      @apply font-heading text-4xl leading-tight tracking-tighter font-medium text-foreground;
+    }
+
+    .typo-main-subtitle {
+      @apply font-heading text-2xl leading-snug tracking-normal font-medium text-foreground;
+    }
+
+    .typo-section-title {
+      @apply font-heading text-3xl leading-tight tracking-normal font-bold text-foreground;
+    }
+
+    .typo-section-subtitle {
+      @apply font-heading text-xl leading-normal tracking-normal font-medium text-foreground;
+    }
+
+    .typo-subsection-title {
+      @apply font-heading text-xl leading-normal tracking-normal font-semibold text-foreground;
+    }
+
+    .typo-subsection-subtitle {
+      @apply font-heading text-lg leading-normal tracking-normal font-medium text-foreground;
+    }
+
+    .typo-card-title {
+      @apply font-heading text-lg leading-snug tracking-normal font-semibold text-foreground;
+    }
+
+    .typo-card-subtitle {
+      @apply font-heading text-base leading-normal tracking-normal font-medium text-foreground;
+    }
+  }
+}
+*/

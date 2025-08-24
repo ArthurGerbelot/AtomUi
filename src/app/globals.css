@@ -1,26 +1,25 @@
-@import "tailwindcss";
+@import "../../modules/atom-ui/src/theme/globals.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =============================================================================
+    DOC SPECIFIC STYLES
+============================================================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Command component when open directly on the document will create some glitch on the Height of the page and scrollable content. */
+/* Add this CSS-guard for the docs and showcase only. */
+
+@layer components {
+
+  /* Limit any cmdk list by default in docs */
+  [cmdk-list] {
+    max-height: 15rem;
+    /* same as max-h-60 */
+    overflow: auto;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Optional: prevent cmdk root from creating odd containing blocks/scopes */
+  [cmdk-root] {
+    contain: layout paint;
+    /* keeps measurements from affecting the page */
+  }
 }
