@@ -6,7 +6,7 @@ import * as React from "react"
 /* eslint-disable */
 import { Button, Card, ChoiceBadge, ChoiceObject, ChoiceValue, HStack, IconButton, IconCheckboxChecked, IconCheckboxUnchecked, IconError, IconInfo, IconSearch, Label, SimpleSelect, Size, sizes, Text, TextWithIcon } from "@uikit"
 /* eslint-disable */
-import Select from "@uikit/components/molecules/Select"
+// import Select from "@uikit/components/molecules/Select"
 /* eslint-disable */
 import { VariantsSelect } from "../components/VariantsSelect"
 /* eslint-disable */
@@ -27,7 +27,7 @@ export default function TestPage() {
 
   return (
     <div className="container mx-auto max-w-4xl px-6 py-12">
-
+      {/*
       <VariantsSelect size={size} setSize={setSize} />
 
       <Card
@@ -35,7 +35,7 @@ export default function TestPage() {
         subtitle="Use the Atomic tokens to customize the SimpleSelect.Trigger, the visual part of the Form Input"
         Icon={<IconCheckboxChecked textColor="success" />}
       >
-      </Card>
+      </Card> */}
     </div >
   )
 }

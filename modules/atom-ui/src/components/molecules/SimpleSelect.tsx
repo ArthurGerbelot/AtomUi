@@ -155,13 +155,13 @@ const SimpleSelectComposed = forwardRefPolymorphic<"button", SimpleSelectCompose
 // SelectRoot
 // -----------------------------------------------------------------------------
 
-type SelectRootProps = React.ComponentProps<typeof SelectPrimitive.Root>
+type SimpleSelectRootProps = React.ComponentProps<typeof SelectPrimitive.Root>
 /**
  * Stateful container (Radix Root) handling a11y and value
  */
 function SelectRoot({
   ...props
-}: SelectRootProps) {
+}: SimpleSelectRootProps) {
   return <SelectPrimitive.Root data-slot="select" {...props} />
 }
 
@@ -170,14 +170,14 @@ function SelectRoot({
 // SelectGroup
 // -----------------------------------------------------------------------------
 
-type SelectGroupProps = React.ComponentProps<typeof SelectPrimitive.Group>
+type SimpleSelectGroupProps = React.ComponentProps<typeof SelectPrimitive.Group>
 
 /**
  * Logical grouping for items (Radix Group)
  */
 function SelectGroup({
   ...props
-}: SelectGroupProps) {
+}: SimpleSelectGroupProps) {
   return <SelectPrimitive.Group data-slot="select-group" {...props} />
 }
 
@@ -186,17 +186,17 @@ function SelectGroup({
 // SelectValue
 // -----------------------------------------------------------------------------
 
-type SelectValueOwnProps = { placeholder?: string }
-type SelectValueProps = AtomProps & SelectValueOwnProps
-type SelectValuePolymorphicProps<T extends React.ElementType = "span"> =
-  PolymorphicProps<T, SelectValueProps>
+type SimpleSelectValueOwnProps = { placeholder?: string }
+type SimpleSelectValueProps = AtomProps & SimpleSelectValueOwnProps
+type SimpleSelectValuePolymorphicProps<T extends React.ElementType = "span"> =
+  PolymorphicProps<T, SimpleSelectValueProps>
 
 /**
  * Default value renderer (mirrors the selected <SelectItem>)
  */
-const SelectValue = forwardRefPolymorphic<"span", SelectValueProps>(
+const SelectValue = forwardRefPolymorphic<"span", SimpleSelectValueProps>(
   function SelectValue<T extends React.ElementType = "span">(
-    { placeholder, ...atomProps }: SelectValuePolymorphicProps<T>,
+    { placeholder, ...atomProps }: SimpleSelectValuePolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
 
@@ -220,18 +220,18 @@ const SelectValue = forwardRefPolymorphic<"span", SelectValueProps>(
 // CustomSelectValue
 // -----------------------------------------------------------------------------
 
-type SelectCustomValueOwnProps = SelectValueOwnProps & { value?: string }
-type SelectCustomValueProps = AtomProps & SelectCustomValueOwnProps
-type SelectCustomValuePolymorphicProps<T extends React.ElementType = "span"> =
-  PolymorphicProps<T, SelectCustomValueProps>
+type SimpleSelectCustomValueOwnProps = SimpleSelectValueOwnProps & { value?: string }
+type SimpleSelectCustomValueProps = AtomProps & SimpleSelectCustomValueOwnProps
+type SimpleSelectCustomValuePolymorphicProps<T extends React.ElementType = "span"> =
+  PolymorphicProps<T, SimpleSelectCustomValueProps>
 
 /**
  * Custom value renderer (polymorphic). You control the rendered content via children.
  * Provide placeholder/value so the component can manage a11y attributes.
  */
-const SelectCustomValue = forwardRefPolymorphic<"span", SelectCustomValueProps>(
+const SelectCustomValue = forwardRefPolymorphic<"span", SimpleSelectCustomValueProps>(
   function SelectCustomValue<T extends React.ElementType = "span">(
-    { placeholder, value, ...atomProps }: SelectCustomValuePolymorphicProps<T>,
+    { placeholder, value, ...atomProps }: SimpleSelectCustomValuePolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
 
@@ -262,10 +262,10 @@ const SelectCustomValue = forwardRefPolymorphic<"span", SelectCustomValueProps>(
 // TYPES DEFINITIONS
 // ------------------------------
 
-type SelectTriggerOwnProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & VariantProps<typeof selectTriggerVariants>
-type SelectTriggerProps = AtomProps & SelectTriggerOwnProps
-type SelectTriggerPolymorphicProps<T extends React.ElementType = "button"> =
-  PolymorphicProps<T, SelectTriggerProps>
+type SimpleSelectTriggerOwnProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & VariantProps<typeof selectTriggerVariants>
+type SimpleSelectTriggerProps = AtomProps & SimpleSelectTriggerOwnProps
+type SimpleSelectTriggerPolymorphicProps<T extends React.ElementType = "button"> =
+  PolymorphicProps<T, SimpleSelectTriggerProps>
 
 // COMPONENT IMPLEMENTATION
 // ------------------------------
@@ -274,9 +274,9 @@ type SelectTriggerPolymorphicProps<T extends React.ElementType = "button"> =
  * Select trigger (Radix Trigger)
  * Visual part of the Select component on the Form
  */
-const SelectTrigger = forwardRefPolymorphic<"button", SelectTriggerProps>(
+const SelectTrigger = forwardRefPolymorphic<"button", SimpleSelectTriggerProps>(
   function SelectTrigger<T extends React.ElementType = "button">(
-    { size = "md", children, ...props }: SelectTriggerPolymorphicProps<T>,
+    { size = "md", children, ...props }: SimpleSelectTriggerPolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
 
@@ -360,7 +360,7 @@ function SelectContent({
 // SelectLabel
 // -----------------------------------------------------------------------------
 
-type SelectLabelProps = React.ComponentProps<typeof SelectPrimitive.Label>
+type SimpleSelectLabelProps = React.ComponentProps<typeof SelectPrimitive.Label>
 
 /**
  * Group title (must be inside Group)
@@ -368,7 +368,7 @@ type SelectLabelProps = React.ComponentProps<typeof SelectPrimitive.Label>
 function SelectLabel({
   className,
   ...props
-}: SelectLabelProps) {
+}: SimpleSelectLabelProps) {
   const { className: atomClass, style, ...rest } = resolveAtomTokens(props as any)
   return (
     <SelectPrimitive.Label
@@ -385,7 +385,7 @@ function SelectLabel({
 // SelectItem
 // -----------------------------------------------------------------------------
 
-type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>
+type SimpleSelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>
 
 /**
  * Selectable option (Radix Item)
@@ -395,7 +395,7 @@ function SelectItem({
   children,
   value,
   ...props
-}: SelectItemProps) {
+}: SimpleSelectItemProps) {
   const { className: atomClass, style, ...rest } = resolveAtomTokens(props as any)
   return (
     <SelectPrimitive.Item
@@ -427,14 +427,14 @@ function SelectItem({
 // SelectSeparator
 // -----------------------------------------------------------------------------
 
-type SelectSeparatorProps = React.ComponentProps<typeof SelectPrimitive.Separator>
+type SimpleSelectSeparatorProps = React.ComponentProps<typeof SelectPrimitive.Separator>
 /**
  * Visual divider between groups/sections
  */
 function SelectSeparator({
   className,
   ...props
-}: SelectSeparatorProps) {
+}: SimpleSelectSeparatorProps) {
   const { className: atomClass, style, ...rest } = resolveAtomTokens(props as any)
   return (
     <Separator
@@ -511,12 +511,12 @@ export const SimpleSelect = Object.assign(SimpleSelectComposed, {
 export type {
   SimpleSelectComposedOwnProps,
   SimpleSelectComposedProps as SimpleSelectProps,
-  SelectRootProps as SimpleSelectRootProps,
-  SelectGroupProps as SimpleSelectGroupProps,
-  SelectValueProps as SimpleSelectValueProps,
-  SelectCustomValueProps as SimpleSelectCustomValueProps,
-  SelectItemProps as SimpleSelectItemProps,
-  SelectLabelProps as SimpleSelectLabelProps,
-  SelectSeparatorProps as SimpleSelectSeparatorProps,
-  SelectTriggerProps as SimpleSelectTriggerProps,
+  SimpleSelectRootProps,
+  SimpleSelectGroupProps,
+  SimpleSelectValueProps,
+  SimpleSelectCustomValueProps,
+  SimpleSelectItemProps,
+  SimpleSelectLabelProps,
+  SimpleSelectSeparatorProps,
+  SimpleSelectTriggerProps,
 }

@@ -23,7 +23,7 @@ export default function UIKitDocLayout({
             <a href="/uikit-doc">
               <h1 className="text-xl font-bold text-gray-900 dark:text-white">Bull Bitcoin<br />UIKit Doc.</h1>
             </a>
-            {/* <ColorModeButton /> */}
+            <ColorModeButton />
           </div>
         </div>
 
