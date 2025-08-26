@@ -30,11 +30,13 @@ import { CSSProperties } from "react"
  * Typography variants for Text component
  * Each variant defines both visual styling and semantic meaning
  */
-const badgeVariants = cva("inline-flex items-baseline align-baseline", {
-  variants: {
-    size: sizeWithSmallPaddingVariants,
-  },
-})
+const badgeVariants = cva("inline-flex items-baseline align-baseline "
+  + "min-w-0 max-w-full overflow-hidden" // For ellipsis
+  , {
+    variants: {
+      size: sizeWithSmallPaddingVariants,
+    },
+  })
 
 
 
@@ -91,7 +93,7 @@ export const Badge = forwardRefPolymorphic<"span", BadgeProps>(
         className={cn(badgeVariants({ size }), className)} // Use size + padding
         style={{
           ...style,
-          transform: `translateY(-.01em)`,  // VERY SMALL ADJUSTMENT TO FIT THE BADGE TO THE TEXT )
+          // transform: `translateY(-.01em)`,  // VERY SMALL ADJUSTMENT TO FIT THE BADGE TO THE TEXT )
           "--text-scale": textScale,
         } as CSSProperties}
 
@@ -101,8 +103,8 @@ export const Badge = forwardRefPolymorphic<"span", BadgeProps>(
           // VERY SMALL ADJUSTMENT TO FIT THE BADGE TO THE TEXT
           // Since the badge is smaller, baseline alignment is still optimal but we add a slight ~2px offset
           // to vertically center it with standard text
-          // style={{ transform: `translateY(.05em)` }}
-          className="inline-block align-baseline leading-[inherit] text-[calc(1em*var(--text-scale,1))]"
+          style={{ transform: `translateY(-.025em)` }}
+          className="inline-block align-baseline leading-[inherit] text-[calc(1em*var(--text-scale,1))] min-w-0 flex-1 truncate"
         >
           {children}
         </span>

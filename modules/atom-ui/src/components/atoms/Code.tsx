@@ -1,6 +1,7 @@
 
 import { cva, VariantProps } from "class-variance-authority"
 import * as React from "react"
+import { CSSProperties } from "react"
 
 import { cn, resolveAtomTokens } from "../../lib"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../lib/core/polymorphic-helpers"
@@ -23,6 +24,7 @@ type CodeOwnProps = {
   includeTag?: boolean
   includeSelfClosingTag?: boolean
   includeBrace?: boolean
+  textScale?: number | string
 }
 
 export type CodeProps = AtomProps & CodeOwnProps;
@@ -46,6 +48,7 @@ export const Code = forwardRefPolymorphic<"pre", CodeProps>(
       variant,
       includeTag, includeSelfClosingTag,
       includeBrace,
+      textScale = 0.875, // Slightly smaller than Badge (0.9) for code readability
       children,
       ...props
     }: CodePolymorphicProps<T>,
@@ -53,7 +56,7 @@ export const Code = forwardRefPolymorphic<"pre", CodeProps>(
   ) {
 
     // Resolve the atom tokens
-    const { as, asChild, className, ...rest } = resolveAtomTokens(props);
+    const { as, asChild, className, style, ...rest } = resolveAtomTokens(props);
 
     // If inline, remove <pre> (cannot be inside  <p> tags)
     const isInline = as === "span" || as === "div" || props.display === "inline";
@@ -119,12 +122,20 @@ export const Code = forwardRefPolymorphic<"pre", CodeProps>(
         as={_as as any} // Type assertion needed for polymorphic inference
         asChild={asChild}
 
-        typo="code"
-        className={cn("bg-light inline-block px-1 py-0.5 rounded-sm", className)}
+        colorTheme="light"
+        className={cn("font-mono bg-light inline-block px-1 py-0.5 rounded-sm", className)}
+        style={{
+          ...style,
+          "--text-scale": textScale,
+        } as CSSProperties}
 
         {...rest} // Spread remaining props (color theme, style, event handlers, etc.)
       >
-        {asChild ? children : content}
+        {asChild ? children : (
+          <span className="inline-block leading-[inherit] text-[calc(1em*var(--text-scale,1))] min-w-0">
+            {content}
+          </span>
+        )}
       </Atom>
     )
   }

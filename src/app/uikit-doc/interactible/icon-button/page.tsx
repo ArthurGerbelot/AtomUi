@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { IconButton, Button, HStack, IconEdit, IconPlus, IconMinus, IconClose, IconSearch, IconDelete, IconAdmin, IconUser, type Size, type ColorTheme, type ButtonVariant, type Radius, buttonVariants, colorThemes, IconArrowRight, IconBell, IconTrue, sizes, Header, Card, VStack, Text } from "@uikit"
+import { IconButton, Button, HStack, IconEdit, IconPlus, IconMinus, IconClose, IconSearch, IconDelete, IconAdmin, IconUser, type Size, type ColorTheme, type ButtonVariant, type Radius, buttonVariants, colorThemes, IconArrowRight, IconBell, IconTrue, sizes, Header, Card, VStack, Text, radiuses, surfaces } from "@uikit"
 import { VariantsSelect } from "../../components/VariantsSelect"
 
 
@@ -22,84 +22,116 @@ export default function IconButtonPage() {
         radius={radius} setRadius={setRadius} defaultRadius="full"
       />
 
-      {/* Basic Icon Buttons */}
-      <Card title="Basic Icon Buttons">
-        <HStack gap>
-          <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconAdmin} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconBell} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconSearch} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconClose} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-        </HStack>
-      </Card>
+      <HStack wrap>
 
-      {/* Different Sizes */}
-      <Card title="Different Sizes">
-        <HStack gap>
-          <IconButton icon={IconUser} size="xs" colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconUser} size="sm" colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconUser} size="md" colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconUser} size="lg" colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconUser} size="xl" colorTheme={colorTheme} variant={variant} radius={radius} />
-        </HStack>
-      </Card>
+        {/* Basic Icon Buttons */}
+        <Card title="Basic Icon Buttons">
+          <HStack gap>
+            <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconAdmin} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconBell} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconSearch} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconClose} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+          </HStack>
+        </Card>
 
-      {/* Interactive States */}
-      <Card title="Interactive States">
-        <HStack gap>
-          <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-          <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} disabled />
-          <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} loading />
-        </HStack>
-      </Card>
-
-      {/* Different Colors */}
-      <Card title="Different Colors">
-        <HStack gap wrap>
-          {
-            colorThemes.map((colorTheme) => (
-              <IconButton key={colorTheme} icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
-            ))
-          }
-        </HStack>
-      </Card>
-
-      {/* With Children (Alternative to icon prop) */}
-      <Card title="With Children (Alternative to icon prop)">
-        <HStack gap>
-          <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
-            <IconUser />
-          </IconButton>
-          <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
-            <IconAdmin />
-          </IconButton>
-          <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
-            <IconBell />
-          </IconButton>
-        </HStack>
-      </Card>
+        {/* Different Radius */}
+        <Card title="Different Radius">
+          <HStack gap>
+            {
+              radiuses.map((radius) => (
+                <IconButton key={radius} icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+              ))
+            }
+          </HStack>
+        </Card>
 
 
-      {/* With Children (Alternative to icon prop) */}
-      <Card title="Size matching with Button">
-        <VStack gap>
-          {sizes.map(size => {
-            return (
-              <HStack gap key={size}>
-                <IconButton size={size} colorTheme={colorTheme} variant="solid" radius={radius}>
-                  <IconUser />
-                </IconButton>
-                <Button size={size} colorTheme={colorTheme} variant="solid" radius={radius}>
-                  Text
-                </Button>
-                <Button size={size} colorTheme={colorTheme} variant="solid" radius={radius} icon={IconUser}>
-                  Text
-                </Button>
-              </HStack>
-            )
-          })}
-        </VStack>
-      </Card>
+        {/* Different Radius */}
+        <Card title="Different Variants (Overrides Surface)">
+          <HStack gap>
+            {
+              buttonVariants.map((variant) => (
+                <IconButton key={variant} icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+              ))
+            }
+          </HStack>
+        </Card>
+
+
+        {/* Different Sizes */}
+        <Card title="Different Sizes">
+          <HStack gap>
+            <IconButton icon={IconUser} size="xs" colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconUser} size="sm" colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconUser} size="md" colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconUser} size="lg" colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconUser} size="xl" colorTheme={colorTheme} variant={variant} radius={radius} />
+          </HStack>
+        </Card>
+
+        {/* Interactive States */}
+        <Card title="Interactive States">
+          <HStack gap>
+            <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+            <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} disabled />
+            <IconButton icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} loading />
+          </HStack>
+        </Card>
+
+        {/* Different Colors */}
+        <Card title="Different Colors">
+          <HStack gap wrap>
+            {
+              colorThemes.map((colorTheme) => (
+                <IconButton key={colorTheme} icon={IconUser} size={size} colorTheme={colorTheme} variant={variant} radius={radius} />
+              ))
+            }
+          </HStack>
+        </Card>
+
+        {/* With Children (Alternative to icon prop) */}
+        <Card title="With Children (Alternative to icon prop)">
+          <HStack gap>
+            <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
+              <IconUser />
+            </IconButton>
+            <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
+              <IconAdmin />
+            </IconButton>
+            <IconButton size={size} colorTheme={colorTheme} variant={variant} radius={radius}>
+              <IconBell />
+            </IconButton>
+          </HStack>
+        </Card>
+
+
+        {/* With Children (Alternative to icon prop) */}
+        <Card title="Size matching with Button">
+          <VStack gap>
+            {sizes.map(size => {
+              return (
+                <HStack gap key={size}>
+                  <IconButton radius="full" size={size} colorTheme={colorTheme} variant="solid">
+                    <IconUser />
+                  </IconButton>
+                  <IconButton size={size} colorTheme={colorTheme} variant="solid" radius={radius}>
+                    <IconUser />
+                  </IconButton>
+                  <Button size={size} colorTheme={colorTheme} variant="solid" radius={radius} icon={IconUser}>
+                    Text
+                  </Button>
+                  <Button size={size} colorTheme={colorTheme} variant="solid" radius={radius}>
+                    Text
+                  </Button>
+                </HStack>
+              )
+            })}
+          </VStack>
+        </Card>
+
+
+      </HStack>
 
       {/* Real-world Examples */}
       <Header title="Real-world Examples" />

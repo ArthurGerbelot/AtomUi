@@ -168,6 +168,7 @@ export const IconSMS = (props: IconProps) => <Icon icon={Lucide.MessageSquare} {
 export const IconCall = (props: IconProps) => <Icon icon={Lucide.Phone} {...props} />
 export const IconWaiting = (props: IconProps) => <Icon icon={Lucide.Clock} {...props} />
 export const IconMap = (props: IconProps) => <Icon icon={Lucide.MapPin} {...props} />
+export const IconCalendar = (props: IconProps) => <Icon icon={Lucide.Calendar} {...props} />
 
 export const IconOrder = (props: IconProps) => <Icon icon={Lucide.Receipt} {...props} />
 

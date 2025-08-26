@@ -99,6 +99,9 @@ export default function UIKitDocLayout({
               <NavLink href="/uikit-doc/typo/list" isActive={pathname === "/uikit-doc/typo/list"}>
                 List
               </NavLink>
+              <NavLink href="/uikit-doc/typo/code" isActive={pathname === "/uikit-doc/typo/code"}>
+                Code
+              </NavLink>
             </div>
           </div>
 
@@ -114,6 +117,9 @@ export default function UIKitDocLayout({
               <NavLink href="/uikit-doc/interactible/icon-button" isActive={pathname === "/uikit-doc/interactible/icon-button"}>
                 Icon Button
               </NavLink>
+              <NavLink href="/uikit-doc/interactible/calendar" isActive={pathname === "/uikit-doc/interactible/calendar"}>
+                Calendar
+              </NavLink>
             </div>
           </div>
 
@@ -126,11 +132,20 @@ export default function UIKitDocLayout({
               <NavLink href="/uikit-doc/form/input" isActive={pathname === "/uikit-doc/form/input"}>
                 Input
               </NavLink>
+              <NavLink href="/uikit-doc/form/checkbox" isActive={pathname === "/uikit-doc/form/checkbox"}>
+                Checkbox
+              </NavLink>
               <NavLink href="/uikit-doc/form/simple-select" isActive={pathname === "/uikit-doc/form/simple-select"}>
                 SimpleSelect
               </NavLink>
               <NavLink href="/uikit-doc/form/select" isActive={pathname === "/uikit-doc/form/select"}>
                 Select
+              </NavLink>
+              <NavLink href="/uikit-doc/form/multi-select" isActive={pathname === "/uikit-doc/form/multi-select"}>
+                MultiSelect
+              </NavLink>
+              <NavLink href="/uikit-doc/form/datepicker" isActive={pathname === "/uikit-doc/form/datepicker"}>
+                DatePicker
               </NavLink>
             </div>
           </div>
@@ -143,6 +158,9 @@ export default function UIKitDocLayout({
             <div className="space-y-1">
               <NavLink href="/uikit-doc/layout" isActive={pathname === "/uikit-doc/layout"}>
                 Layout
+              </NavLink>
+              <NavLink href="/uikit-doc/layout/accordion" isActive={pathname === "/uikit-doc/layout/accordion"}>
+                Accordion
               </NavLink>
             </div>
           </div>

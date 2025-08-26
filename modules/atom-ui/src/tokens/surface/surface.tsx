@@ -147,15 +147,15 @@ export const surfaces = ['card', 'solid', 'outline', 'secondary', 'subtle', "sub
 export type Surface = typeof surfaces[number]
 
 export const surfaceVariants: Record<Surface, string> = {
-  card: "bg-surface-card text-surface-card-foreground rounded-xl border border-surface-card-border",
-  solid: "bg-primary text-primary-foreground shadow-xs border-0",
-  secondary: "bg-surface-secondary text-surface-secondary-foreground shadow-xs border-0",
-  outline: "bg-transparent border border-primary-higher-contrast text-primary-higher-contrast shadow-xs",
-  subtle: "bg-primary/30 text-surface-secondary-foreground shadow-xs border-0",
-  "subtle-accent": "bg-primary/20 text-primary-higher-contrast shadow-xs border-0",
-  "subtle-outline": "bg-primary/20 border border-primary-higher-contrast text-primary-higher-contrast shadow-xs",
-  "text-accent": "bg-transparent text-primary-higher-contrast border-0 shadow-none",
-  none: "bg-transparent text-foreground border-0 shadow-none",
+  card: "bg-surface-card text-surface-card-foreground rounded-xl border border-surface-card-border hover:bg-surface-card",
+  solid: "bg-primary text-primary-foreground shadow-xs border-0 hover:bg-primary",
+  secondary: "bg-surface-secondary text-surface-secondary-foreground shadow-xs border-0 hover:bg-surface-secondary",
+  outline: "bg-transparent border border-primary-higher-contrast text-primary-higher-contrast shadow-xs hover:bg-transparent",
+  subtle: "bg-primary/30 text-surface-secondary-foreground shadow-xs border-0 hover:bg-primary/30",
+  "subtle-accent": "bg-primary/20 text-primary-higher-contrast shadow-xs border-0 hover:bg-primary/20",
+  "subtle-outline": "bg-primary/10 border border-primary-higher-contrast text-primary-higher-contrast shadow-xs hover:bg-primary/10",
+  "text-accent": "bg-transparent text-primary-higher-contrast border-0 shadow-none hover:bg-transparent",
+  none: "bg-transparent text-foreground border-0 shadow-none hover:bg-transparent",
 
   /* Legacy Input surface - Now use new "input" surface (was only for "select"*/
   // input:
@@ -168,20 +168,16 @@ export const surfaceVariants: Record<Surface, string> = {
   //   "disabled:cursor-not-allowed disabled:opacity-50 " +
   //   "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive ",
 
-  /* Select surface (based on input but adapted for trigger) */
+  /* Input surface - base styling for all input-like components */
   input:
-    /* Base layout & box */
-    "bg-transparent border border-low-contrast rounded-md inline-flex items-center justify-between gap-2 whitespace-nowrap w-fit " +
-    /* Child icons */
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon-size])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground " +
-    /* SelectValue child */
-    "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 " +
+    /* Base layout & appearance */
+    "bg-transparent text-surface-card-foreground border border-low-contrast/60 rounded-md w-full " +
     /* Visuals */
     "shadow-xs transition-[color,box-shadow] outline-none " +
     /* Focus ring + keep while open */
     "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] data-[state=open]:border-ring data-[state=open]:ring-ring/40 data-[state=open]:ring-[4px] " +
     /* Hover */
-    "hover:bg-low-contrast/20 " +
+    "hover:bg-light/50 " +
     /* Disabled */
     "disabled:cursor-not-allowed disabled:opacity-50 " +
     /* Invalid */

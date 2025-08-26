@@ -86,19 +86,22 @@ export const blockVariants: Record<"true" | "false", string> = {
 // "display=flex" and "flex" boolean helper already added by "display" section
 
 
-// flex children
+// Flex children
+// ---------------
+// - "min-w-0" is used to avoid the flex child to shrink to 0 width
+//      (Example: a Fieldset with a too long Input will get out of the container without 'min-w-0')
 export type Flex = BooleanVariants | NumericalVariants | "auto" | "none" | "initial";
 export const flexVariants: Record<Exclude<Flex, OmitableVariants>, string> = {
-  "true": "flex-1",
+  "true": "min-w-0 flex-1",
   "false": "",
-  "_n": "flex-[var(--flex-numerical)]", // "_n" is used a "format" for ALL numeric keys
-  "1": "flex-1",
-  "2": "flex-2",
-  "3": "flex-3",
-  "4": "flex-4",  // Also provide most used variants
-  "5": "flex-5",
-  "6": "flex-6",
-  "auto": "flex-auto",
+  "_n": "min-w-0 flex-[var(--flex-numerical)]", // "_n" is used a "format" for ALL numeric keys
+  "1": "min-w-0 flex-1",
+  "2": "min-w-0 flex-2",
+  "3": "min-w-0 flex-3",
+  "4": "min-w-0 flex-4",  // Also provide most used variants
+  "5": "min-w-0 flex-5",
+  "6": "min-w-0 flex-6",
+  "auto": "min-w-0 flex-auto",
   "none": "flex-none",
   "initial": "flex-initial",
 }

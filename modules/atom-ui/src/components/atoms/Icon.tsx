@@ -9,12 +9,28 @@ import { asSmartSlot } from "../core/SmartSlot"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, resolveAtomTokens } from "../../lib"
 
 
+
+
 // =============================================================================
 // Icon
 // -----------------------------------------------------------------------------
 // [Atomic] [Polymorphic] [SmartSlot] [Icon]
 // -----------------------------------------------------------------------------
 // Icon component for displaying (lucide) icons
+//
+// SMART PASSTHROUGH BEHAVIOR:
+// This component is intentionally permissive and allows developers to accidentally
+// wrap an Icon inside another Icon. When this happens, the outer Icon detects the
+// inner Icon (via data-atom-icon attribute) and automatically:
+// 1. Merges its props with the inner Icon's props (outer props have lower priority)
+// 2. Returns the inner Icon directly, bypassing the wrapper
+// 3. This prevents double-wrapping and ensures proper styling
+//
+// Example that works seamlessly:
+// <Icon variant="hero" bgColor="bitcoin">
+//   <IconError />  {/* This Icon receives variant="hero" and bgColor="bitcoin" */}
+// </Icon>
+//
 // =============================================================================
 
 
@@ -22,12 +38,20 @@ import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, resolveAtomTok
 // VARIANTS
 // -----------------------------------------------------------------------------
 
-const iconVariants = cva("inline-block shrink-0", {
+export const iconVariants = [
+  'default', 'mini', 'chip', 'medium', 'hero', 'jumbo',
+] as const
+export type IconVariant = typeof iconVariants[number]
+
+const iconVariantsCva = cva("inline-block shrink-0", {
   variants: {
     variant: {
       default: "",
-      small: "size-10 rounded-full p-[.25em] bg-primary",
-      big: "size-28 rounded-full p-3 bg-primary",
+      mini: "rounded-full p-1 bg-primary",           // 32px - very small
+      chip: "rounded-full p-[.25em] bg-primary",     // 56px - small
+      medium: "rounded-full p-2 bg-primary",         // 80px - medium
+      hero: "rounded-full p-3 bg-primary",           // 112px - large
+      jumbo: "rounded-full p-4 bg-primary",          // 144px - very large
     },
   },
   defaultVariants: {
@@ -35,6 +59,16 @@ const iconVariants = cva("inline-block shrink-0", {
   },
 })
 
+// Layout Variant sizes (handled in JavaScript instead of CSS to avoid conflicts)
+// Not the same as size (xs, sm, ..) made to match the text size
+const variantSizes = {
+  default: null,  // Uses the size prop
+  mini: 32,       // 8 * 4 = 32px
+  chip: 56,       // 14 * 4 = 56px
+  medium: 80,     // 20 * 4 = 80px
+  hero: 112,      // 28 * 4 = 112px
+  jumbo: 144,     // 36 * 4 = 144px
+} as const;
 
 
 // -----------------------------------------------------------------------------
@@ -44,11 +78,12 @@ const iconVariants = cva("inline-block shrink-0", {
 type IconSize = number | Size | undefined;
 
 export type IconProps = Omit<AtomProps, 'children' | 'asChild' | 'size'>
-  & VariantProps<typeof iconVariants>
+  & VariantProps<typeof iconVariantsCva>
   & {
     icon?: ComponentType<any>
     size?: IconSize
     children?: ReactNode | ComponentType<any> | string
+    __sizeOverride?: IconSize
   }
 
 export type IconPolymorphicProps<T extends React.ElementType = "div"> =
@@ -79,99 +114,129 @@ const sizeMap: Record<Size, number> = {
 
 export const Icon = forwardRefPolymorphic<"span", IconProps>(
   function Icon<T extends React.ElementType = "span">(
-    {
-      icon: IconType,
-      children,
-      size = "md",
-      variant = "default",
-      ...props
-    }: IconPolymorphicProps<T>,
+    props: IconPolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
+    const {
+      as,
+      style,
+      className,
+      size = "md",
+      icon: IconType,
+      children,
+      variant = "default",
+      __sizeOverride,
+      ...propsRest
+    } = props;
 
-    // If textColor is provided, use it, otherwise use colorTheme
-    const color = (props as any)?.textColor ?? (props as any)?.colorTheme
+    // Resolve atom tokens AFTER extracting our specific props
+    const { className: atomClassName, style: atomStyle, ...rest } = resolveAtomTokens(propsRest);
 
-
-    // Resolve the atom tokens
-    const { as, className, ...rest } = resolveAtomTokens({ ...(props as any), ...(color ? { textColor: color } : {}) });
-    const resolvedSize = typeof size === "string" ? sizeMap[size as Size] ?? 24 : size
-
-
-
-    // For both ResolvedElement and ResolvedIcon
-    const sharedProps = {
-      // className: cn("inline-block leading-none"),
-      className: cn("inline-block leading-none text-inherit"),
-      "data-slot": "icon",
-      "data-icon-size": true, // To disactivate the default size-4 on BaseButton [&_svg:not([data-icon-size])]:size-4
-      "aria-hidden": true,
-      ...(resolvedSize ? { width: resolvedSize, height: resolvedSize, size: resolvedSize } : {})
-    } as IconProps;
-
-    const wrapperClass = cn(
-      "inline-flex items-center justify-center align-bottom leading-[0]",
-      iconVariants({ variant }),
-      // "w-[var(--icon-size)] h-[var(--icon-size)]",
-
-      // No-op pour contourner [&_svg:not([class*='size-'])]
-      // "size-empty", // No more needed now that we have data-icon-size ??
-      className
-    )
-
-
-    let ResolvedIcon: ComponentType<any> | undefined = IconType
-    let ResolvedElement: React.ReactElement | undefined
-
-    if (!ResolvedIcon && React.isValidElement(children)) {
-
-      const childrenProps = (children as any)?.props;
-      const { className: childrenClassName, style: childrenStyle, ...rest } = resolveAtomTokens(childrenProps);
-
-      sharedProps.className = cn(sharedProps.className, childrenClassName);
-      sharedProps.style = { ...sharedProps.style, ...childrenStyle };
-
-
-      // Clone the element with the shared props
-      ResolvedElement = React.cloneElement(children as React.ReactElement, { ...sharedProps, ...rest })
+    // Remove __sizeOverride from rest props to avoid passing it to DOM
+    if ('__sizeOverride' in rest) {
+      delete (rest as any).__sizeOverride;
     }
 
-    if (!ResolvedIcon && typeof children === "function") {
-      ResolvedIcon = children as unknown as ComponentType<any>
+    // Size resolution with __sizeOverride support
+    const variantSize = variantSizes[variant as keyof typeof variantSizes];
+    const resolvedSize = __sizeOverride
+      ? (typeof __sizeOverride === "string" ? sizeMap[__sizeOverride as Size] ?? 24 : __sizeOverride)
+      : variantSize !== null
+        ? variantSize
+        : typeof size === "string"
+          ? sizeMap[size as Size] ?? 24
+          : size;
+
+    const resolvedVariant = iconVariantsCva({ variant });
+
+    // Smart passthrough: if we're wrapping another Icon, merge props and return it directly
+    // Handle case where children is an array (with spaces and React elements)
+    let childToCheck = children;
+    if (Array.isArray(children)) {
+      // Find the first React element in the array
+      childToCheck = children.find(child => React.isValidElement(child));
     }
 
-    if (!ResolvedIcon && children && !React.isValidElement(children) && typeof children !== "string") {
-      ResolvedIcon = children as unknown as ComponentType<any>
+    if (React.isValidElement(childToCheck)) {
+      const childType = (childToCheck as any).type;
+      const childProps = (childToCheck as any).props || {};
+
+      // Detect if we're wrapping another Icon component
+      const isWrappingIcon = childType === Icon ||
+        childProps?.['data-atom-icon'] === true ||
+        'variant' in childProps ||
+        'icon' in childProps ||
+        // Detect Icon* components from icon library (IconError, IconInfo, etc.)
+        (typeof childType === 'function' && childType.name?.startsWith('Icon'));
+
+      if (isWrappingIcon) {
+        // Merge wrapper props with child props (child props have priority)
+        // Use propsRest to preserve atomic props (bgColor, textColor, etc.)
+        const wrapperProps = {
+          ...(variant !== "default" ? { variant } : {}),
+          ...propsRest,
+          className,
+        };
+
+        const mergedProps = {
+          ...wrapperProps,
+          ...childProps,
+        };
+
+        // Special handling for className merging
+        if (wrapperProps.className && childProps.className) {
+          mergedProps.className = cn(wrapperProps.className, childProps.className);
+        }
+
+        // Special handling for size vs variant conflicts
+        // We need to keep styling but resolve size conflicts properly
+        if (childProps.size && wrapperProps.variant) {
+          // Child has explicit size, but keep parent variant for styling
+          // The size resolution will happen later in the component
+          mergedProps.__sizeOverride = childProps.size;
+        } else if (childProps.variant && wrapperProps.size) {
+          // Child has explicit variant, remove parent size to avoid conflicts
+          delete mergedProps.size;
+        }
+
+        // Return child Icon with merged props, bypassing wrapper
+        return React.cloneElement(childToCheck as React.ReactElement, mergedProps);
+      }
     }
 
-    if (!ResolvedIcon && !ResolvedElement && process.env.NODE_ENV !== 'production') {
-      console.warn('[Icon] Unable to resolve icon from:', children)
-    }
+    let ResolvedIcon: React.ReactElement | undefined = undefined;
 
+    // Use the same childToCheck logic for consistency
+    if (React.isValidElement(childToCheck)) {
+      ResolvedIcon = childToCheck
+    } else if (typeof children === "function") {
+      ResolvedIcon = React.createElement(children)
+    } else if (IconType) {
+      ResolvedIcon = <IconType />
+    }
 
     return (
       <Atom
         ref={ref}
+        className={cn(
+          resolvedVariant,
+          resolvedSize ? `size-[var(--icon-size)] w-[var(--icon-size)] h-[var(--icon-size)]` : {},
+          atomClassName,
+          className
+        )}
+        style={{
+          "--icon-size": `${resolvedSize}px`,
+          ...atomStyle,
+          ...style
+        } as React.CSSProperties}
+        data-atom-icon={true}
+        data-icon-size={true}
         as={(as ?? "span") as any}
-        className={wrapperClass}
-        style={
-          resolvedSize ? ({ ["--icon-size"]: `${resolvedSize}px` } as React.CSSProperties) : undefined
-        }
-        // {...(resolvedSize ? { width: `${resolvedSize}px`, height: `${resolvedSize}px`, size: `${resolvedSize}px` } : {})}
+        asChild
         {...rest}
       >
-        {
-          ResolvedElement
-            ? ResolvedElement
-            : ResolvedIcon
-              ? (
-                <ResolvedIcon
-                  {...sharedProps}
-                />
-              )
-              : null
-        }
-      </Atom >
+        {ResolvedIcon}
+      </Atom>
     )
   }
 )

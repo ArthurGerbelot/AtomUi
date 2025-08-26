@@ -1,10 +1,11 @@
 'use client'
 
-import { Text, Icon, SmartSlot, Heading, Code, IconSearch, IconDelete, IconAdmin, IconSuccess, IconError, IconWarning, IconInfo, IconUser, IconBell, IconDollar, IconExternalLink, IconBullBitcoin, IconLBTC, IconLNBTC, IconBTC, IconBitcoin, IconProps, pickSmartSlotSpecs, Header, SmartIcon, Card, IconButton, Button, TextWithIcon, ChoiceBadge, HStack, Size } from "@uikit"
+import { Text, Icon, SmartSlot, Heading, Code, IconSearch, IconDelete, IconAdmin, IconSuccess, IconError, IconWarning, IconInfo, IconUser, IconBell, IconDollar, IconExternalLink, IconBullBitcoin, IconLBTC, IconLNBTC, IconBTC, IconBitcoin, IconProps, pickSmartSlotSpecs, Header, SmartIcon, Card, IconButton, Button, TextWithIcon, ChoiceBadge, HStack, Size, VStack, iconVariants } from "@uikit"
 import * as IconModule from "@uikit/components/atoms/IconLibrary"
 import { CodeRenderer } from "../../components/CardExample"
 import { VariantsSelect } from "../../components/VariantsSelect"
 import React from "react"
+import Link from "next/link"
 
 
 // Récupère tous les exports qui commencent par "Icon" du module
@@ -21,6 +22,10 @@ export default function IconsPage() {
   return (
     <div className="space-y-8 p-6">
       <Heading>Icon Library Examples</Heading>
+
+      <Card icon={IconInfo} title="Stress Test" className="max-w-md mx-auto" surface="outline" colorTheme="info">
+        See <Text as={Link} typo="link" colorTheme="brand" href="/uikit-doc/typo/icon/stress-test">Stress Test</Text>
+      </Card>
 
       <div className="flex flex-row gap-4">
         <div className="flex-1 flex flex-col gap-8">
@@ -58,21 +63,61 @@ export default function IconsPage() {
 
           {/* Different Sizes */}
           <Card title="Different px or size prop">
-            <div className="flex flex-wrap items-center gap-4">
-              <IconUser size={12} />
-              <IconUser />
-              <IconUser size={50} />
-            </div>
+            <VStack>
+              <div>
+                <Text weight="medium">Alias size (xs, sm, ..) - Match Text size</Text>
+                <div className="flex flex-wrap items-center gap-4">
+                  <IconUser size={"xs"} />
+                  <IconUser size={"sm"} />
+                  <IconUser size={"md"} />
+                  <IconUser size={"lg"} />
+                  <IconUser size={"xl"} />
+                </div>
+              </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <IconUser size={"xs"} />
-              <IconUser size={"sm"} />
-              <IconUser size={"md"} />
-              <IconUser size={"lg"} />
-              <IconUser size={"xl"} />
-            </div>
+              <div>
+                <Text weight="medium">Variant size (medium, hero, ...) - For layout purpose</Text>
+                <HStack>
+                  <IconUser variant="default" />
+                  <IconUser variant="mini" />
+                  <IconUser variant="chip" />
+                  <IconUser variant="medium" />
+                </HStack>
+                <HStack>
+                  <IconUser variant="hero" />
+                  <IconUser variant="jumbo" />
+                </HStack>
+              </div>
+
+              <div>
+                <Text weight="medium">Custom size</Text>
+                <div className="flex flex-wrap items-center gap-4">
+                  <IconUser size={12} />
+                  <IconUser />
+                  <IconUser size={80} />
+                </div>
+              </div>
+            </VStack>
           </Card>
 
+          {/* Different Sizes */}
+          <Card title="Different way to use">
+            <HStack>
+
+              {/* 1. Direct use */}
+              <IconModule.IconBulletPoint variant="hero" bgColor="bitcoin" textColor="white" />
+
+              {/* 2. Wrapper avec icon */}
+              <Icon icon={IconModule.IconBulletPoint} variant="hero" bgColor="bitcoin" textColor="white" />
+
+              {/* 3. Wrapper avec icon prérendu */}
+              <Icon><IconModule.IconBulletPoint variant="hero" bgColor="bitcoin" textColor="white" /></Icon>
+
+              {/* 4. Via children */}
+              <Icon variant="hero" bgColor="bitcoin" textColor="white"> <IconModule.IconBulletPoint /> </Icon>
+
+            </HStack>
+          </Card>
 
           {/* Wrapper usage */}
           <Card
@@ -210,8 +255,11 @@ export default function IconsPage() {
         </div >
       </div >
 
+
+
       {/* Complete Icon Grid */}
-      <Card title={`Complete ${iconExports.length} icons`} >
+      < Card title={`Complete ${iconExports.length} icons`
+      } >
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
           {iconExports.map(([name, IconComponent]) => {
             const Icon = IconComponent as React.ComponentType<{ size?: number | string }>
@@ -223,7 +271,7 @@ export default function IconsPage() {
             )
           })}
         </div >
-      </Card>
+      </Card >
     </div >
   )
 }

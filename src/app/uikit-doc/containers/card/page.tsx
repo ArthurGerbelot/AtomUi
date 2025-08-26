@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { cn } from '@uikit'
 import { Card, CardProps } from '@uikit/components/molecules/Card'
-import { VStack, HStack, Text } from '@uikit/components/atoms'
+import { VStack, HStack, Text, Button, BackButton, Icon, IconBulletPoint } from '@uikit/components/atoms'
 import { IconBitcoin } from '@uikit'
 
 type CardVariant = CardProps["variant"]
@@ -19,7 +19,7 @@ export default function CardDocPage() {
   const [showFooterSeparator, setShowFooterSeparator] = React.useState(true)
 
   const [showSeparators, setShowSeparators] = React.useState(true)
-  const [showBorders, setShowBorders] = React.useState(true)
+  const [showBorders, setShowBorders] = React.useState(false)
 
   // Header controls
   const [cardVariant, setCardVariant] = React.useState<CardVariant>('default')
@@ -29,6 +29,8 @@ export default function CardDocPage() {
 
   return (
     <div className="container mx-auto max-w-6xl px-6 py-10 space-y-6">
+
+
       <HStack gap="lg">
         {/* Controls */}
 
@@ -128,8 +130,8 @@ export default function CardDocPage() {
                   ? { icon: IconBitcoin, iconProps: { bgColor: 'bitcoin', textColor: 'white' } as any } // eslint-disable-line @typescript-eslint/no-explicit-any
                   : {}
               )}
-              {...(headerHasBack ? { BackLink: <span className="text-sm">Back</span> } : {})}
-              {...(headerHasAction ? { Action: <button className="px-2 py-1 text-sm border rounded">Edit</button> } : {})}
+              {...(headerHasBack ? { BackLink: <BackButton /> } : {})}
+              {...(headerHasAction ? { Action: <Button size="xs" secondary >Edit</Button> } : {})}
             />
           )}
 

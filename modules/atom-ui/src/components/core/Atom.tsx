@@ -55,7 +55,7 @@ export const atomVariants = cva("", {
  * These are the component's "knobs" - what makes Atom unique
  */
 export type AtomProps = {
-  id?: string,
+  // id?: string,
   /** Theme color that applies consistent color tokens */
   colorTheme?: ColorTheme
   /** CSS classes to apply */
@@ -66,7 +66,7 @@ export type AtomProps = {
   asChild?: boolean
   /** React children */
   children?: React.ReactNode
-} & AtomicTokenProps
+} & AtomicTokenProps & React.HTMLAttributes<HTMLDivElement>
 
 /**
  * Complete polymorphic props for Atom

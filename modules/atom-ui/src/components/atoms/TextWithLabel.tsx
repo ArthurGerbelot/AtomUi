@@ -18,7 +18,7 @@ import { Text, SmartText, TextProps } from "./Text"
 // VARIANTS & STYLING
 // -----------------------------------------------------------------------------
 
-const textWithLabelVariants = cva("inline-flex items-baseline", {
+const textWithLabelVariants = cva("inline", {
   variants: {
     size: sizeVariants, //
   },
@@ -102,14 +102,23 @@ export const TextWithLabel = forwardRefPolymorphic<"span", TextWithLabelProps>(
 
     return (
       <Atom
+        display="inline"
         ref={ref}
         as={(as ?? "span") as any}
         asChild={asChild}
         className={cn(textWithLabelVariants({ size }), className)}
         {...rest}
       >
-        <SmartText typo="label" size={size} specs={labelSpecs} />
-        {separatorContent && <Text style={separator == "arrow" ? { transform: "translateY(-0.15em)" } : {}} textSize={size}>{separatorContent}</Text>}
+        <SmartText display="inline-block" typo="label" size={size} specs={labelSpecs} />
+        {separatorContent && (
+          <Text
+            className="mx-1"
+            style={separator == "arrow" ? { transform: "translateY(-0.15em)" } : {}}
+            textSize={size}
+          >
+            {separatorContent}
+          </Text>
+        )}
         <SmartText size={size} specs={textSpecs} />
       </Atom>
     )

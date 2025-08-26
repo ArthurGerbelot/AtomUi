@@ -5,8 +5,18 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 import { cn } from "@uikit/lib"
 import { surfaceVariants } from "@uikit/tokens"
 
+// =============================================================================
+// Popover
+// -----------------------------------------------------------------------------
+// [Molecule] [Polymorphic] [SmartSlot] [Layout]
+// -----------------------------------------------------------------------------
+// Popover component built with Radix UI primitives for floating content
+// =============================================================================
 
-// @TODO ??
+// -----------------------------------------------------------------------------
+// COMPONENT DEFINITIONS
+// -----------------------------------------------------------------------------
+// @TODO Composed version ... no?
 function PopoverComposed({
   children, ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root> & {
@@ -14,7 +24,6 @@ function PopoverComposed({
 }) {
   return <PopoverPrimitive.Root data-slot="popover" {...props}>{children}</PopoverPrimitive.Root>
 }
-// --------------------------
 
 function PopoverRoot({
   ...props
@@ -56,7 +65,9 @@ function PopoverAnchor({
   return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />
 }
 
-
+// =============================================================================
+// EXPORT
+// =============================================================================
 
 export const Popover = Object.assign(PopoverComposed, {
   Root: PopoverRoot,

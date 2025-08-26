@@ -6,9 +6,37 @@ import { asSmartSlot, createSmartSlotSpecs, pickSmartSlotSpecs, pickVariantSmart
 import { Heading, HeadingProps, IconProps, Text, TextProps, Icon, SmartIcon, SmartText, SmartHeading } from "../atoms";
 import { Atom, AtomProps } from "../core";
 
+// =============================================================================
+// Header
+// -----------------------------------------------------------------------------
+// [Molecule] [Polymorphic] [SmartSlot] [Layout]
+// -----------------------------------------------------------------------------
+// Header component for sections, pages, and content blocks with title, subtitle, description
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Global Helpers
+// -----------------------------------------------------------------------------
+
+export const shouldShowHeader = (props: HeaderProps) => (
+  smartSlotMustBeRendered(createSmartSlotSpecs(props.title, props.titleProps, props.Title))
+  || smartSlotMustBeRendered(createSmartSlotSpecs(props.subtitle, props.subtitleProps, props.Subtitle))
+  || smartSlotMustBeRendered(createSmartSlotSpecs(props.description, props.descriptionProps, props.Description))
+  || smartSlotMustBeRendered(createSmartSlotSpecs(props.icon, props.iconProps, props.Icon))
+  || props.Action
+  || props.BackLink
+)
+
+// -----------------------------------------------------------------------------
+// TYPE DEFINITIONS
+// -----------------------------------------------------------------------------
 
 export type HeaderVariant = "main" | "section" | "sub-section";
 export type HeaderAlignVariant = "left" | "center" | "right";
+
+// -----------------------------------------------------------------------------
+// VARIANTS & STYLING
+// -----------------------------------------------------------------------------
 
 const headerVariants = cva("flex flex-col", {
   variants: {
@@ -73,8 +101,9 @@ export type HeaderProps = Omit<AtomProps, "title">
     className?: string;
   };
 
-
-
+// -----------------------------------------------------------------------------
+// COMPONENT IMPLEMENTATION
+// -----------------------------------------------------------------------------
 
 export function Header({
   variant = "section",

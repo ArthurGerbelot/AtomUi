@@ -7,7 +7,7 @@ import { Atom, type AtomProps } from "../core/Atom"
 import { SmartAtom } from "../core/Atom"
 import { asSmartSlot, createSmartSlotSpecs, smartSlotMustBeRendered, type SmartSlot } from "../core/SmartSlot"
 import { type IconProps, SmartIcon } from "."
-import { sizeWithHeightVariants } from "../../tokens/base/base"
+import { sizeWithHeightVariants, type Size } from "../../tokens/base/base"
 
 
 // =============================================================================
@@ -28,6 +28,15 @@ import { sizeWithHeightVariants } from "../../tokens/base/base"
 const inputVariants = cva("", {
   variants: { size: sizeWithHeightVariants }
 })
+
+/** Size-dependent padding for left/right icons and addons */
+const inputPaddingBySize: Record<Size, { left: string; right: string }> = {
+  xs: { left: "pl-8", right: "pr-8" },
+  sm: { left: "pl-9", right: "pr-9" },
+  md: { left: "pl-10", right: "pr-10" },
+  lg: { left: "pl-12", right: "pr-12" },
+  xl: { left: "pl-14", right: "pr-14" }
+}
 
 
 // -----------------------------------------------------------------------------
@@ -121,14 +130,14 @@ export const Input = forwardRefPolymorphic<"input", InputProps>(
     return (
       <SmartAtom
         specs={wrapperSpecs}
-        className={cn("relative inline-block")}
+        className={cn("relative inline-block w-full")}
       >
         {/* Left SmartSlots */}
-        <SmartIcon className={leftClassName + " left-3 text-high-contrast"} specs={iconLeftSpecs} />
+        <SmartIcon size={size} className={leftClassName + " left-3 text-high-contrast"} specs={iconLeftSpecs} />
         <SmartAtom className={leftClassName} specs={addonLeftSpecs} />
 
         {/* Right SmartSlots */}
-        <SmartIcon className={rightClassName + " right-3 text-high-contrast"} specs={iconRightSpecs} />
+        <SmartIcon size={size} className={rightClassName + " right-3 text-high-contrast"} specs={iconRightSpecs} />
         <SmartAtom className={rightClassName} specs={addonRightSpecs} />
 
         <Atom
@@ -140,8 +149,8 @@ export const Input = forwardRefPolymorphic<"input", InputProps>(
           {...maybeType}
           className={cn(
             inputVariants({ size }),
-            hasLeft && "pl-10",
-            hasRight && "pr-10",
+            hasLeft && inputPaddingBySize[(size || "md") as Size].left,
+            hasRight && inputPaddingBySize[(size || "md") as Size].right,
             atomClass,
             className,
           )}

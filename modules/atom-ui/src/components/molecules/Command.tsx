@@ -12,10 +12,19 @@ import { cn } from "@uikit/lib"
 import { HStack, IconActive, IconCheckboxChecked, IconChevronRight, IconSearch, IconSelected, Input } from "../atoms"
 import { Atom } from "../core"
 
+// =============================================================================
+// Command
+// -----------------------------------------------------------------------------
+// [Molecule] [Polymorphic] [SmartSlot] [Container]
+// -----------------------------------------------------------------------------
+// Command palette and search interface built with cmdk primitives
+// =============================================================================
 
 // =============================================================================
 // COMMAND COMPOSED
 // =============================================================================
+
+
 // @TODO ?
 function CommandComposed({
   children, ...props
@@ -207,6 +216,10 @@ function CommandShortcut({
     />
   )
 }
+
+// =============================================================================
+// EXPORT
+// =============================================================================
 
 export const Command = Object.assign(CommandComposed, {
   Root: CommandRoot,

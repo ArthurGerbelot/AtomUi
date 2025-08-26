@@ -90,25 +90,25 @@ export type Typos = typeof typos[number]
 // See
 //
 export const typoVariants: Record<Typos, string> = {
-  "body": "font-sans text-base leading-normal tracking-normal font-normal text-foreground",
-  "label": "font-sans text-sm leading-snug tracking-wide font-medium text-foreground",
+  "body": "font-sans text-base leading-normal tracking-normal font-normal", // text-foreground",
+  "label": "font-sans text-sm leading-snug tracking-wide font-medium", // text-foreground",
   "subtle": "font-sans text-md leading-normal tracking-wide font-normal text-low-contrast-higher-contrast",
   "hint": "font-sans text-sm leading-normal tracking-wide font-normal text-low-contrast-higher-contrast",
   "caption": "font-sans text-xs leading-normal tracking-wide font-normal text-light-higher-contrast",
-  "code": "font-mono text-sm leading-snug tracking-normal font-normal text-foreground",
-  "number": "text-4xl text-foreground",
+  "code": "font-mono text-sm leading-snug tracking-normal font-normal", // text-foreground",
+  "number": "text-4xl", // text-foreground",
   "placeholder": "text-sm text-low-contrast-higher-contrast",
-  "p": "font-sans text-md leading-relaxed tracking-normal font-normal text-foreground",
+  "p": "font-sans text-md leading-relaxed tracking-normal font-normal", // text-foreground",
   "blockquote": "font-serif text-md leading-relaxed tracking-normal font-normal text-low-contrast-higher-contrast italic",
   "link": "font-sans text-md leading-normal tracking-normal font-normal text-primary-higher-contrast underline-offset-6 hover:underline",
-  "main-title": "font-heading text-5xl leading-tight tracking-tighter font-medium text-foreground",
-  "main-subtitle": "font-heading text-2xl leading-snug tracking-normal font-medium text-foreground",
-  "section-title": "font-heading text-3xl leading-tight tracking-normal font-medium text-foreground",
-  "section-subtitle": "font-heading text-xl leading-normal tracking-normal font-medium text-foreground",
-  "subsection-title": "font-heading text-xl leading-normal tracking-normal font-semibold text-foreground",
-  "subsection-subtitle": "font-heading text-lg leading-normal tracking-normal font-medium text-foreground",
-  "card-title": "font-heading text-lg leading-snug tracking-normal font-semibold text-foreground",
-  "card-subtitle": "font-heading text-base leading-normal tracking-normal font-medium text-foreground"
+  "main-title": "font-heading text-5xl leading-tight tracking-tighter font-medium", // text-foreground",
+  "main-subtitle": "font-heading text-2xl leading-snug tracking-normal font-medium", // text-foreground",
+  "section-title": "font-heading text-3xl leading-tight tracking-normal font-medium", // text-foreground",
+  "section-subtitle": "font-heading text-xl leading-normal tracking-normal font-medium", // text-foreground",
+  "subsection-title": "font-heading text-xl leading-normal tracking-normal font-semibold", // text-foreground",
+  "subsection-subtitle": "font-heading text-lg leading-normal tracking-normal font-medium", // text-foreground",
+  "card-title": "font-heading text-lg leading-snug tracking-normal font-semibold", // text-foreground",
+  "card-subtitle": "font-heading text-base leading-normal tracking-normal font-medium", // text-foreground"
 }
 
 
@@ -165,7 +165,13 @@ export const textColorVariants: Record<"primary" | ColorTheme, string> = {
 export type Truncate = BooleanVariants;
 export const truncateVariants: Record<"true" | "false", string> = {
   true: "truncate w-full",
-  false: "",
+  false: "truncate-none",
+}
+// Alias
+export type Ellipsis = BooleanVariants;
+export const ellipsisVariants: Record<"true" | "false", string> = {
+  true: "truncate w-full",
+  false: "truncate-none",
 }
 
 export type Underline = BooleanVariants;

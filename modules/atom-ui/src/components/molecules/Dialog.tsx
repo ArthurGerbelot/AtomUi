@@ -4,7 +4,7 @@ import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 
 import { cn, resolveAtomTokens } from "../../lib"
-import { Header, type HeaderProps } from "./Header"
+import { Header, shouldShowHeader, type HeaderProps } from "./Header"
 import { Heading, IconButtonProps, IconClose, Overlay, SmartIconButton, Text } from "../atoms"
 import { Atom, AtomProps, createSmartSlotSpecs, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, SmartSlot, smartSlotMustBeRendered } from "../core"
 
@@ -63,47 +63,44 @@ type DialogComposedProps = React.ComponentProps<typeof DialogPrimitive.Root> & D
  * @param props - DialogProps
  * @returns Dialog component
  */
-function DialogComposed({
-  // Root props
-  children,
-  open,
-  defaultOpen,
-  onOpenChange,
-  modal,
+function DialogComposed(props: DialogComposedProps) {
 
-  // One‑shot API
-  trigger,
+  const {
+    // Root props
+    children,
+    open,
+    defaultOpen,
+    onOpenChange,
+    modal,
 
-  // Part props (not SmartSlot - yet?)
-  boxProps,
-  headerProps,
+    // One‑shot API
+    trigger,
 
-  avoidContent,
-  contentProps,
+    // Part props (not SmartSlot - yet?)
+    boxProps,
+    headerProps,
 
-  // Header SmartSlots
-  title, titleProps, Title,
-  subtitle, subtitleProps, Subtitle,
-  description, descriptionProps, Description,
-  icon, iconProps, Icon,
-  Action, BackLink,
-  align,
+    avoidContent,
+    contentProps,
 
-  // Footer content
-  footer,
+    // Header SmartSlots
+    title, titleProps, Title,
+    subtitle, subtitleProps, Subtitle,
+    description, descriptionProps, Description,
+    icon, iconProps, Icon,
+    Action, BackLink,
+    align,
 
-  showCloseButton = true,
+    // Footer content
+    footer,
 
-  ...restRoot
-}: DialogComposedProps) {
+    showCloseButton = true,
+
+    ...restRoot
+  } = props;
 
   // Define if Header should be shown
-  const shouldShowHeader = smartSlotMustBeRendered(createSmartSlotSpecs(title, titleProps, Title))
-    || smartSlotMustBeRendered(createSmartSlotSpecs(subtitle, subtitleProps, Subtitle))
-    || smartSlotMustBeRendered(createSmartSlotSpecs(description, descriptionProps, Description))
-    || smartSlotMustBeRendered(createSmartSlotSpecs(icon, iconProps, Icon))
-    || Action
-    || BackLink
+  const _shouldShowHeader = shouldShowHeader(props as HeaderProps);
   // If footer not provided do not show anything (for margin management)
   const shouldShowFooter = Boolean(footer)
 
@@ -124,7 +121,7 @@ function DialogComposed({
 
         {showCloseButton && <DialogCloseIcon />}
 
-        {shouldShowHeader && (
+        {_shouldShowHeader && (
           <DialogHeader
             title={title}
             titleProps={titleProps}

@@ -35,10 +35,10 @@ export default function HeaderPage() {
                 <span className="text-violet-600 dark:text-violet-400 text-lg">🧩</span>
                 <h3 className="font-bold text-violet-900 dark:text-violet-100">Heading component</h3>
               </div>
-              <p className="text-violet-700 dark:text-violet-300">
+              <div className="text-violet-700 dark:text-violet-300">
                 The <Code includeTag>Heading</Code> component interprets the <strong>typo</strong> token to choose the
                 appropriate HTML tag (e.g., h1, h2, h3) and apply consistent styling.
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -386,7 +386,7 @@ function HeaderDemo() {
           title="Interactive Header Demo"
           subtitle={showSubtitle ? "This is a subtitle" : undefined}
           description={showDescription ? "This is a description that explains the header content. It can be quite long and will wrap appropriately." : undefined}
-          iconProps={overrideIconVariant ? { variant: iconVariant } : undefined}
+          iconProps={overrideIconVariant ? { variant: iconVariant as any } : undefined}
           Icon={showIcon ? <IconBitcoin bgColor={"bitcoin"} textColor={"white"} /> : undefined}
           BackLink={showBackLink ? <BackButton onClick={() => console.log("back")} /> : undefined}
           Action={showAction ? <Button textSize="sm" color="high-contrast" variant="ghost" icon={IconEdit}>Edit</Button> : undefined}

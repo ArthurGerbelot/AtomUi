@@ -1,4 +1,5 @@
 
+import * as React from "react"
 import { SmartSlot } from "../components/core/SmartSlot";
 import { IconProps } from "../components/atoms/Icon";
 import { BadgeProps, TextProps } from "@uikit/components";
@@ -12,7 +13,7 @@ import { ColorTheme, Surface } from "@uikit/tokens";
 // Move
 // ------
 // @TODO: Translation?? string | JSX.Element
-export type Translation = string;            // @TODO: Translation?? string | JSX.Element
+export type Translation = React.ReactNode;
 
 
 
@@ -34,7 +35,8 @@ export type ChoiceObject<_ChoiceValue extends ChoiceValue = ChoiceValue> = {
   /** Business value (typed) */
   value: _ChoiceValue                        // (string | number | boolean),
   /** Human-readable label */
-  label?: Translation              // TranslationType (string | JSX.Element)
+  label?: Translation               // TranslationType (string | JSX.Element)
+  description?: Translation         // TranslationType (string | JSX.Element)
   // isLabelLoading?: boolean,    // Is Translation loaded ? (still a thing ? keep the ideain case it become  thing..)
 
 

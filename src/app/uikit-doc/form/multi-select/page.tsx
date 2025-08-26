@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { Header, Text, Button, Choice, Select, Code, Card, IconInfo, AutoGrid, Fieldset, Label, Size, UNGROUPED_GROUP_KEY, IconMap, HStack, colorThemes, VStack, List, TextWithLabel } from '@uikit'
+import { Header, Text, Button, MultiSelect, Code, Card, IconInfo, AutoGrid, Fieldset, Label, Size, UNGROUPED_GROUP_KEY, IconMap, HStack, colorThemes, VStack, List, TextWithLabel } from '@uikit'
 import { CardExample } from '../../components/CardExample'
 import { VariantsSelect } from '../../components/VariantsSelect'
 import { colorChoices, countryChoices, frameworksWithLongLabels, longList, temperatureColors } from '../utils'
@@ -14,7 +14,7 @@ export default function SelectDocsPage() {
   const [size, setSize] = React.useState<Size | undefined>(undefined)
 
   const [value, setValue] = React.useState<string>('')
-  const [color, setColor] = React.useState<string>('')
+  const [colors, setColors] = React.useState<string[]>([])
 
   return (
     <div className="container mx-auto max-w-4xl px-6 py-12 space-y-12">
@@ -63,7 +63,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Atomic update</Label>
-            <Select
+            <MultiSelect
               surface="subtle"
               colorTheme="info"
               radius="full"
@@ -76,7 +76,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Simpler version</Label>
-            <Select
+            <MultiSelect
               size={size}
               choices={[1, 2, 3]}
             />
@@ -85,7 +85,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Using ChoiceObject[]</Label>
-            <Select
+            <MultiSelect
               size={size}
               choices={[{ value: "info" }, { value: "success" }, { value: "error" }]}
             />
@@ -93,7 +93,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>With Choice visual props</Label>
-            <Select
+            <MultiSelect
               size={size}
               choices={[
                 { value: "info", label: "Info + icon", icon: IconInfo },
@@ -105,7 +105,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label><Code includeBrace>choiceBadgeProps</Code></Label>
-            <Select
+            <MultiSelect
               size={size}
               choices={[
                 { value: "info", label: "Info + icon", icon: IconInfo },
@@ -122,7 +122,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label><Code includeBrace>overrideChoiceBadgeProps</Code></Label>
-            <Select
+            <MultiSelect
               size={size}
               choices={[
                 { value: "info", label: "Info + icon", icon: IconInfo },
@@ -139,7 +139,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Disabled</Label>
-            <Select
+            <MultiSelect
               disabled
               placeholder="Disabled"
               size={size}
@@ -149,7 +149,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Inferred type</Label>
-            <Select
+            <MultiSelect
               placeholder="Inferred type"
               size={size}
               choices={colorChoices}
@@ -159,7 +159,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Long list</Label>
-            <Select
+            <MultiSelect
               placeholder="Handle long list"
               size={size}
               choices={longList}
@@ -168,7 +168,7 @@ export default function SelectDocsPage() {
 
           <Fieldset flex>
             <Label>Groups and <Code includeBrace>groupLabels</Code></Label>
-            <Select
+            <MultiSelect
               placeholder="Handle groups"
               size={size}
               choices={countryChoices}
@@ -197,12 +197,12 @@ export default function SelectDocsPage() {
         <HStack>
           <Fieldset flex>
             <Label>Not searchable</Label>
-            <Select choices={temperatureColors} placeholder="Select…" searchable={false} />
+            <MultiSelect choices={temperatureColors} placeholder="Select…" searchable={false} />
           </Fieldset>
 
           <Fieldset flex>
             <Label>Too long value</Label>
-            <Select choices={frameworksWithLongLabels} placeholder="Select…" />
+            <MultiSelect choices={frameworksWithLongLabels} placeholder="Select…" />
           </Fieldset>
         </HStack>
       </CardExample>
@@ -216,7 +216,7 @@ export default function SelectDocsPage() {
         <HStack>
           <Fieldset flex>
             <Label>With keywords</Label>
-            <Select choices={temperatureColors} placeholder="Select…" />
+            <MultiSelect choices={temperatureColors} placeholder="Select…" />
           </Fieldset>
         </HStack>
       </CardExample>
@@ -230,16 +230,16 @@ export default function SelectDocsPage() {
 
       <CardExample title="Controlled" description="The value lives in parent state.">
         <div className="flex items-center gap-4">
-          <Select
+          <MultiSelect
             choices={temperatureColors}
             placeholder="Pick a color"
-            value={color}
-            onValueChange={setColor}
+            value={colors}
+            onValueChange={setColors}
           />
-          <Text className="text-muted-foreground">value: {color || '-'}</Text>
+          <Text className="text-muted-foreground">value: {colors.join(', ') || '-'}</Text>
           <div className="flex items-center gap-2">
-            <Button size="sm" variant="secondary" onClick={() => setColor('green')}>Set Green</Button>
-            <Button size="sm" variant="secondary" onClick={() => setColor('')}>Clear</Button>
+            <Button size="sm" variant="secondary" onClick={() => setColors(['green'])}>Set Green</Button>
+            <Button size="sm" variant="secondary" onClick={() => setColors([])}>Clear</Button>
           </div>
         </div>
       </CardExample>
@@ -250,7 +250,7 @@ export default function SelectDocsPage() {
       <Header variant="sub-section" title={<>Groups & labels</>} subtitle="Organize options logically" />
       <CardExample title="Groups" description="Automatically groups by the choice's group field.">
         <div className="flex items-center gap-4">
-          <Select
+          <MultiSelect
             choices={temperatureColors}
             placeholder="Color"
             searchPlaceholder="Search a color…"
@@ -290,7 +290,6 @@ export default function SelectDocsPage() {
         title="Primitives API"
         subtitle="Compose your own select with fine-grained building blocks"
         Icon={<IconInfo textColor="info" />}
-        className="max-w-2xl mx-auto"
       >
         <VStack gap>
           <Text textSize="sm">Each subcomponent plays a specific role. Combine them to build any Select UX.</Text>

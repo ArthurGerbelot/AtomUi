@@ -15,7 +15,7 @@ import { Text, TextProps } from "./Text"
 
 export type LabelProps = TextProps;
 
-export type LabelPolymorphicProps<T extends React.ElementType = "span"> =
+export type LabelPolymorphicProps<T extends React.ElementType = "label"> =
   PolymorphicProps<T, LabelProps>
 
 
@@ -23,8 +23,8 @@ export type LabelPolymorphicProps<T extends React.ElementType = "span"> =
 // COMPONENT DEFINITIONS
 // -----------------------------------------------------------------------------
 
-export const Label = forwardRefPolymorphic<"span", LabelProps>(
-  function Label<T extends React.ElementType = "span">(
+export const Label = forwardRefPolymorphic<"label", LabelProps>(
+  function Label<T extends React.ElementType = "label">(
     props: LabelPolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
@@ -32,6 +32,7 @@ export const Label = forwardRefPolymorphic<"span", LabelProps>(
       ref={ref}
       typo="label"
       display="block"
+      as="label"
       {...props}
     />
   }

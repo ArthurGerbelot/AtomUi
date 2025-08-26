@@ -23,6 +23,7 @@ import {
 // Typo
 import {
   familyVariants, leadingVariants, textColorVariants, textVariants, trackingVariants, Truncate, truncateVariants, typoVariants, Underline, underlineVariants, weightVariants, Italic, italicVariants,
+  ellipsisVariants,
 } from "./typo/typo";
 
 // Layout
@@ -71,6 +72,7 @@ export const tokens: Record<string, readonly string[]> = {
 export const atomicVariantsTokens = [
   // Theme Color (primary CSS var ..)
   'colorTheme',
+
   // Base
   'size',
   // Typography
@@ -82,14 +84,12 @@ export const atomicVariantsTokens = [
   'gap',
   // Surface
   'surface', 'bgColor', 'borderColor', 'shadow', 'radius',
-
-
-
   //...
 ] as const
+
 export const atomicBooleanTokens = [
   // Typography
-  'truncate', 'underline', 'italic',
+  'truncate', 'ellipsis', 'underline', 'italic',
   // Layout
   'inline', 'inlineBlock', 'block',
   // Spacing
@@ -119,7 +119,9 @@ export const atomicVariants = {
   tracking: trackingVariants,
   weight: weightVariants,
   family: familyVariants,
+
   truncate: truncateVariants,
+  ellipsis: ellipsisVariants,
   underline: underlineVariants,
   italic: italicVariants,
 

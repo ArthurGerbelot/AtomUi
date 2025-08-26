@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { BadgeProps, ChoiceBadgeProps, IconChevronDown, IconChevronUp, IconSelected, Separator, SmartChoiceBadge } from "../atoms"
 import { Atom, AtomProps } from "../core/Atom"
 import { addGroupLabels, overrideChoicesBadgeProps, regroupChoices, toChoiceObject, type Choice, type ChoiceValue } from "../../lib/choices"
-import { selectBaseChoiceBadgeProps, selectTriggerVariants } from "../../lib/select"
+import { BaseSelectOwnProps, selectBaseChoiceBadgeProps, selectTriggerVariants } from "../../lib/select"
 import { createSmartSlotSpecs, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, SmartSlot } from "../core"
 import { cn, resolveAtomTokens } from "../../lib"
 import { surfaceVariants } from "../../tokens"
@@ -30,30 +30,18 @@ import { surfaceVariants } from "../../tokens"
 // TYPE DEFINITIONS
 // -----------------------------------------------------------------------------
 
-type SimpleSelectComposedOwnProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = {
-  choices: Choice<_ChoiceValue>[]
-
-  placeholder?: string
-  groupLabels?: Record<string, string | React.ReactNode>
-
-
-
-  // SmartSlot `choiceBadgeProps` - have lower priority override the choice.badgeProps
-  // so use `overrideChoiceBadgeProps` to override everything
-  overrideChoiceBadgeProps?: Partial<BadgeProps>
-}
-  & SmartSlot<ChoiceBadgeProps, "choiceBadge">  // { choiceBadge, choiceBadgeProps, ChoiceBadge }
-  & VariantProps<typeof selectTriggerVariants>  // { size }
+// Use the BaseSelectOwnProps type to define the props for the SimpleSelect component
+type SimpleSelectComposedOwnProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = BaseSelectOwnProps<_ChoiceValue>
 
 
 // Compose props: Own + Radix Root Primitive + (Trigger) Variant + Atom
 type SimpleSelectComposedProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = SimpleSelectComposedOwnProps<_ChoiceValue>
-  & Omit<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, "children">
+  & Omit<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, "children" | "value" | "defaultValue" | "onValueChange">
   & AtomProps
 
 
-type SimpleSelectPolymorphicComposedProps<T extends React.ElementType = "div"> =
-  PolymorphicProps<T, SimpleSelectComposedProps<ChoiceValue>>
+type SimpleSelectPolymorphicComposedProps<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "div"> =
+  PolymorphicProps<T, SimpleSelectComposedProps<_ChoiceValue>>
 
 
 // -----------------------------------------------------------------------------
@@ -65,7 +53,7 @@ type SimpleSelectPolymorphicComposedProps<T extends React.ElementType = "div"> =
  * for basic Select without search, multi-select, etc.
  */
 const SimpleSelectComposed = forwardRefPolymorphic<"button", SimpleSelectComposedProps<ChoiceValue>>(
-  function SimpleSelectComposed<T extends React.ElementType = "button">(
+  function SimpleSelectComposed<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "button">(
     {
       choices,
       placeholder = "Select",
@@ -78,7 +66,7 @@ const SimpleSelectComposed = forwardRefPolymorphic<"button", SimpleSelectCompose
       overrideChoiceBadgeProps,
 
       ...rest // atomic and radix root primitive props
-    }: SimpleSelectPolymorphicComposedProps<T>,
+    }: SimpleSelectPolymorphicComposedProps<_ChoiceValue, T>,
     ref: PolymorphicRef<T>
   ) {
 
@@ -495,7 +483,27 @@ function SelectScrollDownButton({
 // =============================================================================
 
 
-export const SimpleSelect = Object.assign(SimpleSelectComposed, {
+// -----------------------------------------------------------------------------
+//  Require to be able to infer the _ChoiceValue from the choices prop to the onValueChange callback
+// -----------------------------------------------------------------------------
+// TypeScript cannot add a second generic parameter to forwardRef's call signature.
+// To expose an inferable generic (_ChoiceValue), we publish our own call signature
+// and delegate to SelectComposed. This only changes type surface, not runtime.
+// The wrapper keeps both generics <_ChoiceValue, T> and relays T to SelectComposed,
+// preserving polymorphism (as/asChild) while enabling _ChoiceValue inference from choices.
+// Keep SelectComposed as-is with _ChoiceValue properly propagated internally.
+
+
+
+function SimpleSelectTyped<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "button">(
+  props: SimpleSelectPolymorphicComposedProps<_ChoiceValue, T> & { ref?: PolymorphicRef<T> }
+) {
+  return <SimpleSelectComposed {...(props as any)} />;
+}
+
+
+
+export const SimpleSelect = Object.assign(SimpleSelectTyped, {
   Root: SelectRoot,
   Content: SelectContent,
   Group: SelectGroup,

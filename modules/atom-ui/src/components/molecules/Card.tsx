@@ -4,14 +4,21 @@ import { cva, VariantProps } from "class-variance-authority"
 // Use relative import to avoid circular dependency
 import { cn } from "../../lib/tailwind-utils"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, resolveAtomTokens } from "../../lib/core"
-import { mergeShallow } from "../../lib/utils"
 import { Atom, AtomPolymorphicProps, type AtomProps } from "../core/Atom"
-import { SmartSlotVariantSpecs, pickVariantSmartSlotSpecs } from "../core/SmartSlot"
-import { Header, SmartHeader, type HeaderProps } from "./Header"
+import { SmartSlotVariantSpecs, asSmartSlot, createSmartSlotSpecs, pickVariantSmartSlotSpecs, smartSlotMustBeRendered } from "../core/SmartSlot"
+import { Header, shouldShowHeader, SmartHeader, type HeaderProps } from "./Header"
 import React from "react"
 import { Separator } from "../atoms/Separator"
 import { mergeShallowNode } from "@uikit/lib"
 
+
+// =============================================================================
+// CARD
+// -----------------------------------------------------------------------------
+// [Molecule] [Polymorphic] [SmartSlot] [Container]
+// -----------------------------------------------------------------------------
+// Card component
+// =============================================================================
 
 
 // =============================================================================
@@ -21,6 +28,7 @@ import { mergeShallowNode } from "@uikit/lib"
 //
 
 type CardComposedProps = Omit<CardBoxProps, "title"> & CardHeaderProps & {
+  headerProps?: Partial<HeaderProps>
   avoidContent?: boolean
 }
 
@@ -30,6 +38,8 @@ function CardComposed(props: CardComposedProps) {
   // Destructure props to distribute them to the right atomic components
   const {
     variant,
+
+    headerProps,
     title, titleProps, Title,
     subtitle, subtitleProps, Subtitle,
     description, descriptionProps, Description,
@@ -45,14 +55,20 @@ function CardComposed(props: CardComposedProps) {
     ...rest
   } = props;
 
+  const _shouldShowHeader = shouldShowHeader(props as HeaderProps);
+
+  // Check if there's actual content to render
+  const hasActualChildren = React.Children.count(children) > 0;
+
   return (
     <CardBox {...{
       variant,
       className,
       ...rest
     }}>
-      <CardHeader
+      {_shouldShowHeader && <CardHeader
         {...{
+          ...headerProps,
           variant,
           title, titleProps, Title,
           subtitle, subtitleProps, Subtitle,
@@ -60,15 +76,20 @@ function CardComposed(props: CardComposedProps) {
           icon, iconProps, Icon,
           Action, BackLink,
           align,
+
+          // Pass info about content to adjust spacing
+          hasContent: hasActualChildren,
         }}
-      />
-      {!avoidContent
+      />}
+      {!avoidContent && hasActualChildren
         ? (
-          <CardContent>
+          <CardContent hasHeader={!!_shouldShowHeader}>
             {children}
           </CardContent>
         )
-        : children
+        : avoidContent && hasActualChildren
+          ? children
+          : null
       }
     </CardBox>
   )
@@ -90,6 +111,7 @@ const cardVariants = cva("", {
       "main": "",
       "secondary": "",
       "default": "",
+      "alert": "",
     },
   },
   defaultVariants: {
@@ -159,6 +181,8 @@ const CardBox = forwardRefPolymorphic<"div", CardBoxProps>(
 type CardHeaderOwnProps = {
   // Variant propre à CardHeader, pour injecter des specs dans Header
   variant?: CardBoxProps["variant"]
+  // Pour ajuster le spacing selon s'il y a du contenu ou non
+  hasContent?: boolean
 }
 
 type CardHeaderProps = Omit<HeaderProps, "variant"> & CardHeaderOwnProps
@@ -171,18 +195,23 @@ const cardHeaderVariantProps: SmartSlotVariantSpecs<CardHeaderOwnProps["variant"
   "main": {
     titleProps: { typo: "main-title" },
     subtitleProps: { typo: "main-subtitle" },
-    iconProps: { variant: "big", className: "mt-6" },
+    iconProps: { variant: "hero", className: "mt-6" },
     align: "center",
   },
   "secondary": {
     titleProps: { typo: "section-title" },
     subtitleProps: { typo: "section-subtitle" },
-    iconProps: { variant: "small", className: "mt-2" },
+    iconProps: { variant: "chip", className: "mt-2" },
     align: "center",
   },
   "default": {
     titleProps: { typo: "card-title" },
     subtitleProps: { typo: "card-subtitle" },
+    align: "left",
+  },
+  "alert": {
+    titleProps: { typo: "body", weight: "semibold" },
+    subtitleProps: { typo: "body", size: "sm" },
     align: "left",
   },
 }
@@ -199,7 +228,7 @@ const cardHeaderVariantProps: SmartSlotVariantSpecs<CardHeaderOwnProps["variant"
 // SmartSlot is best for internal slots of a molecule, not for wrapping the whole molecule.
 
 
-function CardHeader({ variant = "default", ...props }: CardHeaderProps) {
+function CardHeader({ variant = "default", hasContent = true, ...props }: CardHeaderProps) {
 
   const variantProps = pickVariantSmartSlotSpecs(cardHeaderVariantProps, variant);
 
@@ -218,6 +247,9 @@ function CardHeader({ variant = "default", ...props }: CardHeaderProps) {
     }
   }
 
+  // Adjust padding based on whether there's content below
+  const headerPadding = hasContent ? "px-4 pt-4 pb-2" : "p-4";
+
   const merged: HeaderProps = {
     ...v,
     ...p,
@@ -230,7 +262,7 @@ function CardHeader({ variant = "default", ...props }: CardHeaderProps) {
     iconProps: mergeShallowNode(v.iconProps, p.iconProps),
 
     align: p.align ?? v.align,
-    className: cn("p-4 py-2", v.className, p.className),
+    className: cn(headerPadding, v.className, p.className),
   }
 
 
@@ -245,14 +277,22 @@ function CardHeader({ variant = "default", ...props }: CardHeaderProps) {
 // =============================================================================
 
 
-export const CardContent = React.forwardRef<HTMLDivElement, AtomPolymorphicProps<"div">>(
-  function CardContent({ className, ...props }, ref) {
+type CardContentProps = AtomPolymorphicProps<"div"> & {
+  hasHeader?: boolean
+}
+
+export const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  function CardContent({ className, hasHeader = true, ...props }, ref) {
+    // Adjust padding based on whether there's a header above
+    const contentPadding = hasHeader ? "px-4 pb-4" : "p-4";
+
     return (
       <Atom
         ref={ref}
         data-slot="card-content"
         className={cn(
-          "px-4 py-2 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&:last-child]:pb-4",
+          contentPadding,
+          "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
           className
         )}
         {...props}
@@ -299,9 +339,10 @@ export function CardSeparator({ className, ...props }: React.ComponentProps<"div
 // EXPORT
 // =============================================================================
 
-
+export const SmartCard = asSmartSlot(CardComposed)
 
 export const Card = Object.assign(CardComposed, {
+  Smart: SmartCard,
   Box: CardBox,
   Header: CardHeader,
   Content: CardContent,

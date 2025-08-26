@@ -62,9 +62,9 @@ const stackVariants = cva("flex items-start gap-md", {
 
 type StackOwnProps = VariantProps<typeof stackVariants>
 
-type StackProps = AtomProps & StackOwnProps;
+export type StackProps = AtomProps & StackOwnProps;
 
-type StackPolymorphicProps<T extends React.ElementType = "div"> =
+export type StackPolymorphicProps<T extends React.ElementType = "div"> =
   PolymorphicProps<T, StackProps>
 
 // =============================================================================

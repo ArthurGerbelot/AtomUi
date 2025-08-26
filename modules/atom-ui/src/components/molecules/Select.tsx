@@ -1,20 +1,20 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 
 import { Atom, type AtomProps } from "../core/Atom"
-import type { BadgeProps } from "../atoms/Badge"
 import { Size } from "../../tokens/base/base"
 import { surfaceVariants } from "../../tokens"
 import type { Choice, ChoiceValue } from "../../lib/choices"
-import { regroupChoices, overrideChoicesBadgeProps, addGroupLabels } from "../../lib/choices"
+import { regroupChoices, overrideChoicesBadgeProps, addGroupLabels, toChoiceObject } from "../../lib/choices"
 import { ChoiceBadgeProps, SmartChoiceBadge } from "../atoms/ChoiceBadge"
 import { createSmartSlotSpecs, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, SmartSlot } from "../core"
 import { cn, resolveAtomTokens } from "../../lib"
 import { IconCheck, IconChevronDown } from "../atoms/IconLibrary"
-import { selectBaseChoiceBadgeProps, selectTriggerVariants, selectFilterDefault } from "../../lib/select"
+import { selectBaseChoiceBadgeProps, selectTriggerVariants, selectFilterDefault, BaseSelectOwnProps } from "../../lib/select"
 import { Command, Popover } from "."
+import { Input } from "../atoms"
 
 // =============================================================================
 // Select (Advanced)
@@ -30,35 +30,22 @@ import { Command, Popover } from "."
 // TYPE DEFINITIONS
 // -----------------------------------------------------------------------------
 
-type SelectComposedOwnProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = {
-  choices: Choice<_ChoiceValue>[]
+type SelectComposedOwnProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = BaseSelectOwnProps<_ChoiceValue> & {
 
-  placeholder?: string
-  groupLabels?: Record<string, React.ReactNode>
-
-  // Advanced features
+  // Advanced features of Select (search, filter)
   searchable?: boolean
   searchPlaceholder?: string
   noResultsPlaceholder?: string
   filter?: (value: string, search: string, keywords?: string[]) => number
-
-  // Controlled/uncontrolled
-  value?: _ChoiceValue
-  defaultValue?: _ChoiceValue
-  onValueChange?: (v: _ChoiceValue) => void
-
-  // SmartSlot `choiceBadgeProps` - low priority; use overrideChoiceBadgeProps to force
-  overrideChoiceBadgeProps?: Partial<BadgeProps>
 }
-  & SmartSlot<ChoiceBadgeProps, "choiceBadge"> // { choiceBadge, choiceBadgeProps, ChoiceBadge }
-  & VariantProps<typeof selectTriggerVariants> // { size }
+
 
 
 // Compose props: Own + Atom
 export type SelectComposedProps<_ChoiceValue extends ChoiceValue = ChoiceValue> = SelectComposedOwnProps<_ChoiceValue>
   & AtomProps
 
-export type SelectPolymorphicComposedProps<T extends React.ElementType = "div", _ChoiceValue extends ChoiceValue = ChoiceValue> =
+export type SelectPolymorphicComposedProps<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "div"> =
   PolymorphicProps<T, SelectComposedProps<_ChoiceValue>>
 
 
@@ -67,7 +54,7 @@ export type SelectPolymorphicComposedProps<T extends React.ElementType = "div", 
 // -----------------------------------------------------------------------------
 
 const SelectComposed = forwardRefPolymorphic<"button", SelectComposedProps<ChoiceValue>>(
-  function SelectComposed<T extends React.ElementType = "button", _ChoiceValue extends ChoiceValue = ChoiceValue>(
+  function SelectComposed<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "button">(
     {
       // Base props
       choices,
@@ -91,24 +78,29 @@ const SelectComposed = forwardRefPolymorphic<"button", SelectComposedProps<Choic
       onValueChange,
 
       ...rest // atomic props
-    }: SelectPolymorphicComposedProps<T, _ChoiceValue>,
+    }: SelectPolymorphicComposedProps<_ChoiceValue, T>,
     ref: PolymorphicRef<T>
   ) {
 
     // ------------------------------
-    // 1) State (open + value)
+    // 1) State (open + value management like MultiSelect)
     // ------------------------------
     const [open, setOpen] = React.useState(false)
     const isControlled = value !== undefined
-    const [internalValue, setInternalValue] = React.useState<_ChoiceValue | undefined>(defaultValue as _ChoiceValue | undefined)
-    const current = (isControlled ? value : internalValue) as _ChoiceValue | undefined
+    const [internalValue, setInternalValue] = React.useState<_ChoiceValue | undefined>(defaultValue)
+    const currentValue = isControlled ? value : internalValue
 
-    const setValue = React.useCallback((v: unknown) => {
-      const next = (v && typeof v === "object" && (v as any).value !== undefined) ? (v as any).value as _ChoiceValue : v as _ChoiceValue
-      if (isControlled) onValueChange?.(next)
-      else {
-        setInternalValue(next)
-        onValueChange?.(next)
+    // Value handler with proper controlled/uncontrolled logic (like MultiSelect)
+    const handleValueChange = React.useCallback((newValue: unknown) => {
+      const choiceValue = (newValue && typeof newValue === "object" && (newValue as any).value !== undefined)
+        ? (newValue as any).value as _ChoiceValue
+        : newValue as _ChoiceValue
+
+      if (isControlled) {
+        onValueChange?.(choiceValue)
+      } else {
+        setInternalValue(choiceValue)
+        onValueChange?.(choiceValue)
       }
     }, [isControlled, onValueChange])
 
@@ -131,13 +123,13 @@ const SelectComposed = forwardRefPolymorphic<"button", SelectComposedProps<Choic
     )
 
     const selected = React.useMemo(() => {
-      if (current == null) return undefined
+      if (currentValue == null) return undefined
       for (const group of groupsInOrder) {
-        const found = group.choices.find((it: any) => (it instanceof Object ? it.value : it) === current)
+        const found = group.choices.find((it: any) => (it instanceof Object ? it.value : it) === currentValue)
         if (found) return (found instanceof Object ? found : { value: found })
       }
       return undefined
-    }, [groupsInOrder, current]) as any
+    }, [groupsInOrder, currentValue]) as any
 
     // ------------------------------
     // 4) Render
@@ -169,26 +161,29 @@ const SelectComposed = forwardRefPolymorphic<"button", SelectComposedProps<Choic
         <SelectContent>
           <Command.Root filter={filter || selectFilterDefault}>
             {searchable && (
-              <Command.Input placeholder={searchPlaceholder} className="h-9" />
+              <SelectInput placeholder={searchPlaceholder} className="h-9" />
             )}
             <Command.List>
               <Command.Empty>{noResultsPlaceholder}</Command.Empty>
               {groupsInOrder.map((group: any, gi: number) => (
                 <Command.Group key={`${group.key}-${gi}`} heading={group.heading}>
-                  {group.choices.map((it: any) => (
-                    <SelectCommandItem
-                      key={String((it instanceof Object ? it.value : it))}
-                      choice={it}
-                      isSelected={current === (it instanceof Object ? it.value : it)}
-                      onSelect={(v) => {
-                        setValue(v)
-                        setOpen(false)
-                      }}
-                      choiceBadge={choiceBadge}
-                      choiceBadgeProps={choiceBadgeProps}
-                      ChoiceBadge={ChoiceBadge}
-                    />
-                  ))}
+                  {group.choices.map((it: any) => {
+                    const c = toChoiceObject(it)
+                    return (
+                      <SelectCommandItem
+                        key={String(c.value)}
+                        choice={c}
+                        isSelected={currentValue === c.value}
+                        onSelect={(v) => {
+                          handleValueChange(v)
+                          setOpen(false)
+                        }}
+                        choiceBadge={choiceBadge}
+                        choiceBadgeProps={choiceBadgeProps}
+                        ChoiceBadge={ChoiceBadge}
+                      />
+                    )
+                  })}
                 </Command.Group>
               ))}
             </Command.List>
@@ -208,11 +203,11 @@ const SelectComposed = forwardRefPolymorphic<"button", SelectComposedProps<Choic
 // ----------------------------------
 
 type SelectValueOwnProps = { placeholder?: string }
-export type SelectValueProps = AtomProps & SelectValueOwnProps
-export type SelectValuePolymorphicProps<T extends React.ElementType = "span"> =
+type SelectValueProps = AtomProps & SelectValueOwnProps
+type SelectValuePolymorphicProps<T extends React.ElementType = "span"> =
   PolymorphicProps<T, SelectValueProps>
 
-export const SelectValue = forwardRefPolymorphic<"span", SelectValueProps>(
+const SelectValue = forwardRefPolymorphic<"span", SelectValueProps>(
   function SelectValue<T extends React.ElementType = "span">(
     { placeholder, children, ...atomProps }: SelectValuePolymorphicProps<T>,
     ref: PolymorphicRef<T>
@@ -238,11 +233,11 @@ export const SelectValue = forwardRefPolymorphic<"span", SelectValueProps>(
 // ----------------------------------
 
 type SelectTriggerOwnProps = React.ComponentProps<"button"> & VariantProps<typeof selectTriggerVariants>
-export type SelectTriggerProps = AtomProps & SelectTriggerOwnProps
-export type SelectTriggerPolymorphicProps<T extends React.ElementType = "button"> =
+type SelectTriggerProps = AtomProps & SelectTriggerOwnProps
+type SelectTriggerPolymorphicProps<T extends React.ElementType = "button"> =
   PolymorphicProps<T, SelectTriggerProps>
 
-export const SelectTrigger = forwardRefPolymorphic<"button", SelectTriggerProps>(
+const SelectTrigger = forwardRefPolymorphic<"button", SelectTriggerProps>(
   function SelectTrigger<T extends React.ElementType = "button">(
     { size = "md", children, ...props }: SelectTriggerPolymorphicProps<T>,
     ref: PolymorphicRef<T>
@@ -309,13 +304,19 @@ export function SelectCommandItem<T extends ChoiceValue>({
   ChoiceBadge,
 }: SelectCommandItemProps<T>) {
   const _choice = (choice instanceof Object ? choice : { value: choice });
+  const isDisabled = !!(_choice as any).disabled
   return (
     <Command.Item
       keywords={_choice.keywords}
       value={String(_choice.value)}
-      onSelect={() => onSelect(_choice.value as T)}
+      disabled={isDisabled}
+      onSelect={() => {
+        if (isDisabled) return
+        onSelect(_choice.value as T)
+      }}
       className={cn(
         "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none",
+        "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       )}
     >
       <SmartChoiceBadge
@@ -331,24 +332,58 @@ export function SelectCommandItem<T extends ChoiceValue>({
   )
 }
 
+// SelectInput
+// ----------------------------------
+
+type SelectInputProps = React.ComponentProps<typeof Command.Input>
+
+export const SelectInput = ({ className, ...props }: SelectInputProps) => {
+  return (
+    <Command.Input data-slot=" select-input" asChild {...props}>
+      <Input />
+    </Command.Input >
+  )
+}
+
 
 // =============================================================================
 // Export (Composed + Primitives)
 // =============================================================================
 
-export const Select = Object.assign(SelectComposed, {
+
+// -----------------------------------------------------------------------------
+//  Require to be able to infer the _ChoiceValue from the choices prop to the onValueChange callback
+// -----------------------------------------------------------------------------
+// TypeScript cannot add a second generic parameter to forwardRef's call signature.
+// To expose an inferable generic (_ChoiceValue), we publish our own call signature
+// and delegate to SelectComposed. This only changes type surface, not runtime.
+// The wrapper keeps both generics <_ChoiceValue, T> and relays T to SelectComposed,
+// preserving polymorphism (as/asChild) while enabling _ChoiceValue inference from choices.
+// Keep SelectComposed as-is with _ChoiceValue properly propagated internally.
+
+
+function SelectTyped<_ChoiceValue extends ChoiceValue = ChoiceValue, T extends React.ElementType = "button">(
+  props: SelectPolymorphicComposedProps<_ChoiceValue, T> & { ref?: PolymorphicRef<T> }
+) {
+  return <SelectComposed {...(props as any)} />;
+}
+
+
+
+export const Select = Object.assign(SelectTyped, {
   Value: SelectValue,
   Trigger: SelectTrigger,
   Content: SelectContent,
   Item: SelectCommandItem,
-}) as unknown as {
-  <V extends ChoiceValue = ChoiceValue, T extends React.ElementType = "button">(
-    props: SelectPolymorphicComposedProps<T, V> & { ref?: PolymorphicRef<T> }
-  ): React.ReactElement | null
-  Value: typeof SelectValue
-  Trigger: typeof SelectTrigger
-  Content: typeof SelectContent
-  Item: typeof SelectCommandItem
-}
+  Input: SelectInput,
+});
 
-export type { SelectComposedProps as SelectProps }
+export type {
+  SelectComposedProps as SelectProps,
+  SelectPolymorphicComposedProps as SelectPolymorphicProps,
+  SelectValueProps,
+  SelectTriggerProps,
+  SelectContentProps,
+  SelectCommandItemProps,
+  SelectInputProps,
+};

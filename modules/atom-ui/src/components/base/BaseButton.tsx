@@ -33,7 +33,7 @@ const variants: Record<ButtonVariant, string> = {
   link: typoVariants["link"], // "typo-link"//"text-primary-higher-contrast underline-offset-4 hover:underline",
 }
 
-const baseButtonVariants = cva(
+export const baseButtonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer " +
   "disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50 " +
   "[&_svg]:pointer-events-none [&_svg:not([data-icon-size])]:size-4 shrink-0 [&_svg]:shrink-0 " +

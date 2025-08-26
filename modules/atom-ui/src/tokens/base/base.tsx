@@ -50,9 +50,9 @@ export const sizeWithSmallPaddingVariants: Record<Size, string> = {
   xl: "text-xl px-[.5rem]", //  py-[.375rem]",
 };
 export const sizeWithHeightVariants: Record<Size, string> = {
-  xs: "text-xs px-2 py-1 h-7",
-  sm: "text-sm px-3 py-1 h-9",
-  md: "text-md px-4 py-2 h-11",
-  lg: "text-lg px-6 py-3 h-13",
-  xl: "text-xl px-8 py-4 h-15",
+  xs: "text-xs px-2 py-1 min-h-7",
+  sm: "text-sm px-3 py-1 min-h-9",
+  md: "text-md px-4 py-2 min-h-11",
+  lg: "text-lg px-6 py-3 min-h-13",
+  xl: "text-xl px-8 py-4 min-h-15",
 };

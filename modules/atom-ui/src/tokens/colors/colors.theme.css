@@ -73,7 +73,8 @@
   --color-low-contrast-foreground: var(--color-black);
   --color-low-contrast-higher-contrast: var(--color-zinc-500);
 
-  --color-light: var(--color-zinc-200);
+  --color-light: oklch(0 0 0 / 8%);
+  /*var(--color-zinc-200);*/
   --color-light-foreground: var(--color-black);
   --color-light-higher-contrast: var(--color-zinc-500);
 
@@ -161,7 +162,8 @@
   --color-low-contrast-foreground: var(--color-zinc-100);
   --color-low-contrast-higher-contrast: var(--color-zinc-500);
 
-  --color-light: var(--color-zinc-700);
+  --color-light: oklch(1 0 0 / 8%);
+  /*var(--color-zinc-700);*/
   --color-light-foreground: var(--color-white);
   --color-light-higher-contrast: var(--color-zinc-500);
 

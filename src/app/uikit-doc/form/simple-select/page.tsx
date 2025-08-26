@@ -4,11 +4,11 @@ import * as React from "react"
 import { useState } from "react"
 import Link from "next/link"
 
-import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, ChoiceObject, sizes, Size, Accordion, AccordionItem, AccordionTrigger, AccordionContent, IconMap, UNGROUPED_GROUP_KEY } from "@uikit"
+import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, ChoiceObject, sizes, Size, Accordion, IconMap, UNGROUPED_GROUP_KEY } from "@uikit"
 
 import { VariantsSelect } from "../../components/VariantsSelect"
 import { CodeRenderer } from "../../components/CardExample"
-import { colorChoices, countryChoices } from "../utils"
+import { colorChoices, countryChoices, longList } from "../utils"
 
 export default function SelectPage() {
   const [size, setSize] = useState<Size | undefined>(undefined)
@@ -16,13 +16,7 @@ export default function SelectPage() {
   const [valueNumber, setValueNumber] = useState<string | undefined>(undefined)
   const [valueLongList, setValueLongList] = useState<string | undefined>(undefined)
 
-  // const directionChoices: ChoiceObject[] = [
-  //   { value: "up", label: "Up", icon: IconArrowUpRight },
-  //   { value: "middle", label: "Middle", icon: IconArrowRight },
-  //   { value: "down", label: "Down", icon: IconArrowDownRight },
-  // ]
 
-  const longList: ChoiceObject[] = Array.from({ length: 100 }).map((_, i) => ({ value: `item-${i + 1}`, label: `Item ${i + 1}` }))
 
   return (
     <div className="container mx-auto max-w-4xl px-6 py-12 space-y-12">
@@ -211,7 +205,7 @@ export default function SelectPage() {
 />`}
             >
               <Fieldset flex>
-                <Label>Using ChoiceObject[]</Label>
+                <Label>With Choice visual props</Label>
                 <SimpleSelect
                   size={size}
                   choices={[
@@ -285,7 +279,7 @@ export default function SelectPage() {
 />`}
             >
               <Fieldset flex>
-                <Label>Use <Code includeBrace>choiceBadgeProps</Code> props</Label>
+                <Label>Use <Code includeBrace>overrideChoiceBadgeProps</Code> props</Label>
                 <SimpleSelect
                   size={size}
                   choices={[
@@ -310,12 +304,33 @@ export default function SelectPage() {
         title="Disabled"
         subtitle="Use the disabled prop to disable the SimpleSelect"
       >
-        <SimpleSelect
-          disabled
-          placeholder="Disabled"
-          size={size}
-          choices={[{ value: "x", label: "Not selectable", disabled: true }]}
-        />
+
+        <Fieldset flex>
+          <Label>Disabled</Label>
+          <SimpleSelect
+            disabled
+            placeholder="Disabled"
+            size={size}
+            choices={[{ value: "x", label: "Not selectable", disabled: true }]}
+          />
+        </Fieldset>
+      </Card>
+
+
+      <Card
+        Icon={<IconCheckboxChecked textColor="success" />}
+        title="Inferred type"
+        subtitle="SimpleSelect must infer the type of the value based on the type of the choices"
+      >
+        <Fieldset flex>
+          <Label>Inferred type</Label>
+          <SimpleSelect
+            placeholder="Inferred type"
+            size={size}
+            choices={colorChoices}
+            onValueChange={(_value) => console.log("value must be a ColorChoices", value)}
+          />
+        </Fieldset>
       </Card>
 
       <Card
@@ -323,11 +338,14 @@ export default function SelectPage() {
         title="Long list of choices"
         subtitle="Automatically handle long list of choices (Radix)"
       >
-        <SimpleSelect
-          placeholder="Handle long list of choices"
-          size={size}
-          choices={longList}
-        />
+        <Fieldset flex>
+          <Label>Long list of choices</Label>
+          <SimpleSelect
+            placeholder="Handle long list of choices"
+            size={size}
+            choices={longList}
+          />
+        </Fieldset>
       </Card>
       <Separator />
 
@@ -406,7 +424,10 @@ export default function SelectPage() {
       >
         <VStack gap>
           <Text>
-            Primitive components are only available for <Code includeTag>SimpleSelect</Code> and NOT for <Code includeTag as={Link} href="/uikit-doc/form/select">Select</Code> and <Code includeTag as={Link} href="/uikit-doc/form/multiselect">MultiSelect</Code> components.
+            Primitive components are not the same between <Code includeTag>SimpleSelect</Code> and <Code includeTag as={Link} href="/uikit-doc/form/select">Select</Code> or <Code includeTag as={Link} href="/uikit-doc/form/multiselect">MultiSelect</Code> components.
+          </Text>
+          <Text>
+            See <Text as={Link} typo="link" href="/uikit-doc/form/select">Select</Text> and <Text as={Link} typo="link" href="/uikit-doc/form/multiselect">MultiSelect</Text> for more details.
           </Text>
         </VStack>
       </Card>
@@ -634,18 +655,18 @@ export default function SelectPage() {
                       return (
                         <SimpleSelect.Group key={`grp-${gi}`} >
                           {gi > 0 && <SimpleSelect.Separator />}
-                          <AccordionItem value={`grp-${gi}`}>
-                            <AccordionTrigger>
+                          <Accordion.Item value={`grp-${gi}`}>
+                            <Accordion.Trigger>
                               <SimpleSelect.Label>{start}-{end}</SimpleSelect.Label>
-                            </AccordionTrigger>
-                            <AccordionContent>
+                            </Accordion.Trigger>
+                            <Accordion.Content>
                               {chunk.map((c) => (
                                 <SimpleSelect.Item key={String(c.value)} value={String(c.value)}>
                                   <Text size={size}>{c.label ?? c.value}</Text>
                                 </SimpleSelect.Item>
                               ))}
-                            </AccordionContent>
-                          </AccordionItem>
+                            </Accordion.Content>
+                          </Accordion.Item>
                         </SimpleSelect.Group>
                       )
                     })}

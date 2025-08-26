@@ -24,10 +24,12 @@ import { asSmartSlot, forwardRefPolymorphic, PolymorphicRef } from "../core"
  */
 export const BackButton = forwardRefPolymorphic<"button", IconButtonProps>(
   function BackButton<T extends React.ElementType = "button">(
-    { icon, ...props }: IconButtonPolymorphicProps<T>,
+    { size, icon, ...props }: IconButtonPolymorphicProps<T>,
     ref: PolymorphicRef<T>
   ) {
     return <IconButton
+      size={size ?? "xs"}
+
       ref={ref as any}
       icon={icon ?? <IconArrowLeft />}
       {...props as any}
