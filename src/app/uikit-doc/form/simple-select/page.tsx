@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import Link from "next/link"
 
-import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, ChoiceObject, sizes, Size, Accordion, IconMap, UNGROUPED_GROUP_KEY } from "@uikit"
+import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, sizes, Size, Accordion, IconMap, UNGROUPED_GROUP_KEY } from "@uikit"
 
 import { VariantsSelect } from "../../components/VariantsSelect"
 import { CodeRenderer } from "../../components/CardExample"
@@ -328,7 +328,7 @@ export default function SelectPage() {
             placeholder="Inferred type"
             size={size}
             choices={colorChoices}
-            onValueChange={(_value) => console.log("value must be a ColorChoices", value)}
+            onValueChange={(_value) => console.log("value must be a ColorChoices", _value)}
           />
         </Fieldset>
       </Card>

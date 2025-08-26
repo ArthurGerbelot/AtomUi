@@ -4,9 +4,8 @@
 import * as React from "react"
 
 // Import from your UI Kit alias
-import { Code, Card, VStack, HStack, Header, Text, Button, SimpleGrid, Separator, List, IconInfo, SimpleSelect } from "@uikit"
-import { sizes, Size, surfaceVariants, surfaces, Surface } from "@uikit/tokens"
-import { VariantsSelect } from "../../components/VariantsSelect"
+import { Code, Card, VStack, HStack, Header, Text, Button, SimpleGrid, IconInfo, SimpleSelect } from "@uikit"
+import { sizes, Size, surfaces, Surface, ColorTheme } from "@uikit/tokens"
 import { CardExample } from "../../components/CardExample"
 
 export default function CodeDocsPage() {
@@ -57,7 +56,7 @@ export default function CodeDocsPage() {
                 placeholder="Surface"
                 choices={[...surfaces]}
                 value={surface}
-                onValueChange={(v) => setSurface(v as any)}
+                onValueChange={(v) => setSurface(v as Surface)}
               />
             </VStack>
 
@@ -78,7 +77,7 @@ export default function CodeDocsPage() {
                   { value: "low-contrast", label: "Low Contrast" },
                 ]}
                 value={colorTheme}
-                onValueChange={(v) => setColorTheme(v === "default" ? undefined : v as any)}
+                onValueChange={(v) => setColorTheme(v === "default" ? undefined : v as ColorTheme)}
               />
             </VStack>
 
@@ -136,7 +135,7 @@ export default function CodeDocsPage() {
                 <Code
                   textScale={textScale}
                   surface={surface}
-                  colorTheme={colorTheme as any}
+                  colorTheme={colorTheme as ColorTheme}
                   includeTag={includeTag}
                   includeSelfClosingTag={includeSelfClosingTag}
                   includeBrace={includeBrace}
@@ -151,7 +150,7 @@ export default function CodeDocsPage() {
               as="pre"
               textScale={textScale}
               surface={surface}
-              colorTheme={colorTheme as any}
+              colorTheme={colorTheme as ColorTheme}
               includeTag={includeTag}
               includeSelfClosingTag={includeSelfClosingTag}
               includeBrace={includeBrace}

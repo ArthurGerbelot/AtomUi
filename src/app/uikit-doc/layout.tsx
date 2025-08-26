@@ -135,6 +135,9 @@ export default function UIKitDocLayout({
               <NavLink href="/uikit-doc/form/checkbox" isActive={pathname === "/uikit-doc/form/checkbox"}>
                 Checkbox
               </NavLink>
+              <NavLink href="/uikit-doc/form/radio" isActive={pathname === "/uikit-doc/form/radio"}>
+                Radio
+              </NavLink>
               <NavLink href="/uikit-doc/form/simple-select" isActive={pathname === "/uikit-doc/form/simple-select"}>
                 SimpleSelect
               </NavLink>

@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { Atom, Heading, Header, type HeaderProps, IconAdmin, Text, Code, HStack, VStack, IconEdit, Card, IconBitcoin, Button, BackButton } from "@uikit"
+import { Atom, Heading, Header, type HeaderProps, IconAdmin, Text, Code, HStack, VStack, IconEdit, Card, IconBitcoin, Button, BackButton, IconProps } from "@uikit"
 import { CardExample } from "../../components/CardExample"
 
 export default function HeaderPage() {
@@ -386,7 +386,7 @@ function HeaderDemo() {
           title="Interactive Header Demo"
           subtitle={showSubtitle ? "This is a subtitle" : undefined}
           description={showDescription ? "This is a description that explains the header content. It can be quite long and will wrap appropriately." : undefined}
-          iconProps={overrideIconVariant ? { variant: iconVariant as any } : undefined}
+          iconProps={overrideIconVariant ? { variant: iconVariant as IconProps['variant'] } : undefined}
           Icon={showIcon ? <IconBitcoin bgColor={"bitcoin"} textColor={"white"} /> : undefined}
           BackLink={showBackLink ? <BackButton onClick={() => console.log("back")} /> : undefined}
           Action={showAction ? <Button textSize="sm" color="high-contrast" variant="ghost" icon={IconEdit}>Edit</Button> : undefined}

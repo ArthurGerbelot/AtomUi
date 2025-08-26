@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from "react"
-import { Alert, Card, VStack, HStack, Header, Text, Button, SimpleGrid, List, IconInfo, IconSuccess, IconError, IconWarning, SimpleSelect, IconClose, IconButton } from "@uikit"
-import { colorThemes, surfaces } from "@uikit/tokens"
+import { Alert, Card, VStack, HStack, Header, Text, Button, SimpleGrid, IconInfo, SimpleSelect, IconClose, IconButton, AlertProps } from "@uikit"
+import { colorThemes, Surface, surfaces } from "@uikit/tokens"
 import { CardExample } from "../../components/CardExample"
 import { Fragment } from "react"
 
@@ -64,8 +64,8 @@ export default function AlertDocsPage() {
           <VStack gap="md">
             <Text typo="label">Live Preview</Text>
             <Alert
-              variant={selectedVariant as any}
-              surface={selectedSurface as any}
+              variant={selectedVariant as AlertProps['variant']}
+              surface={selectedSurface as Surface}
               title={selectedVariantData.label}
               description={selectedVariantData.description}
             />
@@ -103,12 +103,12 @@ export default function AlertDocsPage() {
           {semanticVariants.map((variant) => (
             <Fragment key={variant.value}>
               <Alert
-                variant={variant.value as any}
+                variant={variant.value as AlertProps['variant']}
                 title={variant.label}
                 description={variant.description}
               />
               <Alert
-                variant={variant.value as any}
+                variant={variant.value as AlertProps['variant']}
                 surface="subtle-outline"
                 title={variant.label}
                 description={variant.description}
@@ -117,7 +117,7 @@ export default function AlertDocsPage() {
                 surface="subtle-outline"
                 colorTheme={"low-contrast"}
                 headerProps={{
-                  textColor: variant.value as any,
+                  textColor: variant.value as AlertProps['variant'],
                 }}
                 title={"Card version"}
                 description={"Or redo using Card..."}

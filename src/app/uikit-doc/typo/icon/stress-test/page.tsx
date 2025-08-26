@@ -1,14 +1,10 @@
 'use client'
 
-// app/docs/atom/page.tsx (or pages/docs/atom.tsx for the pages router)
 import * as React from "react"
-// Import from your UI Kit alias
-/* eslint-disable */
-import { Card, ChoiceBadge, ChoiceObject, HStack, VStack, Icon, IconCheckboxChecked, IconError, IconInfo, Size, sizes, Text, Header, iconVariants, Code, IconBitcoin, IconSuccess } from "@uikit"
+import { Card, ChoiceBadge, ChoiceObject, HStack, VStack, Icon, IconCheckboxChecked, IconError, IconInfo, sizes, Text, Header, iconVariants, Code, IconBitcoin, IconSuccess } from "@uikit"
 
 
 
-/* eslint-disable */
 const colorChoices: ChoiceObject[] = [
   { value: "error", label: "Error", Icon: IconError, colorTheme: "error" },
   { value: "success", label: "Success", Icon: IconCheckboxChecked, colorTheme: "success" },
@@ -16,9 +12,6 @@ const colorChoices: ChoiceObject[] = [
 ]
 
 export default function TestPage() {
-
-  /* eslint-disable */
-  const [size, setSize] = React.useState<Size | undefined>(undefined)
 
   return (
     <VStack stretch className="container mx-auto max-w-4xl">

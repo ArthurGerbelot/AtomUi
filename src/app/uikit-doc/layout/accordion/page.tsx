@@ -16,7 +16,6 @@ import {
   IconWarning,
   IconError,
   IconSuccess,
-  Label,
   TextWithLabel
 } from "@uikit"
 import { CardExample } from "../../components/CardExample"

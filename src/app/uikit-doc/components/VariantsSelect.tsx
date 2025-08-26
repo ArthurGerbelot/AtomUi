@@ -1,4 +1,4 @@
-import { Card, SimpleSelect } from "@uikit"
+import { Card, SimpleSelect, Text } from "@uikit"
 import type { Size } from "@uikit/tokens/base/base"
 import { sizes } from "@uikit/tokens/base/base"
 import { colorThemes, type ColorTheme } from "@uikit/tokens/colors/colors"
@@ -41,9 +41,10 @@ export function VariantsSelect<T extends string | number>({
             <label className="block text-sm font-medium mb-2">Size</label>
             <SimpleSelect
               placeholder="undefined"
-              choices={sizes.map((sizeOption) => ({ value: sizeOption }))}
-              value={size ?? ""}
-              onValueChange={(v: Size) => setSize(v ? v : undefined)}
+              choices={[{ value: undefined, label: <Text textColor="muted">undefined</Text> }, ...sizes]}
+              value={size}
+              /* eslint-disable-next-line -- Radix converts undefined to "undefined" string */
+              onValueChange={(v: any) => setSize(v === "undefined" ? undefined : v)}
             />
           </div>
         )}
@@ -53,9 +54,10 @@ export function VariantsSelect<T extends string | number>({
             <label className="block text-sm font-medium mb-2">Color</label>
             <SimpleSelect
               placeholder="undefined"
-              choices={colorThemes.map((ct) => ({ value: ct }))}
-              value={colorTheme ?? ""}
-              onValueChange={(v: ColorTheme) => setColorTheme(v ? v : undefined)}
+              choices={[{ value: undefined, label: <Text textColor="muted">undefined</Text> }, ...colorThemes]}
+              value={colorTheme}
+              /* eslint-disable-next-line -- Radix converts undefined to "undefined" string */
+              onValueChange={(v: any) => setColorTheme(v === "undefined" ? undefined : v)}
             />
           </div>
         )}
@@ -65,9 +67,10 @@ export function VariantsSelect<T extends string | number>({
             <label className="block text-sm font-medium mb-2">Radius</label>
             <SimpleSelect
               placeholder="undefined"
-              choices={radiuses.map((r) => ({ value: r }))}
-              value={radius ?? ""}
-              onValueChange={(v: Radius) => setRadius(v ? v : undefined)}
+              choices={[{ value: undefined, label: <Text textColor="muted">undefined</Text> }, ...radiuses]}
+              value={radius}
+              /* eslint-disable-next-line -- Radix converts undefined to "undefined" string */
+              onValueChange={(v: any) => setRadius(v === "undefined" ? undefined : v)}
             />
           </div>
         )}
@@ -77,9 +80,10 @@ export function VariantsSelect<T extends string | number>({
             <label className="block text-sm font-medium mb-2">Variant</label>
             <SimpleSelect
               placeholder="undefined"
-              choices={variants.map((v) => ({ value: v as unknown as string }))}
-              value={variant ? (variant as unknown as string) : ""}
-              onValueChange={(v: string) => setVariant(v ? (v as unknown as T) : undefined)}
+              choices={[{ value: undefined, label: <Text textColor="muted">undefined</Text> }, ...variants.map((v) => ({ value: v as unknown as string }))]}
+              value={variant as unknown as string}
+              /* eslint-disable-next-line -- Radix converts undefined to "undefined" string */
+              onValueChange={(v: any) => setVariant(v === "undefined" ? undefined : (v as unknown as T))}
             />
           </div>
         )}

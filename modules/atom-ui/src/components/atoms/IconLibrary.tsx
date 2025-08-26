@@ -93,6 +93,7 @@ export const IconRadioUnchecked = (props: IconProps) => <Icon icon={Lucide.Circl
 export const IconCheckboxChecked = (props: IconProps) => <Icon icon={Lucide.CheckCircle} {...props} />
 export const IconCheckboxUnchecked = (props: IconProps) => <Icon icon={Lucide.Circle} {...props} />
 
+export const IconRadio = (props: IconProps) => <Icon icon={Lucide.Circle} {...props} />
 export const IconCheck = (props: IconProps) => <Icon icon={Lucide.Check} {...props} />
 export const IconSelected = (props: IconProps) => <Icon icon={Lucide.Check} {...props} />
 

@@ -36,7 +36,7 @@ type DatePickerComposedOwnProps = {
   /** Selected date value */
   value?: Date
   /** Default selected date */
-  defaultValue?: Date
+  defaultValue?: Date | undefined
   /** Callback when date changes */
   onValueChange?: (date: Date | undefined) => void
 
@@ -51,8 +51,8 @@ type DatePickerComposedOwnProps = {
   disabled?: boolean
 }
 
-// Compose props: Own + Atom
-type DatePickerComposedProps = DatePickerComposedOwnProps & AtomProps
+// Compose props: Own + Atom (excluding conflicting defaultValue)
+type DatePickerComposedProps = DatePickerComposedOwnProps & Omit<AtomProps, 'defaultValue'>
 
 type DatePickerComposedPolymorphicProps<T extends React.ElementType = "div"> =
   PolymorphicProps<T, DatePickerComposedProps>

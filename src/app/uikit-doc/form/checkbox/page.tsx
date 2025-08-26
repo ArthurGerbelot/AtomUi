@@ -111,7 +111,7 @@ export default function CheckboxDocsPage() {
             }}
           />
           <HStack className="mt-4">
-            <Button surface="subtle" colorTheme="success" size="sm" onClick={() => setChecked(true)}>Chekc</Button>
+            <Button surface="subtle" colorTheme="success" size="sm" onClick={() => setChecked(true)}>Check</Button>
             <Button surface="subtle" colorTheme="error" size="sm" onClick={() => setChecked(false)}>Uncheck</Button>
           </HStack>
         </Card>

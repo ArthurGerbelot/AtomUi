@@ -100,7 +100,7 @@ export default function InputPage() {
               placeholder="Password"
               size={size}
               radius={radius}
-              onChange={(e) => { setPassword(e.target.value) }}
+              onChange={(e) => { setPassword((e.target as HTMLInputElement).value) }}
               AddonRight={
                 <IconButton
                   size="sm"

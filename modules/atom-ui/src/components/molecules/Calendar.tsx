@@ -243,12 +243,17 @@ function Calendar({
   )
 }
 
-function CalendarDayButton({
-  className,
-  day,
-  modifiers,
-  ...props
-}: React.ComponentProps<typeof DayButton>) {
+function CalendarDayButton(props: React.ComponentProps<typeof DayButton>) {
+  const {
+    className,
+    day,
+    modifiers,
+    children,
+    onClick,
+    disabled,
+    tabIndex,
+    ...rest
+  } = props
   const defaultClassNames = getDefaultClassNames()
 
   const ref = React.useRef<HTMLButtonElement>(null)
@@ -259,9 +264,13 @@ function CalendarDayButton({
   return (
     <Button
       ref={ref}
+      as="button"
       variant="ghost"
       colorTheme="low-contrast"
       size="sm"
+      onClick={onClick as any}
+      disabled={disabled}
+      tabIndex={tabIndex}
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
         modifiers.selected &&
@@ -277,8 +286,9 @@ function CalendarDayButton({
         defaultClassNames.day,
         className
       )}
-      {...props}
-    />
+    >
+      {children}
+    </Button>
   )
 }
 

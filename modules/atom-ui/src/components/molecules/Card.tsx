@@ -30,6 +30,7 @@ import { mergeShallowNode } from "@uikit/lib"
 type CardComposedProps = Omit<CardBoxProps, "title"> & CardHeaderProps & {
   headerProps?: Partial<HeaderProps>
   avoidContent?: boolean
+  contentProps?: CardContentProps
 }
 
 
@@ -45,6 +46,9 @@ function CardComposed(props: CardComposedProps) {
     description, descriptionProps, Description,
     icon, iconProps, Icon,
     Action, BackLink,
+
+    contentProps, // No need for a complete SmartSlot here, just Props
+
 
     avoidContent,
     align,
@@ -83,7 +87,7 @@ function CardComposed(props: CardComposedProps) {
       />}
       {!avoidContent && hasActualChildren
         ? (
-          <CardContent hasHeader={!!_shouldShowHeader}>
+          <CardContent hasHeader={!!_shouldShowHeader}  {...contentProps}>
             {children}
           </CardContent>
         )

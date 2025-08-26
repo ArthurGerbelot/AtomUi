@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { Header, Text, Button, MultiSelect, Code, Card, IconInfo, AutoGrid, Fieldset, Label, Size, UNGROUPED_GROUP_KEY, IconMap, HStack, colorThemes, VStack, List, TextWithLabel } from '@uikit'
+import { Header, Text, Button, MultiSelect, Code, Card, IconInfo, AutoGrid, Fieldset, Label, Size, UNGROUPED_GROUP_KEY, IconMap, HStack, VStack, List, TextWithLabel } from '@uikit'
 import { CardExample } from '../../components/CardExample'
 import { VariantsSelect } from '../../components/VariantsSelect'
 import { colorChoices, countryChoices, frameworksWithLongLabels, longList, temperatureColors } from '../utils'
@@ -12,8 +12,6 @@ import { colorChoices, countryChoices, frameworksWithLongLabels, longList, tempe
 export default function SelectDocsPage() {
 
   const [size, setSize] = React.useState<Size | undefined>(undefined)
-
-  const [value, setValue] = React.useState<string>('')
   const [colors, setColors] = React.useState<string[]>([])
 
   return (

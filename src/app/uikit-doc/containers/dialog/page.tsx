@@ -316,7 +316,7 @@ export default function DialogDocsPage() {
               description="View or update your account information."
               align="center"
               Icon={IconInfo}
-              iconProps={{ textColor: "info", variant: "small", className: "bg-transparent" }}
+              iconProps={{ textColor: "info", variant: "mini", className: "bg-transparent" }}
               BackLink={<Dialog.Close asChild><BackButton /></Dialog.Close>}
               Action={
                 <Dialog.Close asChild>

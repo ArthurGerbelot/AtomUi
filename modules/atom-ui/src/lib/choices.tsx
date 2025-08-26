@@ -21,7 +21,7 @@ export type Translation = React.ReactNode;
 
 
 
-export type ChoiceValue = string | number | boolean;
+export type ChoiceValue = string | number | boolean | undefined;
 
 type IconSlot = SmartSlot<IconProps, 'icon'>;
 type BadgeSlot = SmartSlot<BadgeProps, 'badge'>;
@@ -38,7 +38,6 @@ export type ChoiceObject<_ChoiceValue extends ChoiceValue = ChoiceValue> = {
   label?: Translation               // TranslationType (string | JSX.Element)
   description?: Translation         // TranslationType (string | JSX.Element)
   // isLabelLoading?: boolean,    // Is Translation loaded ? (still a thing ? keep the ideain case it become  thing..)
-
 
   // Shorthand helpers for common badge props
   // These can be set directly on the root object instead of using badgeProps: {}
@@ -79,6 +78,15 @@ export type Choice<_ChoiceValue extends ChoiceValue = ChoiceValue> = _ChoiceValu
  */
 export const toChoiceObject = <_ChoiceValue extends ChoiceValue>(choice: Choice<_ChoiceValue>): ChoiceObject<_ChoiceValue> => {
   return (choice instanceof Object ? choice : { value: choice }) as ChoiceObject<_ChoiceValue>;
+}
+
+/**
+ * Ensure to work with a ChoiceObject.
+ * @param choice - The choice to convert.
+ * @returns The choice as a ChoiceObject.
+ */
+export const toChoicesObject = <_ChoiceValue extends ChoiceValue>(choices: Choice<_ChoiceValue>[]): ChoiceObject<_ChoiceValue>[] => {
+  return choices.map(toChoiceObject);
 }
 
 /**

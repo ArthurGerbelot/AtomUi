@@ -2,8 +2,9 @@
 
 import * as React from "react"
 import { Calendar } from "@uikit/components/molecules/Calendar"
-import { Card, VStack, HStack, Header, Text, Button, SimpleGrid, SimpleSelect, IconInfo, List } from "@uikit"
+import { Card, VStack, Header, Text, SimpleGrid, SimpleSelect, IconInfo, List } from "@uikit"
 import { CardExample } from "../../components/CardExample"
+import { DateRange } from "react-day-picker"
 
 export default function CalendarDocsPage() {
   const [mode, setMode] = React.useState<"single" | "multiple" | "range">("single")
@@ -15,7 +16,7 @@ export default function CalendarDocsPage() {
   // State for different modes
   const [selectedSingle, setSelectedSingle] = React.useState<Date | undefined>(new Date())
   const [selectedMultiple, setSelectedMultiple] = React.useState<Date[]>([])
-  const [selectedRange, setSelectedRange] = React.useState<{ from?: Date; to?: Date }>({})
+  const [selectedRange, setSelectedRange] = React.useState<DateRange>({ from: new Date(), to: new Date() })
 
   const getSelectedValue = () => {
     switch (mode) {
@@ -26,11 +27,11 @@ export default function CalendarDocsPage() {
     }
   }
 
-  const handleSelectionChange = (selection: any) => {
+  const handleSelectionChange = (selection: Date | Date[] | DateRange) => {
     switch (mode) {
-      case "single": setSelectedSingle(selection); break
-      case "multiple": setSelectedMultiple(selection || []); break
-      case "range": setSelectedRange(selection || {}); break
+      case "single": setSelectedSingle(selection as Date); break
+      case "multiple": setSelectedMultiple(selection as Date[]); break
+      case "range": setSelectedRange(selection as DateRange); break
     }
   }
 
@@ -60,7 +61,7 @@ export default function CalendarDocsPage() {
                   { value: "range", label: "Date Range" }
                 ]}
                 value={mode}
-                onValueChange={(v) => setMode(v as any)}
+                onValueChange={(v) => setMode(v as "single" | "multiple" | "range")}
               />
             </VStack>
 
@@ -72,7 +73,7 @@ export default function CalendarDocsPage() {
                   { value: "dropdown", label: "Dropdown" }
                 ]}
                 value={captionLayout}
-                onValueChange={(v) => setCaptionLayout(v as any)}
+                onValueChange={(v) => setCaptionLayout(v)}
               />
             </VStack>
 
@@ -89,7 +90,7 @@ export default function CalendarDocsPage() {
                   { value: 6, label: "Saturday" }
                 ]}
                 value={weekStartsOn}
-                onValueChange={(v) => setWeekStartsOn(v as any)}
+                onValueChange={(v) => setWeekStartsOn(v)}
               />
             </VStack>
 
@@ -102,7 +103,7 @@ export default function CalendarDocsPage() {
                   { value: 3, label: "3 Months" }
                 ]}
                 value={numberOfMonths}
-                onValueChange={(v) => setNumberOfMonths(v as any)}
+                onValueChange={(v) => setNumberOfMonths(v)}
               />
             </VStack>
 
@@ -125,11 +126,12 @@ export default function CalendarDocsPage() {
           <VStack gap="md">
             <Text typo="label">Live Preview</Text>
 
+            {/* @ts-expect-error: Dynamic mode switching not supported by react-day-picker types */}
             <Calendar
-              mode={mode as any}
-              selected={getSelectedValue() as any}
+              mode={mode}
+              selected={getSelectedValue()}
               onSelect={handleSelectionChange}
-              captionLayout={captionLayout as any}
+              captionLayout={captionLayout}
               showOutsideDays={showOutsideDays}
               weekStartsOn={weekStartsOn}
               numberOfMonths={numberOfMonths}

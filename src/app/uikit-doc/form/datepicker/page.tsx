@@ -2,15 +2,13 @@
 
 import * as React from "react"
 import { DatePicker } from "@uikit/components/molecules/DatePicker"
-import { Card, VStack, HStack, Header, Text, Button, SimpleGrid, SimpleSelect, IconInfo, List, Input } from "@uikit"
-import { CardExample } from "../../components/CardExample"
+import { Card, VStack, HStack, Header, Text, Button, SimpleGrid, SimpleSelect, IconInfo, Input, Size } from "@uikit"
 
 export default function DatePickerDocsPage() {
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>()
   const [dateFormat, setDateFormat] = React.useState<string>("PPP")
   const [placeholder, setPlaceholder] = React.useState<string>("Pick a date")
   const [size, setSize] = React.useState<"xs" | "sm" | "md" | "lg" | "xl">("md")
-  const [colorTheme, setColorTheme] = React.useState<string>("primary")
   const [disabled, setDisabled] = React.useState<boolean>(false)
 
   return (
@@ -41,7 +39,7 @@ export default function DatePickerDocsPage() {
                   { value: "xl", label: "Extra Large" }
                 ]}
                 value={size}
-                onValueChange={(v) => setSize(v as any)}
+                onValueChange={(v) => setSize(v as Size)}
               />
             </VStack>
 
@@ -95,7 +93,6 @@ export default function DatePickerDocsPage() {
               placeholder={placeholder}
               dateFormat={dateFormat}
               size={size}
-              colorTheme={colorTheme as any}
               disabled={disabled}
             />
 
@@ -113,7 +110,7 @@ export default function DatePickerDocsPage() {
 
           <VStack gap="md">
             <Text typo="label">With Default Value</Text>
-            <DatePicker defaultValue={new Date() as any} placeholder="Select a date" />
+            <DatePicker defaultValue={new Date()} placeholder="Select a date" />
           </VStack>
 
 
@@ -301,51 +298,6 @@ export default function DatePickerDocsPage() {
             </tr>
           </tbody>
         </table>
-      </Card>
-
-      {/* Best Practices */}
-      <Card title="Best Practices" description="Guidelines for effective DatePicker usage">
-        <VStack gap="lg">
-          <VStack gap="md">
-            <Text typo="label">Date Formats</Text>
-            <List>
-              <Text>• Use <Text className="font-mono text-sm">"PPP"</Text> for readable dates (January 1, 2024)</Text>
-              <Text>• Use <Text className="font-mono text-sm">"P"</Text> for short format (01/01/2024)</Text>
-              <Text>• Use <Text className="font-mono text-sm">"yyyy-MM-dd"</Text> for ISO format</Text>
-              <Text>• Use <Text className="font-mono text-sm">"dd/MM/yyyy"</Text> for European format</Text>
-            </List>
-          </VStack>
-
-          <VStack gap="md">
-            <Text typo="label">User Experience</Text>
-            <List>
-              <Text>• Provide clear placeholder text indicating expected format</Text>
-              <Text>• Use appropriate size variants for form context</Text>
-              <Text>• Disable invalid dates using <Text className="font-mono text-sm">calendarProps.disabled</Text></Text>
-              <Text>• Consider multi-month view for date ranges</Text>
-            </List>
-          </VStack>
-
-          <VStack gap="md">
-            <Text typo="label">Form Integration</Text>
-            <List>
-              <Text>• Use controlled components with proper state management</Text>
-              <Text>• Validate date selections on change</Text>
-              <Text>• Handle empty states gracefully</Text>
-              <Text>• Provide error styling for invalid selections</Text>
-            </List>
-          </VStack>
-
-          <VStack gap="md">
-            <Text typo="label">Accessibility</Text>
-            <List>
-              <Text>• DatePicker includes proper ARIA labels by default</Text>
-              <Text>• Calendar supports keyboard navigation</Text>
-              <Text>• Provide clear error messages for validation</Text>
-              <Text>• Test with screen readers</Text>
-            </List>
-          </VStack>
-        </VStack>
       </Card>
 
     </div>

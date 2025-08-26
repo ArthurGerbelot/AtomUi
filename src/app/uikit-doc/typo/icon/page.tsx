@@ -1,6 +1,6 @@
 'use client'
 
-import { Text, Icon, SmartSlot, Heading, Code, IconSearch, IconDelete, IconAdmin, IconSuccess, IconError, IconWarning, IconInfo, IconUser, IconBell, IconDollar, IconExternalLink, IconBullBitcoin, IconLBTC, IconLNBTC, IconBTC, IconBitcoin, IconProps, pickSmartSlotSpecs, Header, SmartIcon, Card, IconButton, Button, TextWithIcon, ChoiceBadge, HStack, Size, VStack, iconVariants } from "@uikit"
+import { Text, Icon, SmartSlot, Heading, Code, IconSearch, IconDelete, IconAdmin, IconSuccess, IconError, IconWarning, IconInfo, IconUser, IconBell, IconDollar, IconExternalLink, IconBullBitcoin, IconLBTC, IconLNBTC, IconBTC, IconBitcoin, IconProps, pickSmartSlotSpecs, Header, SmartIcon, Card, IconButton, Button, TextWithIcon, ChoiceBadge, HStack, Size, VStack } from "@uikit"
 import * as IconModule from "@uikit/components/atoms/IconLibrary"
 import { CodeRenderer } from "../../components/CardExample"
 import { VariantsSelect } from "../../components/VariantsSelect"

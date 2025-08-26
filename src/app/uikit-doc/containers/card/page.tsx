@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { cn } from '@uikit'
 import { Card, CardProps } from '@uikit/components/molecules/Card'
-import { VStack, HStack, Text, Button, BackButton, Icon, IconBulletPoint } from '@uikit/components/atoms'
+import { VStack, HStack, Text, Button, BackButton } from '@uikit/components/atoms'
 import { IconBitcoin } from '@uikit'
 
 type CardVariant = CardProps["variant"]
