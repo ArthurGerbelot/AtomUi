@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 
 import "./globals.css";
 import { jetbrainsMono, golosText, bebasNeue } from "@uikit/nextjs";
+import { TooltipProvider } from "@uikit";
 
 export const metadata: Metadata = {
   title: "API Docs",
@@ -23,7 +24,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

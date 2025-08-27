@@ -36,7 +36,7 @@ import { asSmartSlot } from "../core/SmartSlot"
  * Typography variants for Text component
  * Each variant defines both visual styling and semantic meaning
  */
-const textVariants = cva("leading-normal m-0 p-0", {
+const textVariants = cva("leading-normal m-0 p-0 break-words", {
   variants: {
     variant: {
       /** Large numbers or emphasis text */

@@ -13,6 +13,11 @@ export * from "./List"
 export * from "./Popover"
 export * from "./Radio"
 export * from "./SimpleSelect"
+export * from "./ScrollArea"
 export * from "./Select"
+export * from "./Sheet"
+export * from "./Sidebar"
 export * from "./MultiSelect"
+export * from "./Tooltip"
+
 

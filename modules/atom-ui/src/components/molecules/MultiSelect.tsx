@@ -137,7 +137,7 @@ const MultiSelectComposed = forwardRefPolymorphic<"button", MultiSelectComposedP
           >
             <Select.Value>
               {selectedChoices.length > 0 ? (
-                <div className="flex flex-wrap items-center gap-1">
+                <div className="flex flex-wrap items-center gap-1 w-full">
                   {selectedChoices.map((c: any) => (
                     <SmartChoiceBadge
                       key={String(c.value)}

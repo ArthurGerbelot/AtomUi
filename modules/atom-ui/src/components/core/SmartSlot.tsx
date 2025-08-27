@@ -190,6 +190,8 @@ function mergeSmartSlotSpecs<P extends { children?: any }>(
  * Small helper to extract a SmartSlotSpecs from component props by slot name
  *    Component props {title, titleProps, Title, ..allOthersProps}
  *    becomes {content: title, props: titleProps, Component: Title}
+ *
+ * Do not return the rest of the props, use extractSmartSlotSpecs instead
  */
 export function pickSmartSlotSpecs<P extends { children?: any }>(
   props: Record<string, unknown>,
@@ -203,6 +205,41 @@ export function pickSmartSlotSpecs<P extends { children?: any }>(
     props: props[propsKey] as Partial<Omit<P, "children">> | undefined,
     Component: props[NodeKey] as (React.ComponentType<P> | React.ReactElement<P> | null) | undefined,
   };
+}
+
+
+/**
+ * Small helper to extract a SmartSlotSpecs from component props by slot name
+ *
+ * @return [specs, rest]
+ */
+
+export function extractSmartSlotSpecs<P extends { children?: any }>(
+  props: Record<string, unknown>,
+  name: string
+): [SmartSlotSpec<P>, Record<string, unknown>] {
+  const contentKey = name as string; // e.g., "title"
+  const propsKey = `${name}Props` as string; // e.g., "titleProps"
+  const NodeKey = (name[0].toUpperCase() + name.slice(1)) as string; // e.g., "Title"
+
+  // Extract the SmartSlot keys
+  const usedKeys = [contentKey, propsKey, NodeKey];
+
+  // Create rest object with remaining props
+  const rest = Object.keys(props).reduce((acc, key) => {
+    if (!usedKeys.includes(key)) {
+      acc[key] = props[key];
+    }
+    return acc;
+  }, {} as Record<string, unknown>);
+
+  const specs: SmartSlotSpec<P> = {
+    content: props[contentKey] as P['children'] | null | undefined,
+    props: props[propsKey] as Partial<Omit<P, "children">> | undefined,
+    Component: props[NodeKey] as (React.ComponentType<P> | React.ReactElement<P> | null) | undefined,
+  };
+
+  return [specs, rest];
 }
 
 /**

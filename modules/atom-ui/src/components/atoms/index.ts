@@ -22,3 +22,5 @@ export * from "./InputAmount"
 export * from "./InputAmountHuge"
 export * from "./InputClearable"
 export * from "./InputWithClipboard"
+export * from "./Skeleton"
+

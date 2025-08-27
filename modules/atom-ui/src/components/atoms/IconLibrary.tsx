@@ -33,6 +33,9 @@ export const IconArrowDownRight = (props: IconProps) => <Icon icon={Lucide.Arrow
 
 export const IconDotsHorizontal = (props: IconProps) => <Icon icon={Lucide.MoreHorizontal} {...props} />
 
+export const IconPanelLeft = (props: IconProps) => <Icon icon={Lucide.PanelLeft} {...props} />
+export const IconPanelRight = (props: IconProps) => <Icon icon={Lucide.PanelRight} {...props} />
+
 // Actions
 export const IconClose = (props: IconProps) => <Icon icon={Lucide.X} {...props} />
 export const IconClearInput = (props: IconProps) => <Icon icon={Lucide.X} {...props} />

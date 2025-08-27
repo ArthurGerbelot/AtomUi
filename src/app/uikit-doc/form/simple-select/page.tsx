@@ -352,6 +352,26 @@ export default function SelectPage() {
 
       <Card
         Icon={<IconCheckboxChecked textColor="success" />}
+        title="Long value"
+        subtitle="Automatically handle long value"
+      >
+        <Fieldset flex>
+          <Label>Long value</Label>
+          <SimpleSelect
+            placeholder="Handle long value"
+            size={size}
+            choices={[
+              { value: "long-value", label: "Long value with a long label. Long value with a long label. Long value with a long label. " },
+              { value: "foo", label: "Fooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo. " }
+            ]}
+          />
+        </Fieldset>
+      </Card>
+      <Separator />
+
+
+      <Card
+        Icon={<IconCheckboxChecked textColor="success" />}
         title="Groups"
         subtitle="Automatically handle groups using choice.group"
         description="Will be sorted by first group found on the choices list. Use the groupLabels prop to customize the labels of the groups"

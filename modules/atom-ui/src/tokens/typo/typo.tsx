@@ -101,14 +101,15 @@ export const typoVariants: Record<Typos, string> = {
   "p": "font-sans text-md leading-relaxed tracking-normal font-normal", // text-foreground",
   "blockquote": "font-serif text-md leading-relaxed tracking-normal font-normal text-low-contrast-higher-contrast italic",
   "link": "font-sans text-md leading-normal tracking-normal font-normal text-primary-higher-contrast underline-offset-6 hover:underline",
+
   "main-title": "font-heading text-5xl leading-tight tracking-tighter font-medium", // text-foreground",
   "main-subtitle": "font-heading text-2xl leading-snug tracking-normal font-medium", // text-foreground",
   "section-title": "font-heading text-3xl leading-tight tracking-normal font-medium", // text-foreground",
   "section-subtitle": "font-heading text-xl leading-normal tracking-normal font-medium", // text-foreground",
   "subsection-title": "font-heading text-xl leading-normal tracking-normal font-semibold", // text-foreground",
   "subsection-subtitle": "font-heading text-lg leading-normal tracking-normal font-medium", // text-foreground",
-  "card-title": "font-heading text-lg leading-snug tracking-normal font-semibold", // text-foreground",
-  "card-subtitle": "font-heading text-base leading-normal tracking-normal font-medium", // text-foreground"
+  "card-title": "font-heading text-lg leading-snug tracking-normal font-medium", // text-foreground",
+  "card-subtitle": "font-heading text-md leading-normal tracking-normal font-medium", // text-foreground"
 }
 
 

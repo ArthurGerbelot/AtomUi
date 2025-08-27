@@ -163,10 +163,15 @@ const CardBox = forwardRefPolymorphic<"div", CardBoxProps>(
 
         surface="card"
 
-        className={cn(cardVariants({ variant }), className)}
+        className={cn(
+          cardVariants({ variant }),
+          "min-w-0 overflow-auto break-words",
+          className
+        )}
         {...rest}
       >
         {children}
+
       </Atom>
     )
   }
@@ -297,6 +302,7 @@ export const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
         className={cn(
           contentPadding,
           "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+          // "min-w-0 overflow-x-auto",
           className
         )}
         {...props}

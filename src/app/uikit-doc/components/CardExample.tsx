@@ -90,8 +90,8 @@ export const CodeRenderer = ({ code, beforeCode, afterCode, language, tryRenderC
       {(code !== null) && (code || displayCode || beforeCode || afterCode) && (
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-foreground">Code {language && `(${language})`}</h4>
-          <pre className="p-4 bg-muted rounded-lg overflow-x-auto">
-            <code className={`text-sm text-muted-foreground font-mono language-${language}`}>
+          <pre className="p-4 bg-muted rounded-lg min-w-0 overflow-x-auto">
+            <code className={`text-sm text-muted-foreground font-mono language-${language} whitespace-pre-wrap break-all min-w-0`}>
               {beforeCode && `${beforeCode}\n`}
               {code?.toString().trim() || displayCode?.toString().trim()}
               {afterCode && `\n${afterCode}`}
@@ -103,7 +103,7 @@ export const CodeRenderer = ({ code, beforeCode, afterCode, language, tryRenderC
       {/* Render Preview */}
       {children && <div className="space-y-2">
         <h4 className="text-sm font-medium text-foreground">Render</h4>
-        <div className="p-6 rounded-lg bg-card border border-low-contrast"> {/* inset-shadow-[1px_1px_4px_rgba(0,0,0,0.25)] */}
+        <div className="p-6 rounded-lg bg-card border border-low-contrast min-w-0 overflow-x-auto"> {/* inset-shadow-[1px_1px_4px_rgba(0,0,0,0.25)] */}
           {children}
         </div>
       </div>}

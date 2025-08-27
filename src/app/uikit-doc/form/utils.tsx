@@ -40,6 +40,6 @@ export const frameworksWithLongLabels: Choice<string>[] = [
   { value: 'next', label: 'Next.js' },
   { value: 'remix', label: 'Remix' },
   { value: 'nuxt', label: 'Nuxt.js' },
-  { value: 'sveltekit', label: 'SvelteKit SvelteKit SvelteKit SvelteKit SvelteKit SvelteKit' },
+  { value: 'sveltekit', label: 'SvelteKit SvelteKit SvelteKit SvelteKit SvelteKit SvelteKit', surface: 'outline' },
   { value: 'astro', label: 'Astroooooooooooooooooooooooooooooooooooooooooooooo' },
 ]
