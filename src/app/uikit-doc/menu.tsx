@@ -194,6 +194,12 @@ export function Menu() {
                 <Link href="/uikit-doc/containers/popover">Popover</Link>
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
+
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/containers/tooltip"}>
+                <Link href="/uikit-doc/containers/tooltip">Tooltip & Rich Tooltip</Link>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
             <Sidebar.MenuItem>
               <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/containers/dialog"}>
                 <Link href="/uikit-doc/containers/dialog">Dialog</Link>
@@ -241,8 +247,13 @@ export function Menu() {
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
             <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-structure/layout-header-footer"}>
+                <Link href="/uikit-doc/layout-structure/layout-header-footer">LayoutHeaderFooter</Link>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+            <Sidebar.MenuItem>
               <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-structure/sheet"}>
-                <Link href="/uikit-doc/layout-structure/sheet">Sheet Layout</Link>
+                <Link href="/uikit-doc/layout-structure/sheet">Sheet</Link>
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
             <Sidebar.MenuItem>

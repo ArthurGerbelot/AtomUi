@@ -33,7 +33,7 @@ export default function CommandDocsPage() {
           <>
             <Code includeTag>Command</Code> provides a ready-made palette pattern: an input to filter,
             a list with keyboard navigation, optional groups, and shortcuts.
-            It's the building block behind Combobox-like UIs (often wrapped in a <Code includeTag>Popover</Code>).
+            It's the building block behind Combobox-like UIs (often wrapped in a <Code includeTag>Popover</Code>) to build <Text typo="link" as={Link} href="/uikit-doc/form/select">Select</Text> or <Text typo="link" as={Link} href="/uikit-doc/form/multiselect">MultiSelect</Text> components.
             <br />
             <Text weight="semibold">Built with accessibility in mind - full a11y/ARIA support, keyboard navigation, and screen reader announcements.</Text>
           </>

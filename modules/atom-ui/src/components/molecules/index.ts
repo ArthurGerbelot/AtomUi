@@ -19,5 +19,6 @@ export * from "./Sheet"
 export * from "./Sidebar"
 export * from "./MultiSelect"
 export * from "./Tooltip"
+export * from "./HoverCard"
 
 

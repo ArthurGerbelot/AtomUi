@@ -121,7 +121,7 @@ const DatePickerComposed = forwardRefPolymorphic<"button", DatePickerComposedPro
     // 3) Render
     // ------------------------------
     return (
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover.Root open={open} onOpenChange={setOpen}>
         <Popover.Trigger asChild>
           <DatePickerTrigger
             ref={ref as any}
@@ -144,7 +144,7 @@ const DatePickerComposed = forwardRefPolymorphic<"button", DatePickerComposedPro
             {...calendarProps}
           />
         </Popover.Content>
-      </Popover>
+      </Popover.Root>
     )
 
   }

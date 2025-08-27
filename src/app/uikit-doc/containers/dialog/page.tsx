@@ -155,30 +155,21 @@ export default function DialogDocsPage() {
           <Dialog.Root>
             <Dialog.Trigger asChild><Button variant="outline">Small</Button></Dialog.Trigger>
             <Dialog.Box className="max-w-sm">
-              <Dialog.Content>
-                <Dialog.Title>Small</Dialog.Title>
-                Small modal content
-              </Dialog.Content>
+              <Dialog.Header title="Small" description="Small modal content" />
             </Dialog.Box>
           </Dialog.Root>
 
           <Dialog.Root>
             <Dialog.Trigger asChild><Button variant="outline">Default</Button></Dialog.Trigger>
             <Dialog.Box className="max-w-2xl">
-              <Dialog.Content>
-                <Dialog.Title>Default</Dialog.Title>
-                Default modal content
-              </Dialog.Content>
+              <Dialog.Header title="Default" description="Default modal content" />
             </Dialog.Box>
           </Dialog.Root>
 
           <Dialog.Root>
             <Dialog.Trigger asChild><Button variant="outline">Full</Button></Dialog.Trigger>
             <Dialog.Box className="max-w-[calc(100%-5rem)]">
-              <Dialog.Content>
-                <Dialog.Title>Full</Dialog.Title>
-                Full modal content
-              </Dialog.Content>
+              <Dialog.Header title="Full" description="Full modal content" />
             </Dialog.Box>
           </Dialog.Root>
         </div>

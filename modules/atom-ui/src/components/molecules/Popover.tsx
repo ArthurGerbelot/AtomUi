@@ -13,17 +13,122 @@ import { surfaceVariants } from "@uikit/tokens"
 // Popover component built with Radix UI primitives for floating content
 // =============================================================================
 
-// -----------------------------------------------------------------------------
-// COMPONENT DEFINITIONS
-// -----------------------------------------------------------------------------
-// @TODO Composed version ... no?
+
+// =============================================================================
+// Composed API
+// =============================================================================
+
 function PopoverComposed({
-  children, ...props
+  children,
+  content,
+  trigger = "click",
+  openDelay = 50,
+  closeDelay = 150,
+  ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root> & {
-  children: React.ReactNode
+  children: React.ReactNode, // Trigger
+  content: React.ReactNode,  // Popover content
+  trigger?: "click" | "hover", // Trigger behavior
+  openDelay?: number, // (hover mode)
+  closeDelay?: number, // (hover mode)
 }) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props}>{children}</PopoverPrimitive.Root>
+  const [hoverOpen, setHoverOpen] = React.useState(false)
+
+  // For hover trigger, use controlled state with hover area management
+  if (trigger === "hover") {
+    const isControlled = "open" in props
+    const open = isControlled ? props.open : hoverOpen
+    const onOpenChange = isControlled ? props.onOpenChange : setHoverOpen
+
+    const openTimeoutRef = React.useRef<any>(null)
+    const closeTimeoutRef = React.useRef<any>(null)
+
+    const handleMouseEnter = () => {
+      // Clear any pending close
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current)
+        closeTimeoutRef.current = null
+      }
+
+      // Open with delay if specified
+      if (openDelay > 0) {
+        openTimeoutRef.current = setTimeout(() => {
+          onOpenChange && onOpenChange(true)
+          openTimeoutRef.current = null
+        }, openDelay)
+      } else {
+        onOpenChange && onOpenChange(true)
+      }
+    }
+
+    const handleMouseLeave = () => {
+      // Clear any pending open
+      if (openTimeoutRef.current) {
+        clearTimeout(openTimeoutRef.current)
+        openTimeoutRef.current = null
+      }
+
+      // Close with delay
+      closeTimeoutRef.current = setTimeout(() => {
+        onOpenChange && onOpenChange(false)
+        closeTimeoutRef.current = null
+      }, closeDelay)
+    }
+
+    React.useEffect(() => {
+      return () => {
+        if (openTimeoutRef.current) {
+          clearTimeout(openTimeoutRef.current)
+        }
+        if (closeTimeoutRef.current) {
+          clearTimeout(closeTimeoutRef.current)
+        }
+      }
+    }, [])
+
+    return (
+      <PopoverPrimitive.Root
+        data-slot="popover"
+        {...props}
+        open={open}
+        onOpenChange={onOpenChange}
+      >
+        <PopoverTrigger
+          asChild
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {children}
+        </PopoverTrigger>
+        <PopoverContent
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {content}
+        </PopoverContent>
+      </PopoverPrimitive.Root>
+    )
+  }
+
+  // Default click trigger behavior
+  return (
+    <PopoverPrimitive.Root data-slot="popover" {...props}>
+      <PopoverTrigger asChild>
+        {children}
+      </PopoverTrigger>
+      <PopoverContent>
+        {content}
+      </PopoverContent>
+    </PopoverPrimitive.Root>
+  )
 }
+
+
+
+// =============================================================================
+// Primitives
+// =============================================================================
+
 
 function PopoverRoot({
   ...props

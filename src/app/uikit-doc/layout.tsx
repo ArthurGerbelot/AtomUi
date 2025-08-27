@@ -2,7 +2,7 @@
 
 import React from "react"
 import { ColorModeButton } from "@uikit/nextjs"
-import { LayoutSidebar, Code } from "@uikit"
+import { LayoutSidebar } from "@uikit"
 import { Menu } from "./menu"
 
 

@@ -48,7 +48,7 @@ export default function PopoverDocsPage() {
       ============================================================================= */}
       <Header
         variant="section"
-        title={<>Basic usage</>}
+        title={<>Composed API</>}
         subtitle="Trigger + content with safe defaults"
         description={
           <>
@@ -57,11 +57,8 @@ export default function PopoverDocsPage() {
         }
       />
       <CardExample title="Basic Popover" description="Simple trigger/content pattern.">
-        <Popover>
-          <Popover.Trigger asChild>
-            <Button>Open Popover</Button>
-          </Popover.Trigger>
-          <Popover.Content className="w-64">
+        <Popover
+          content={
             <div className="space-y-2">
               <Text className="font-semibold block">Hello there 👋</Text>
               <Text className="text-muted-foreground block">
@@ -73,7 +70,9 @@ export default function PopoverDocsPage() {
                 </Link>
               </div>
             </div>
-          </Popover.Content>
+          }
+        >
+          <Button>Open Popover</Button>
         </Popover>
       </CardExample>
 
@@ -82,6 +81,17 @@ export default function PopoverDocsPage() {
       ============================================================================= */}
       <Header
         variant="section"
+        title="Primitives"
+        subtitle={<>Build your own</>}
+        description={
+          <>
+            Use <code>side</code>, <code>align</code>, and <code>sideOffset</code> on <code>PopoverContent</code>.
+          </>
+        }
+      />
+
+      <Header
+        variant="sub-section"
         title={<>Positioning</>}
         subtitle="Control side, align, and offsets"
         description={
@@ -134,7 +144,7 @@ export default function PopoverDocsPage() {
           INTERACTIVE CONTENT (FORM)
       ============================================================================= */}
       <Header
-        variant="section"
+        variant="sub-section"
         title={<>Interactive content</>}
         subtitle="Use forms or pickers inside the popover"
         description={
@@ -184,7 +194,7 @@ export default function PopoverDocsPage() {
           CONTROLLED STATE (BASIC)
       ============================================================================= */}
       <Header
-        variant="section"
+        variant="sub-section"
         title={<>Controlled state</>}
         subtitle="Manage open/close with React state"
         description={
@@ -224,7 +234,7 @@ export default function PopoverDocsPage() {
           ASCHILD & CUSTOM TRIGGERS
       ============================================================================= */}
       <Header
-        variant="section"
+        variant="sub-section"
         title={<>Custom triggers with asChild</>}
         subtitle="Use any element/component as the trigger"
         description={
@@ -234,30 +244,28 @@ export default function PopoverDocsPage() {
         }
       />
       <CardExample title="asChild Trigger" description="Compose with your own links or buttons.">
-        <Popover>
-          <Popover.Trigger asChild>
-            <a className="underline cursor-pointer text-primary">Open via link</a>
-          </Popover.Trigger>
-          <Popover.Content className="w-56">
+        <Popover
+          content={
             <Text>Triggered by an anchor via <code>asChild</code>.</Text>
-          </Popover.Content>
+          }
+        >
+          <a className="underline cursor-pointer text-primary">Open via link</a>
         </Popover>
 
-        <Popover.Root>
-          <Popover.Trigger asChild>
-            <Button variant="ghost">Ghost Button Trigger</Button>
-          </Popover.Trigger>
-          <Popover.Content>
+        <Popover
+          content={
             <Text>Custom Button trigger using asChild.</Text>
-          </Popover.Content>
-        </Popover.Root>
+          }
+        >
+          <Button variant="ghost">Ghost Button Trigger</Button>
+        </Popover>
       </CardExample>
 
       {/* =============================================================================
     ANCHORING
 ============================================================================= */}
       <Header
-        variant="section"
+        variant="sub-section"
         title={<>Anchoring</>}
         subtitle="Position relative to a non-trigger element"
         description={

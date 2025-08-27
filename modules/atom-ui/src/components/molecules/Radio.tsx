@@ -132,7 +132,7 @@ const RadioComposed = React.forwardRef<
     // With Card wrapper (always acts as label)
     if (withCard || hasCardProps) {
       return (
-        <Label htmlFor={isDisabled ? undefined : inputId}>
+        <Label htmlFor={isDisabled ? undefined : inputId} key={inputId}>
           <RadioCard
             htmlFor={isDisabled ? undefined : inputId}
             isChecked={currentValue === _choice?.value}
@@ -154,7 +154,7 @@ const RadioComposed = React.forwardRef<
     }
 
     return (
-      <Label htmlFor={isDisabled ? undefined : inputId}>
+      <Label htmlFor={isDisabled ? undefined : inputId} key={inputId}>
         <RadioLayout disabled={isDisabled}>
           {inputElement}
           {labelContent}

@@ -61,6 +61,14 @@ export default function CheckboxDocsPage() {
             />
             <Checkbox
               choice={{
+                value: "foo-3",
+                label: <>Add a small 1₿  donation</>,
+                // description: "Receive weekly updates"
+              }}
+              withCard
+            />
+            <Checkbox
+              choice={{
                 value: "accept-terms-3",
                 label: "Accept terms and conditions",
                 description: <>Read and agree to the <Text typo="link" as={Link} href="#">terms and conditions</Text></>
