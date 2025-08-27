@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Card, HStack, Header, Code, VStack, IconInfo, Text, List, TextWithLabel, Scroll } from "@uikit"
+import { Button, Card, HStack, Header, Code, VStack, IconInfo, Text, List, TextWithLabel, ScrollArea } from "@uikit"
 import * as React from "react"
 
 
@@ -23,7 +23,7 @@ export default function ScrollAreaDocsPage() {
 
         {/* Basic Usage */}
         <Card title="Basic ScrollArea" description="Simple scrollable content with custom scrollbars">
-          <Scroll className="h-64 w-full border rounded-md p-4">
+          <ScrollArea className="h-64 w-full border rounded-md p-4">
             <div className="space-y-4">
               {Array.from({ length: 20 }, (_, i) => (
                 <p key={i} className="text-sm">
@@ -32,12 +32,12 @@ export default function ScrollAreaDocsPage() {
                 </p>
               ))}
             </div>
-          </Scroll>
+          </ScrollArea>
         </Card>
 
         <Card title="Horizontal Scroll" description="Horizontally scrollable content with explicit horizontal scrollbar">
-          <Scroll.Root className="h-32 w-full border rounded-md p-4">
-            <Scroll.Viewport>
+          <ScrollArea.Root className="h-32 w-full border rounded-md p-4">
+            <ScrollArea.Viewport>
               <div className="flex gap-4 w-max">
                 {Array.from({ length: 20 }, (_, i) => (
                   <div
@@ -48,13 +48,13 @@ export default function ScrollAreaDocsPage() {
                   </div>
                 ))}
               </div>
-            </Scroll.Viewport>
-            <Scroll.Bar orientation="horizontal" />
-          </Scroll.Root>
+            </ScrollArea.Viewport>
+            <ScrollArea.Bar orientation="horizontal" />
+          </ScrollArea.Root>
         </Card>
 
         <Card title="Fixed Height with Long Content" description="Scrollable area with specific height constraints">
-          <Scroll className="h-48 w-full border rounded-md p-4">
+          <ScrollArea className="h-48 w-full border rounded-md p-4">
             <div className="space-y-2">
               <h3 className="font-semibold text-lg">Long Article Content</h3>
               {Array.from({ length: 30 }, (_, i) => (
@@ -65,12 +65,12 @@ export default function ScrollAreaDocsPage() {
                 </p>
               ))}
             </div>
-          </Scroll>
+          </ScrollArea>
         </Card>
 
         <Card title="Custom Scrollbar" description="ScrollArea with custom scrollbar styling">
-          <Scroll className="h-40 w-full border rounded-md p-4 bg-muted/30">
-            <Scroll.Bar className="bg-border/80 hover:bg-border transition-colors w-3" />
+          <ScrollArea className="h-40 w-full border rounded-md p-4 bg-muted/30">
+            <ScrollArea.Bar className="bg-border/80 hover:bg-border transition-colors w-3" />
             <div className="space-y-3">
               <h4 className="font-medium">Custom Styled Scrollbar</h4>
               {Array.from({ length: 15 }, (_, i) => (
@@ -79,28 +79,62 @@ export default function ScrollAreaDocsPage() {
                 </div>
               ))}
             </div>
-          </Scroll>
+          </ScrollArea>
         </Card>
 
         <Card title="Both Directions Example" description="Scroll horizontally and vertically with both scrollbars">
-          <Scroll.Root className="h-40 w-full border rounded-md p-4">
-            <Scroll.Viewport>
+          <ScrollArea.Root className="h-40 w-full border rounded-md p-4">
+            <ScrollArea.Viewport>
               <div className="w-max space-y-2">
-                <h4 className="font-medium w-[2000px]">Wide and Tall Content</h4>
+                <h4 className="font-medium w-[700px]">Wide and Tall Content</h4>
                 {Array.from({ length: 12 }, (_, i) => (
-                  <div key={i} className="w-[2000px] p-2 bg-muted rounded text-sm">
-                    Item {i + 1} - This content is both wide and tall, demonstrating scrolling in both horizontal and vertical directions. The content extends beyond the container width to trigger horizontal scrolling. Item {i + 1} - This content is both wide and tall, demonstrating scrolling in both horizontal and vertical directions. The content extends beyond the container width to trigger horizontal scrolling. Item {i + 1} - This content is both wide and tall, demonstrating scrolling in both horizontal and vertical directions. The content extends beyond the container width to trigger horizontal scrolling.
+                  <div key={i} className="w-[700px] p-2 bg-muted rounded text-sm">
+                    Item {i + 1} - This content is both wide and tall, demonstrating scrolling in both horizontal and vertical directions.
+                    The content extends beyond the container width to trigger horizontal scrolling.
                   </div>
                 ))}
               </div>
-            </Scroll.Viewport>
-            <Scroll.Bar orientation="vertical" />
-            <Scroll.Bar orientation="horizontal" />
-            <Scroll.Corner />
-          </Scroll.Root>
+            </ScrollArea.Viewport>
+            <ScrollArea.Bar orientation="vertical" />
+            <ScrollArea.Bar orientation="horizontal" />
+            <ScrollArea.Corner />
+          </ScrollArea.Root>
         </Card>
 
-        <SimpleScrollCard />
+        <Card title="Code Example" description="How to implement ScrollArea component">
+          <ScrollArea className="h-56 w-full border rounded-md">
+            <pre className="p-4 text-xs font-mono">
+              {`import { Scroll } from "@uikit"
+
+// Simple composition (auto scrollbars)
+<ScrollArea className="h-64 w-full border rounded-md p-4">
+  <div className="space-y-4">
+    {Array.from({ length: 20 }, (_, i) => (
+      <p key={i}>This is line {i + 1} of scrollable content.</p>
+    ))}
+  </div>
+</ScrollArea>
+
+// With horizontal scrollbar
+<ScrollArea className="h-32 w-full border rounded-md p-4">
+  <ScrollArea.Bar orientation="horizontal" />
+  <div className="flex gap-4 w-max">
+    {/* Wide content */}
+  </div>
+</ScrollArea>
+
+// Manual composition with primitives
+<ScrollArea.Root className="h-64 w-full">
+  <ScrollArea.Viewport>
+    {/* Your content */}
+  </ScrollArea.Viewport>
+  <ScrollArea.Bar orientation="vertical" />
+  <ScrollArea.Bar orientation="horizontal" />
+  <ScrollArea.Corner />
+</ScrollArea.Root>`}
+            </pre>
+          </ScrollArea>
+        </Card>
 
         {/* Props Reference */}
         <Card
@@ -203,8 +237,8 @@ export default function ScrollAreaDocsPage() {
           <VStack gap="md">
             <div>
               <h4 className="font-medium mb-2">Basic Primitive Composition</h4>
-              <Scroll.Root className="h-32 w-full border rounded p-2">
-                <Scroll.Viewport>
+              <ScrollArea.Root className="h-32 w-full border rounded p-2">
+                <ScrollArea.Viewport>
                   <div className="space-y-2">
                     <p className="text-sm">Manual composition with primitives</p>
                     <p className="text-sm">You can control every aspect of the scroll area</p>
@@ -212,16 +246,16 @@ export default function ScrollAreaDocsPage() {
                     <p className="text-sm">This gives you maximum flexibility</p>
                     <p className="text-sm">For complex scrolling interactions</p>
                   </div>
-                </Scroll.Viewport>
-                <Scroll.Bar orientation="vertical" />
-                <Scroll.Corner />
-              </Scroll.Root>
+                </ScrollArea.Viewport>
+                <ScrollArea.Bar orientation="vertical" />
+                <ScrollArea.Corner />
+              </ScrollArea.Root>
             </div>
 
             <div>
               <h4 className="font-medium mb-2">Both Scrollbars with Corner</h4>
-              <Scroll.Root className="h-32 w-full border rounded p-2 bg-muted/20">
-                <Scroll.Viewport>
+              <ScrollArea.Root className="h-32 w-full border rounded p-2 bg-muted/20">
+                <ScrollArea.Viewport>
                   <div className="w-max space-y-2">
                     <p className="text-sm font-medium w-[600px]">Wide content that requires horizontal scrolling</p>
                     {Array.from({ length: 8 }, (_, i) => (
@@ -230,17 +264,17 @@ export default function ScrollAreaDocsPage() {
                       </p>
                     ))}
                   </div>
-                </Scroll.Viewport>
-                <Scroll.Bar orientation="vertical" className="bg-primary/20 hover:bg-primary/40 w-3" />
-                <Scroll.Bar orientation="horizontal" className="bg-secondary/20 hover:bg-secondary/40 h-3" />
-                <Scroll.Corner />
-              </Scroll.Root>
+                </ScrollArea.Viewport>
+                <ScrollArea.Bar orientation="vertical" className="bg-primary/20 hover:bg-primary/40 w-3" />
+                <ScrollArea.Bar orientation="horizontal" className="bg-secondary/20 hover:bg-secondary/40 h-3" />
+                <ScrollArea.Corner />
+              </ScrollArea.Root>
             </div>
 
             <div>
               <h4 className="font-medium mb-2">Custom Scrollbar Styling</h4>
-              <Scroll.Root className="h-24 w-full border rounded p-2">
-                <Scroll.Viewport>
+              <ScrollArea.Root className="h-24 w-full border rounded p-2">
+                <ScrollArea.Viewport>
                   <div className="space-y-1">
                     {Array.from({ length: 12 }, (_, i) => (
                       <p key={i} className="text-xs py-0.5">
@@ -248,111 +282,22 @@ export default function ScrollAreaDocsPage() {
                       </p>
                     ))}
                   </div>
-                </Scroll.Viewport>
-                <Scroll.Bar
+                </ScrollArea.Viewport>
+                <ScrollArea.Bar
                   orientation="vertical"
                   className="bg-success/10 hover:bg-success/20 w-4 rounded-full"
                 />
-              </Scroll.Root>
+              </ScrollArea.Root>
             </div>
           </VStack>
         </Card>
 
-        <ProgrammaticScrollCard />
-
+        <HStack>
+          <Button secondary size="sm" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            Scroll to Top
+          </Button>
+        </HStack>
       </VStack >
     </div >
-  )
-}
-
-function ProgrammaticScrollCard() {
-  const scrollRef = React.useRef<HTMLDivElement>(null)
-
-  const scrollToTop = () => {
-    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const scrollToBottom = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
-    }
-  }
-
-  return (
-    <Card title="Programmatic Scrolling" description="Control ScrollArea scrolling with JavaScript">
-      <VStack gap="md">
-        <Scroll.Root className="h-48 w-full border rounded-md p-4">
-          <Scroll.Viewport ref={scrollRef}>
-            <div className="space-y-3">
-              <h4 className="font-medium">Long Content with Programmatic Controls</h4>
-              {Array.from({ length: 25 }, (_, i) => (
-                <div key={i} className="p-3 bg-muted rounded border text-sm">
-                  <strong>Section {i + 1}</strong> - This is scrollable content that can be controlled programmatically.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-                </div>
-              ))}
-            </div>
-          </Scroll.Viewport>
-          <Scroll.Bar orientation="vertical" />
-        </Scroll.Root>
-
-        <HStack>
-          <Button size="sm" onClick={scrollToTop}>
-            Scroll to Top
-          </Button>
-          <Button size="sm" variant="secondary" onClick={scrollToBottom}>
-            Scroll to Bottom
-          </Button>
-        </HStack>
-
-        <Text textSize="sm" textColor="muted">
-          ✅ Now using Radix ScrollArea with ref forwarding to Scroll.Viewport for programmatic control!
-        </Text>
-      </VStack>
-    </Card>
-  )
-}
-
-function SimpleScrollCard() {
-  const scrollRef = React.useRef<HTMLDivElement>(null)
-
-  const scrollToTop = () => {
-    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const scrollToBottom = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
-    }
-  }
-
-  return (
-    <Card
-      title="Composed Component with Ref"
-      description="Using the composed Scroll component with ref forwarded to the viewport"
-    >
-      <VStack gap="md">
-        <Scroll ref={scrollRef} className="h-48 w-full border rounded-md p-4">
-          <div className="space-y-3">
-            <h4 className="font-medium">Composed Component with Ref</h4>
-            {Array.from({ length: 20 }, (_, i) => (
-              <div key={i} className="p-3 bg-muted rounded border text-sm">
-                <strong>Item {i + 1}</strong> - Using the simple Scroll component (composed) with ref forwarding.
-                This is much cleaner than manual composition for simple use cases.
-              </div>
-            ))}
-          </div>
-        </Scroll>
-
-        <HStack>
-          <Button size="sm" onClick={scrollToTop}>
-            Scroll to Top
-          </Button>
-          <Button size="sm" variant="secondary" onClick={scrollToBottom}>
-            Scroll to Bottom
-          </Button>
-        </HStack>
-      </VStack>
-    </Card>
   )
 }

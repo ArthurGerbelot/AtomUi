@@ -1,8 +1,8 @@
 'use client'
-
-import { Button, Card, HStack, Header, Code, VStack, IconInfo, Text, List, TextWithLabel, Sidebar, Alert, LayoutSidebar } from "@uikit"
-import { HomeIcon, SettingsIcon, UsersIcon, FolderIcon, MessageSquareIcon } from "lucide-react"
 import * as React from "react"
+
+import { Card, Header, Code, VStack, IconInfo, Text, List, TextWithLabel, Sidebar, Alert, LayoutSidebar } from "@uikit"
+import { HomeIcon, SettingsIcon, UsersIcon } from "lucide-react"
 
 
 function DemoSidebarMenu() {

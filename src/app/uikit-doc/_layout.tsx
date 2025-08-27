@@ -1,10 +1,7 @@
 'use client'
 
 import React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ColorModeButton } from "@uikit/nextjs"
-import { Sidebar, ScrollArea } from "@uikit"
+import { Sidebar } from "@uikit"
 
 
 export default function UIKitDocLayout({
