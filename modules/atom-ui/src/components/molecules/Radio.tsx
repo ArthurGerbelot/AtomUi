@@ -3,7 +3,9 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
-import { cn, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, resolveAtomTokens } from "@uikit/lib"
+import { cn } from "../../lib"
+import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../lib/core/polymorphic-helpers"
+import { resolveAtomTokens } from "../../lib/core/atom"
 import { CardProps, SmartCard } from "./Card"
 import { Choice, ChoiceValue, toChoiceObject, toChoicesObject } from "../../lib/choices"
 import { IconRadio, Label } from "../atoms"

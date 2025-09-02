@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Select, Header } from '@uikit'
+import { Select, Header, Atom } from '@uikit'
 
 export default function TestPage() {
   const [value, setValue] = React.useState<string>("")
@@ -11,21 +11,7 @@ export default function TestPage() {
       <Header title="Test Select" />
 
       <div className="space-y-4">
-        <h3>Controlled Select:</h3>
-        <Select
-          choices={["red", "green", "blue"]}
-          value={value}
-          onValueChange={setValue}
-          placeholder="Pick a color"
-        />
-        <p>Selected value: {value || 'none'}</p>
-
-        <h3>Uncontrolled Select:</h3>
-        <Select
-          choices={["apple", "banana", "cherry"]}
-          placeholder="Pick a fruit"
-          onValueChange={(v) => console.log("Selected:", v)}
-        />
+        <Atom bgColor={"amber"} maxW={"md"} className="h-10 mx-auto" />
       </div>
     </div>
   )

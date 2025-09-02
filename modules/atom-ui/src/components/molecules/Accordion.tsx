@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { cn } from "@uikit/lib"
+import { cn } from "../../lib"
 import { IconChevronDown } from "../atoms"
 
 // =============================================================================

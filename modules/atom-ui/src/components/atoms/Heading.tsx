@@ -1,4 +1,5 @@
-import { convertToValidHtmlId, resolveAtomTokens } from "@uikit/lib"
+import { convertToValidHtmlId } from "../../lib/react/utils"
+import { resolveAtomTokens } from "../../lib/core/atom"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../lib/core/polymorphic-helpers"
 import { asSmartSlot } from "../core"
 import { Atom, type AtomProps } from "../core/Atom"

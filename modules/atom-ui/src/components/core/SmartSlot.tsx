@@ -1,5 +1,9 @@
 import * as React from "react";
-import { injectProps, mergeShallowNode, cn, resolveAtomTokens, mergeShallow } from "@uikit";
+import { injectProps } from "../../lib/react/inject-props";
+import { mergeShallowNode } from "../../lib/react/merge-shallow-node";
+import { cn } from "../../lib";
+import { resolveAtomTokens } from "../../lib/core/atom";
+import { mergeShallow } from "../../lib/utils";
 
 // =============================================================================
 // SmartSlot Policy

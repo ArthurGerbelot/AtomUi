@@ -1,5 +1,6 @@
 /* Tokens/theme entry (no Tailwind import) */
 
 @import './colors/colors.theme.css';
-@import './surface/surface.theme.css';
+@import './layout/layout.theme.css';
 @import './typo/typo.theme.css';
+@import './surface/surface.theme.css';

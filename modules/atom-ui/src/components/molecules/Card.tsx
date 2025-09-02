@@ -9,7 +9,7 @@ import { SmartSlotVariantSpecs, asSmartSlot, createSmartSlotSpecs, pickVariantSm
 import { Header, shouldShowHeader, SmartHeader, type HeaderProps } from "./Header"
 import React from "react"
 import { Separator } from "../atoms/Separator"
-import { mergeShallowNode } from "@uikit/lib"
+import { mergeShallowNode } from "../../lib/react/merge-shallow-node"
 
 
 // =============================================================================

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
 
-import { cn } from "@uikit/lib"
+import { cn } from "../../lib"
 import { Button } from "../atoms/Button"
 import { IconChevronDown, IconChevronLeft, IconChevronRight } from "../atoms"
 import { SimpleSelect } from "./SimpleSelect"

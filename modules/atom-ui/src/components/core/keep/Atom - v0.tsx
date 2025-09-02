@@ -21,7 +21,10 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 
-import { cn, getPrimaryColorStyle, ColorTheme, resolveAtomTokens } from "@uikit"
+import { cn } from "../../../lib"
+import { getPrimaryColorStyle } from "../../../lib/core/colors"
+import { ColorTheme } from "../../../tokens/colors/colors"
+import { resolveAtomTokens } from "../../../lib/core/atom"
 
 
 

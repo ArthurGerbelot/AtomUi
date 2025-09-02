@@ -14,7 +14,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Atom, type AtomProps, ComponentWithAs } from "./Atom - v0"
-import { cn } from "@uikit"
+import { cn } from "../../../lib"
 
 /* =============================================================================
  * CVA: Text variants Custom variants

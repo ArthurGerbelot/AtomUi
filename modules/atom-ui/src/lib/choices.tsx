@@ -2,8 +2,10 @@
 import * as React from "react"
 import { SmartSlot } from "../components/core/SmartSlot";
 import { IconProps } from "../components/atoms/Icon";
-import { BadgeProps, TextProps } from "@uikit/components";
-import { ColorTheme, Surface } from "@uikit/tokens";
+import { BadgeProps } from "../components/atoms/Badge";
+import { TextProps } from "../components/atoms/Text";
+import { ColorTheme } from "../tokens/colors/colors";
+import { Surface } from "../tokens/surface/surface";
 
 
 // =========================================

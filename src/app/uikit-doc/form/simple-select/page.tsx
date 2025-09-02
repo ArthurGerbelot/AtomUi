@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import Link from "next/link"
 
-import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, sizes, Size, Accordion, IconMap, UNGROUPED_GROUP_KEY } from "@uikit"
+import { Header, Card, HStack, VStack, Text, Code, Separator, SimpleSelect, TextWithLabel, Button, TextWithIcon, IconError, IconInfo, IconCheckboxChecked, List, IconSuccess, Fieldset, Label, ChoiceBadge, IconWarning, sizes, Size, Accordion, IconMap, UNGROUPED_GROUP_KEY, containerSizes } from "@uikit"
 
 import { VariantsSelect } from "../../components/VariantsSelect"
 import { CodeRenderer } from "../../components/CardExample"
@@ -154,6 +154,22 @@ export default function SelectPage() {
                 <SimpleSelect
                   size={size}
                   choices={[1, 2, 3]}
+                />
+              </Fieldset>
+            </CodeRenderer>
+          </Card.Content>
+
+
+          <Card.Content>
+            <Header variant="sub-section" title="To use a readonly array and make it valid, you need to spread it." className="mb-4" />
+            <CodeRenderer
+              code={`<SimpleSelect choices={[...containerSizes]} />`}
+            >
+              <Fieldset flex>
+                <Label>Container Sizes</Label>
+                <SimpleSelect
+                  size={size}
+                  choices={[...containerSizes]}
                 />
               </Fieldset>
             </CodeRenderer>

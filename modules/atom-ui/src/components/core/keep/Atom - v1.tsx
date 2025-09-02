@@ -4,7 +4,11 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
-import { cn, getPrimaryColorStyle, ColorTheme, resolveAtomTokens, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "@uikit"
+import { cn } from "../../../lib"
+import { getPrimaryColorStyle } from "../../../lib/core/colors"
+import { ColorTheme } from "../../../tokens/colors/colors"
+import { resolveAtomTokens } from "../../../lib/core/atom"
+import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../../lib/core/polymorphic-helpers"
 
 export const atomVariants = cva("", { variants: {}, defaultVariants: {} })
 

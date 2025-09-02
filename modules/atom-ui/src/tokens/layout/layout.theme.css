@@ -1,0 +1,37 @@
+:root {
+  /* New small containers (classes will be created in layout.layer.css)
+    ----------------------------*/
+  /* 5xs → now ~ 192px */
+  --container-5xs: 12rem;
+  /* 4xs → now ~ 224px */
+  --container-4xs: 14rem;
+
+  /* Shift every container up by one step
+    ----------------------------*/
+  /* 3xs → now ~ 288px (old 2xs) */
+  --container-3xs: 18rem;
+  /* 2xs → now ~ 320px (old xs) */
+  --container-2xs: 20rem;
+  /* xs → now ~ 384px (old sm) */
+  --container-xs: 24rem;
+  /* sm → now ~ 448px (old md) */
+  --container-sm: 28rem;
+  /* md → now ~ 512px (old lg) */
+  --container-md: 32rem;
+  /* lg → now ~ 576px (old xl) */
+  --container-lg: 36rem;
+  /* xl → now ~ 672px (old 2xl) */
+  --container-xl: 42rem;
+  /* 2xl → now ~ 768px (old 3xl) */
+  --container-2xl: 48rem;
+  /* 3xl → now ~ 896px (old 4xl) */
+  --container-3xl: 56rem;
+  /* 4xl → now ~ 1024px (old 5xl) */
+  --container-4xl: 64rem;
+  /* 5xl → now ~ 1152px (old 6xl) */
+  --container-5xl: 72rem;
+  /* 6xl → now ~ 1280px (old 7xl) */
+  --container-6xl: 80rem;
+  /* 7xl → now ~ 1408px (headroom, +8rem ~128px) */
+  --container-7xl: 88rem;
+}

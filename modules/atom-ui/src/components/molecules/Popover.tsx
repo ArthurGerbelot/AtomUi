@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
-import { cn } from "@uikit/lib"
-import { surfaceVariants } from "@uikit/tokens"
+import { cn } from "../../lib"
+import { surfaceVariants } from "../../tokens/surface/surface"
 
 // =============================================================================
 // Popover

@@ -1,7 +1,8 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn, resolveAtomTokens } from "@uikit"
+import { cn } from "../../lib"
+import { resolveAtomTokens } from "../../lib/core/atom"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../lib/core/polymorphic-helpers"
 import { Atom, type AtomProps } from "../core/Atom"
 import { SmartAtom } from "../core/Atom"

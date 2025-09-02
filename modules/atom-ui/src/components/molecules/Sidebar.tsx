@@ -7,15 +7,14 @@ import { PanelLeftIcon } from "lucide-react"
 
 import { useIsMobile } from "../../hooks"
 import { cn } from "../../lib"
-import { Button, IconButton, IconPanelLeft, IconPanelRight } from ".."
-import { Input } from ".."
-import { Separator } from ".."
-
-import {
-  Sheet
-} from ".."
-import { Skeleton } from ".."
-import { Tooltip, TooltipProvider, } from "@uikit/components/molecules/Tooltip"
+import { Button } from "../atoms/Button"
+import { IconButton } from "../atoms/IconButton"
+import { IconPanelLeft, IconPanelRight } from "../atoms/IconLibrary"
+import { Input } from "../atoms/Input"
+import { Separator } from "../atoms/Separator"
+import { Sheet } from "./Sheet"
+import { Skeleton } from "../atoms/Skeleton"
+import { Tooltip, TooltipProvider } from "./Tooltip"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7

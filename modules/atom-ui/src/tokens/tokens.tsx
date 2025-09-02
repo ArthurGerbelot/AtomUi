@@ -30,6 +30,7 @@ import {
 import {
   displayVariants, blockVariants, inlineBlockVariants, inlineVariants,
   flexVariants, flexDirectionVariants, Flex,
+  maxWidthVariants,
 } from "./layout/layout";
 
 // Spacing
@@ -78,7 +79,7 @@ export const atomicVariantsTokens = [
   // Typography
   'textColor', 'textSize', 'leading', 'tracking', 'weight', 'family', 'typo',
   // Layout
-  'display',    // Parent
+  'maxW', 'display', 'flexDirection',    // Parent
   'flex',       // Child
   // Spacing
   'gap',
@@ -127,6 +128,8 @@ export const atomicVariants = {
 
   // layout
   // --------------
+  maxW: maxWidthVariants,
+
   display: displayVariants,
   inline: inlineVariants,
   inlineBlock: inlineBlockVariants,
@@ -160,5 +163,5 @@ export type AtomicTokenProps = Omit<VariantProps<typeof atomicRecipe>,
 > & {
   [key in typeof atomicBooleanTokens[number]]?: BooleanVariants
 } & {
-  flex?: Omit<Flex, "_n">,
+  flex?: Omit<Flex, "_n">, // flex is boolean and numerical (+ _n) variants
 };

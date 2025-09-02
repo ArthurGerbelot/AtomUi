@@ -8,7 +8,7 @@ import {
   Dialog,
 } from "./Dialog"
 
-import { cn } from "@uikit/lib"
+import { cn } from "../../lib"
 import { HStack, IconActive, IconCheckboxChecked, IconChevronRight, IconSearch, IconSelected, Input } from "../atoms"
 import { Atom } from "../core"
 

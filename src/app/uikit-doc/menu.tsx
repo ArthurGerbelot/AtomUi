@@ -62,6 +62,11 @@ export function Menu() {
                 <Link href="/uikit-doc/theme/surfaces">Surfaces</Link>
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/theme/spacing"}>
+                <Link href="/uikit-doc/theme/spacing">Spacing (TODO gap-md, my-md, ..)</Link>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
           </Sidebar.Menu>
         </Sidebar.GroupContent>
       </Sidebar.Group>
@@ -259,6 +264,11 @@ export function Menu() {
             <Sidebar.MenuItem>
               <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-structure/test"}>
                 <Link href="/uikit-doc/layout-structure/test">Test Page Structure</Link>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-content/cards-layout"}>
+                <Link href="/uikit-doc/layout-content/cards-layout">Cards Columns Layout</Link>
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
           </Sidebar.Menu>

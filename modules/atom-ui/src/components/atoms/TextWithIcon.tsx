@@ -1,8 +1,9 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn, resolveAtomTokens } from "@uikit/lib"
-import { sizeWithGapVariants } from "@uikit/tokens/base/base"
+import { cn } from "../../lib"
+import { resolveAtomTokens } from "../../lib/core/atom"
+import { sizeWithGapVariants } from "../../tokens/base/base"
 import { asSmartSlot, Atom, AtomProps, createSmartSlotSpecs, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, SmartSlot } from "../core"
 import { SmartText, TextProps } from "./Text"
 import { IconProps, SmartIcon } from "./Icon"

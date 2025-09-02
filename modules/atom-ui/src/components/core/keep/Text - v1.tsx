@@ -2,7 +2,8 @@
 import { cva, VariantProps } from "class-variance-authority"
 
 
-import { cn, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "@uikit"
+import { cn } from "../../../lib"
+import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../../lib/core/polymorphic-helpers"
 import { Atom, type AtomOwnProps } from "./Atom - v1"
 
 

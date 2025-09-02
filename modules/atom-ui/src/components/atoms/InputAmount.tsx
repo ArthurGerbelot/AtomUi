@@ -2,7 +2,7 @@ import * as React from "react"
 import { Input, type InputProps } from "./Input"
 import { formatAmount, parseAmount } from "../../lib/format"
 import { asSmartSlot, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../core"
-import { setReactInputValue } from "@uikit/lib"
+import { setReactInputValue } from "../../lib/react/events"
 
 
 

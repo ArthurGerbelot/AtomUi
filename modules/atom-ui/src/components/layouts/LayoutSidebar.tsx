@@ -1,7 +1,9 @@
 'use client'
 
 import * as React from "react"
-import { Sidebar, ScrollArea, Code } from "../.."
+import { Sidebar } from "../molecules/Sidebar"
+import { ScrollArea } from "../molecules/ScrollArea"
+import { Code } from "../atoms/Code"
 import { Tooltip } from "../molecules/Tooltip"
 import { cn } from "../../lib"
 

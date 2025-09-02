@@ -2,7 +2,8 @@ import { cva, VariantProps } from "class-variance-authority"
 
 // Use relative import to avoid circular dependency
 import { cn } from "../../../lib/tailwind-utils"
-import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, resolveAtomTokens } from "../../../lib/core"
+import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../../lib/core/polymorphic-helpers"
+import { resolveAtomTokens } from "../../../lib/core/atom"
 import { Atom, AtomProps } from "../Atom"
 import { asSmartSlot } from "../SmartSlot"
 

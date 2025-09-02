@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 
-import { cn, resolveAtomTokens } from "@uikit/lib";
+import { cn } from "../../../lib";
+import { resolveAtomTokens } from "../../../lib/core/atom";
 import { SmartText, Text, TextProps } from "../../atoms";
 import { AtomProps, SmartAtom } from "../Atom";
 import { pickSmartSlotSpecs, pickVariantSmartSlotSpecs, SmartSlot, SmartSlotVariantSpecs } from "../SmartSlot";

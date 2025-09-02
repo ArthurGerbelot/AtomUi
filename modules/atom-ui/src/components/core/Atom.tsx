@@ -18,12 +18,10 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority"
-import {
-  cn,
-  ColorTheme,
-  resolveAtomTokens,
-  AtomicTokenProps,
-} from "@uikit"
+import { cn } from "../../lib"
+import { ColorTheme } from "../../tokens/colors/colors"
+import { AtomicTokenProps } from "../../tokens/tokens"
+import { resolveAtomTokens } from "../../lib/core/atom"
 
 import { asSmartSlot } from "./SmartSlot"
 

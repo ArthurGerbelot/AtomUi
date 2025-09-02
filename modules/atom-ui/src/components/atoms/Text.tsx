@@ -19,7 +19,8 @@
 // =============================================================================
 
 import { cva, VariantProps } from "class-variance-authority"
-import { cn, resolveAtomTokens } from "@uikit"
+import { cn } from "../../lib"
+import { resolveAtomTokens } from "../../lib/core/atom"
 import {
   forwardRefPolymorphic,
   PolymorphicProps,

@@ -16,6 +16,8 @@ export const sizes = [
 ] as const
 export type Size = typeof sizes[number]
 
+// By default `size` only affect the text size (but can be overrided by the component to affect other things)
+// -------------------------
 export const sizeVariants: Record<Size, string> = {
   xs: "text-xs",
   sm: "text-sm",

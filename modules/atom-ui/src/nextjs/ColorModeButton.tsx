@@ -2,7 +2,8 @@
 
 import React from "react"
 import { useTheme } from "next-themes"
-import { IconSun, IconMoon, IconBitcoin, IconButton } from "@uikit"
+import { IconSun, IconMoon, IconBitcoin } from "../components/atoms/IconLibrary"
+import { IconButton } from "../components/atoms/IconButton"
 
 
 export interface ColorModeButtonProps {
