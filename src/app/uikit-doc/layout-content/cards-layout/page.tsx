@@ -9,8 +9,6 @@ import {
   Button, SimpleSelect,
   LayoutGrid,
   Code,
-  ContainerSize,
-  containerSizes,
   Size,
   sizes
 } from "@uikit"

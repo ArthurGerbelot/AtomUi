@@ -75,7 +75,7 @@ export default function ExampleCardsLayoutsPage() {
       <div className="space-y-6">
         <div className="text-center">
           <Text textSize="2xl" weight="bold">LayoutTwoCol - Grille responsive</Text>
-          <Text textColor="muted">S'adapte automatiquement selon la largeur d'écran</Text>
+          <Text textColor="muted">S&apos;adapte automatiquement selon la largeur d&apos;écran</Text>
         </div>
 
         <LayoutMultiCol size="md">
