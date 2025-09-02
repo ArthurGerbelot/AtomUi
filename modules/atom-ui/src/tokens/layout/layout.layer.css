@@ -27,242 +27,258 @@
  */
 @layer utilities {
 
-  /* Formula
-   -----------------------------------------------------------------
-   Core rule: repeat(--simplegrid-cols, --simplegrid-size).
-   All layout responsiveness comes from changing the variables. */
-
+  /* One formula: fluid 1fr tracks, computed max width on the parent */
   .simplegrid-formula {
-    grid-template-columns: repeat(var(--simplegrid-cols, 1), var(--simplegrid-size, var(--container-md)));
+    display: grid;
+    /* inputs (can be set via classes) */
+    --_cols: var(--simplegrid-cols, 1);
+    --_size: var(--simplegrid-size, var(--container-md));
+    --_gap: var(--simplegrid-gap, 0px);
+    /* layout */
+    grid-template-columns: repeat(var(--_cols), minmax(0, 1fr));
+    gap: var(--_gap);
+    /* compute total max width = cols*size + (cols-1)*gap */
+    --simplegrid-max-w: calc(var(--_cols)*var(--_size) + (var(--_cols) - 1)*var(--_gap));
+    max-width: min(100%, var(--simplegrid-max-w));
+    margin-inline: auto;
   }
 
-  /* Column count
-   -----------------------------------------------------------------
-   sg-cols-1 .. sg-cols-6 set --simplegrid-cols.
-   Each breakpoint (sm:, md:, lg:, xl:, 2xl:) is declared explicitly,
-   otherwise Tailwind’s purge would never emit them. */
+  /* Cols (base) */
   .sg-cols-1 {
-    --simplegrid-cols: 1;
+    --simplegrid-cols: 1
   }
 
   .sg-cols-2 {
-    --simplegrid-cols: 2;
+    --simplegrid-cols: 2
   }
 
   .sg-cols-3 {
-    --simplegrid-cols: 3;
+    --simplegrid-cols: 3
   }
 
   .sg-cols-4 {
-    --simplegrid-cols: 4;
+    --simplegrid-cols: 4
   }
 
   .sg-cols-5 {
-    --simplegrid-cols: 5;
+    --simplegrid-cols: 5
   }
 
   .sg-cols-6 {
-    --simplegrid-cols: 6;
+    --simplegrid-cols: 6
   }
 
-  /* Responsive variants
-   -----------------------------------------------------------------
-   In Tailwind v4, custom utilities do NOT get responsive variants
-   (sm:, md:, lg:, xl:, 2xl:) automatically. If we want to use
-   classes like `xl:sg-cols-3`, we must declare them literally here.
-   This way Tailwind sees them during build and does not purge them. */
+  /* Cols (responsive variants, purge-safe) */
   @media (min-width:640px) {
     .sm\:sg-cols-1 {
-      --simplegrid-cols: 1;
+      --simplegrid-cols: 1
     }
 
     .sm\:sg-cols-2 {
-      --simplegrid-cols: 2;
+      --simplegrid-cols: 2
     }
 
     .sm\:sg-cols-3 {
-      --simplegrid-cols: 3;
+      --simplegrid-cols: 3
     }
 
     .sm\:sg-cols-4 {
-      --simplegrid-cols: 4;
+      --simplegrid-cols: 4
     }
 
     .sm\:sg-cols-5 {
-      --simplegrid-cols: 5;
+      --simplegrid-cols: 5
     }
 
     .sm\:sg-cols-6 {
-      --simplegrid-cols: 6;
+      --simplegrid-cols: 6
     }
   }
 
   @media (min-width:768px) {
     .md\:sg-cols-1 {
-      --simplegrid-cols: 1;
+      --simplegrid-cols: 1
     }
 
     .md\:sg-cols-2 {
-      --simplegrid-cols: 2;
+      --simplegrid-cols: 2
     }
 
     .md\:sg-cols-3 {
-      --simplegrid-cols: 3;
+      --simplegrid-cols: 3
     }
 
     .md\:sg-cols-4 {
-      --simplegrid-cols: 4;
+      --simplegrid-cols: 4
     }
 
     .md\:sg-cols-5 {
-      --simplegrid-cols: 5;
+      --simplegrid-cols: 5
     }
 
     .md\:sg-cols-6 {
-      --simplegrid-cols: 6;
+      --simplegrid-cols: 6
     }
   }
 
   @media (min-width:1024px) {
     .lg\:sg-cols-1 {
-      --simplegrid-cols: 1;
+      --simplegrid-cols: 1
     }
 
     .lg\:sg-cols-2 {
-      --simplegrid-cols: 2;
+      --simplegrid-cols: 2
     }
 
     .lg\:sg-cols-3 {
-      --simplegrid-cols: 3;
+      --simplegrid-cols: 3
     }
 
     .lg\:sg-cols-4 {
-      --simplegrid-cols: 4;
+      --simplegrid-cols: 4
     }
 
     .lg\:sg-cols-5 {
-      --simplegrid-cols: 5;
+      --simplegrid-cols: 5
     }
 
     .lg\:sg-cols-6 {
-      --simplegrid-cols: 6;
+      --simplegrid-cols: 6
     }
   }
 
   @media (min-width:1280px) {
     .xl\:sg-cols-1 {
-      --simplegrid-cols: 1;
+      --simplegrid-cols: 1
     }
 
     .xl\:sg-cols-2 {
-      --simplegrid-cols: 2;
+      --simplegrid-cols: 2
     }
 
     .xl\:sg-cols-3 {
-      --simplegrid-cols: 3;
+      --simplegrid-cols: 3
     }
 
     .xl\:sg-cols-4 {
-      --simplegrid-cols: 4;
+      --simplegrid-cols: 4
     }
 
     .xl\:sg-cols-5 {
-      --simplegrid-cols: 5;
+      --simplegrid-cols: 5
     }
 
     .xl\:sg-cols-6 {
-      --simplegrid-cols: 6;
+      --simplegrid-cols: 6
     }
   }
 
   @media (min-width:1536px) {
     .\32xl\:sg-cols-1 {
-      --simplegrid-cols: 1;
+      --simplegrid-cols: 1
     }
 
     .\32xl\:sg-cols-2 {
-      --simplegrid-cols: 2;
+      --simplegrid-cols: 2
     }
 
     .\32xl\:sg-cols-3 {
-      --simplegrid-cols: 3;
+      --simplegrid-cols: 3
     }
 
     .\32xl\:sg-cols-4 {
-      --simplegrid-cols: 4;
+      --simplegrid-cols: 4
     }
 
     .\32xl\:sg-cols-5 {
-      --simplegrid-cols: 5;
+      --simplegrid-cols: 5
     }
 
     .\32xl\:sg-cols-6 {
-      --simplegrid-cols: 6;
+      --simplegrid-cols: 6
     }
   }
 
-  /* Column size
-   -----------------------------------------------------------------
-   sg-size-5xs .. sg-size-7xl map --simplegrid-size to container tokens.
-   These classes can also be prefixed with sm:/md:/lg:/xl:/2xl: since
-   they exist as literal utilities and won’t be purged. */
+  /* Size (maps to container tokens, global only) */
   .sg-size-5xs {
-    --simplegrid-size: var(--container-5xs);
+    --simplegrid-size: var(--container-5xs)
   }
 
   .sg-size-4xs {
-    --simplegrid-size: var(--container-4xs);
+    --simplegrid-size: var(--container-4xs)
   }
 
   .sg-size-3xs {
-    --simplegrid-size: var(--container-3xs);
+    --simplegrid-size: var(--container-3xs)
   }
 
   .sg-size-2xs {
-    --simplegrid-size: var(--container-2xs);
+    --simplegrid-size: var(--container-2xs)
   }
 
   .sg-size-xs {
-    --simplegrid-size: var(--container-xs);
+    --simplegrid-size: var(--container-xs)
   }
 
   .sg-size-sm {
-    --simplegrid-size: var(--container-sm);
+    --simplegrid-size: var(--container-sm)
   }
 
   .sg-size-md {
-    --simplegrid-size: var(--container-md);
+    --simplegrid-size: var(--container-md)
   }
 
   .sg-size-lg {
-    --simplegrid-size: var(--container-lg);
+    --simplegrid-size: var(--container-lg)
   }
 
   .sg-size-xl {
-    --simplegrid-size: var(--container-xl);
+    --simplegrid-size: var(--container-xl)
   }
 
   .sg-size-2xl {
-    --simplegrid-size: var(--container-2xl);
+    --simplegrid-size: var(--container-2xl)
   }
 
   .sg-size-3xl {
-    --simplegrid-size: var(--container-3xl);
+    --simplegrid-size: var(--container-3xl)
   }
 
   .sg-size-4xl {
-    --simplegrid-size: var(--container-4xl);
+    --simplegrid-size: var(--container-4xl)
   }
 
   .sg-size-5xl {
-    --simplegrid-size: var(--container-5xl);
+    --simplegrid-size: var(--container-5xl)
   }
 
   .sg-size-6xl {
-    --simplegrid-size: var(--container-6xl);
+    --simplegrid-size: var(--container-6xl)
   }
 
   .sg-size-7xl {
-    --simplegrid-size: var(--container-7xl);
+    --simplegrid-size: var(--container-7xl)
   }
+
+  /* gap alias → only sets the var for the max-width calc (stack with your existing gap-* class) */
+  .sg-gap-xs {
+    --simplegrid-gap: var(--gap-xs)
+  }
+
+  .sg-gap-sm {
+    --simplegrid-gap: var(--gap-sm)
+  }
+
+  .sg-gap-md {
+    --simplegrid-gap: var(--gap-md)
+  }
+
+  .sg-gap-lg {
+    --simplegrid-gap: var(--gap-lg)
+  }
+
+  .sg-gap-xl {
+    --simplegrid-gap: var(--gap-xl)
+  }
+
 }

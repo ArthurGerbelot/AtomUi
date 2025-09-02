@@ -1,0 +1,15 @@
+:root {
+  /* Create CSS Vars to also be able to use them on calc (ex: layout.layer.css)
+    ----------------------------*/
+
+  /* .gap-1 */
+  --gap-xs: calc(var(--spacing) * 1);
+  /* .gap-2 */
+  --gap-sm: calc(var(--spacing) * 2);
+  /* .gap-4 */
+  --gap-md: calc(var(--spacing) * 4);
+  /* .gap-6 */
+  --gap-lg: calc(var(--spacing) * 6);
+  /* .gap-8 */
+  --gap-xl: calc(var(--spacing) * 8);
+}

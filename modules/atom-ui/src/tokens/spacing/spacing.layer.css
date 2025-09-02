@@ -5,22 +5,27 @@
   /* -------------------------- */
 
   .gap-xs {
+    /* Same as --gap-xs */
     @apply gap-1;
   }
 
   .gap-sm {
+    /* Same as --gap-sm */
     @apply gap-2;
   }
 
   .gap-md {
+    /* Same as --gap-md */
     @apply gap-4;
   }
 
   .gap-lg {
+    /* Same as --gap-lg */
     @apply gap-6;
   }
 
   .gap-xl {
+    /* Same as --gap-xl */
     @apply gap-8;
   }
 
