@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { jetbrainsMono, golosText, bebasNeue } from "@uikit/nextjs";
 import { TooltipProvider } from "@uikit";
+import { NavigationProvider } from "@/components/version/NavigationProvider";
 
 export const metadata: Metadata = {
   title: "API Docs",
@@ -25,7 +26,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            {children}
+            <NavigationProvider>
+              {children}
+            </NavigationProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>

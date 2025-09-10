@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cn } from "../../lib"
+import { ContainerSize } from "../../tokens/layout/layout"
 
 // =============================================================================
 // LayoutHeaderFooter
@@ -21,7 +22,7 @@ export interface LayoutHeaderFooterProps {
   footerClassName?: string
   contentClassName?: string
   sticky?: boolean // Header collé en haut
-  fullWidth?: boolean // Header pleine largeur (sinon container centré)
+  size?: ContainerSize | "full" // Taille du container (défaut: "full" = pleine largeur)
 }
 
 export function LayoutHeaderFooter({
@@ -34,7 +35,7 @@ export function LayoutHeaderFooter({
   footerClassName,
   contentClassName,
   sticky = false,
-  fullWidth = true,
+  size = "full",
 }: LayoutHeaderFooterProps) {
   return (
     <div className={cn(
@@ -50,7 +51,7 @@ export function LayoutHeaderFooter({
         )}>
           <div className={cn(
             "px-4 py-3",
-            !fullWidth && "container mx-auto"
+            size !== "full" ? `max-w-${size} mx-auto` : ""
           )}>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -75,12 +76,12 @@ export function LayoutHeaderFooter({
       {/* Footer */}
       {footerContent && (
         <footer className={cn(
-          "bg-background border-t mt-auto",
+          "bg-background mt-auto",
           footerClassName
         )}>
           <div className={cn(
             "px-4 py-6",
-            !fullWidth && "container mx-auto"
+            size !== "full" ? `max-w-${size} mx-auto` : ""
           )}>
             {footerContent}
           </div>

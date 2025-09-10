@@ -1,5 +1,13 @@
 /* Also create the utilities classes based on the news tokens */
 @layer utilities {
+  .max-w-7xs {
+    max-width: var(--container-7xs);
+  }
+
+  .max-w-6xs {
+    max-width: var(--container-6xs);
+  }
+
   .max-w-5xs {
     max-width: var(--container-5xs);
   }
@@ -8,12 +16,36 @@
     max-width: var(--container-4xs);
   }
 
+  .max-w-3xs {
+    max-width: var(--container-3xs);
+  }
+
+  .max-w-2xs {
+    max-width: var(--container-2xs);
+  }
+
+  .w-7xs {
+    width: var(--container-7xs);
+  }
+
+  .w-6xs {
+    width: var(--container-6xs);
+  }
+
   .w-5xs {
     width: var(--container-5xs);
   }
 
   .w-4xs {
     width: var(--container-4xs);
+  }
+
+  .w-3xs {
+    width: var(--container-3xs);
+  }
+
+  .w-2xs {
+    width: var(--container-2xs);
   }
 }
 
@@ -200,6 +232,14 @@
   }
 
   /* Size (maps to container tokens, global only) */
+  .sg-size-7xs {
+    --simplegrid-size: var(--container-7xs)
+  }
+
+  .sg-size-6xs {
+    --simplegrid-size: var(--container-6xs)
+  }
+
   .sg-size-5xs {
     --simplegrid-size: var(--container-5xs)
   }
@@ -262,23 +302,23 @@
 
   /* gap alias → only sets the var for the max-width calc (stack with your existing gap-* class) */
   .sg-gap-xs {
-    --simplegrid-gap: var(--gap-xs)
+    --simplegrid-gap: var(--spacing-xs)
   }
 
   .sg-gap-sm {
-    --simplegrid-gap: var(--gap-sm)
+    --simplegrid-gap: var(--spacing-sm)
   }
 
   .sg-gap-md {
-    --simplegrid-gap: var(--gap-md)
+    --simplegrid-gap: var(--spacing-md)
   }
 
   .sg-gap-lg {
-    --simplegrid-gap: var(--gap-lg)
+    --simplegrid-gap: var(--spacing-lg)
   }
 
   .sg-gap-xl {
-    --simplegrid-gap: var(--gap-xl)
+    --simplegrid-gap: var(--spacing-xl)
   }
 
 }

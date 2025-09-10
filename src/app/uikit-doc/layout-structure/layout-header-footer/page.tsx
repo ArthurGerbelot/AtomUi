@@ -16,7 +16,7 @@ export default function LayoutHeaderFooterDocsPage() {
 
 
       <Alert variant="info" className="max-w-md mx-auto" title="Full page implementation demo">
-        See full page implementation here <Text typo="link" colorTheme="brand" as={Link} href="/example-layout/header-footer">Header & Footer</Text>
+        See full page implementation here <Text typo="link" colorTheme="brand" as={Link} href="/example-layouts/header-footer">Header & Footer</Text>
       </Alert>
 
       {/* Basic Example */}
@@ -133,7 +133,6 @@ export default function LayoutHeaderFooterDocsPage() {
         <VStack gap="md">
           <div className="border rounded-lg overflow-hidden h-64">
             <LayoutHeaderFooter
-              fullWidth
               headerClassName="bg-blue-600 text-white"
               footerClassName="bg-gray-800 text-white"
               headerLeftContent={

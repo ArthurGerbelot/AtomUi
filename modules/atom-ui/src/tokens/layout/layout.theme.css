@@ -1,6 +1,10 @@
 :root {
   /* New small containers (classes will be created in layout.layer.css)
     ----------------------------*/
+  /* 7xs → now ~ 128px */
+  --container-7xs: 8rem;
+  /* 6xs → now ~ 160px */
+  --container-6xs: 10rem;
   /* 5xs → now ~ 192px */
   --container-5xs: 12rem;
   /* 4xs → now ~ 224px */

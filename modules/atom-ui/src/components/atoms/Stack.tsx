@@ -49,9 +49,14 @@ const stackVariants = cva("flex items-start gap-md", {
       true: "w-full",
       false: "",
     },
+    center: {
+      true: "justify-center",
+      false: "",
+    },
   },
   defaultVariants: {
     direction: "vertical",
+    align: "stretch",
   },
 });
 
@@ -76,7 +81,7 @@ export const Stack = forwardRefPolymorphic<"div", StackProps>(
   function Stack<T extends React.ElementType = "div">(
     {
       // On variant
-      direction, wrap, align, stretch, full,
+      direction, wrap, align, stretch, full, center,
       // Props with default
       gap = "md",
       ...props }: StackPolymorphicProps<T>,
@@ -93,7 +98,7 @@ export const Stack = forwardRefPolymorphic<"div", StackProps>(
         ref={ref}
         as={(as ?? "div") as any}
         asChild={asChild}
-        className={cn(stackVariants({ direction, wrap, align, stretch, full }), className)}
+        className={cn(stackVariants({ direction, wrap, align, stretch, center, full }), className)}
         {...rest} // Spread remaining props (color theme, style, event handlers, etc.)
       />
     )

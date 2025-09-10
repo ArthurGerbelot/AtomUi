@@ -5,7 +5,7 @@ import { VStack, type StackProps } from "../atoms/Stack"
 
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../core"
 import { cn, resolveAtomTokens } from "../../lib"
-import { Size } from "../../tokens"
+import { ContainerSize, Size } from "../../tokens"
 
 // =============================================================================
 // LayoutOneCol
@@ -24,7 +24,7 @@ export interface LayoutOneColProps
   extends Omit<StackProps, "direction" | "size"> {
   children: React.ReactNode
   /** Design size token (or "full" for 100% width) */
-  size?: Size | "full"
+  size?: ContainerSize
 }
 
 type LayoutOneColPolymorphicProps<T extends React.ElementType = "div"> =

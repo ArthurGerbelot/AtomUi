@@ -97,7 +97,7 @@ export function LayoutSidebar({
     <Sidebar.Inset key="inset">
       <div className="relative h-full w-full">
         {showTrigger && (
-          <div className={`absolute top-4 ${side === "left" ? "left-4" : "right-4"} z-50 flex items-center gap-2`}>
+          <div className={`absolute top-2 ${side === "left" ? "left-2" : "right-2"} z-50 flex items-center gap-2`}>
             <Tooltip tooltip={triggerTooltip} tooltipProps={{ side: side === "left" ? "right" : "left" }}>
               <Sidebar.Trigger side={side} />
             </Tooltip>

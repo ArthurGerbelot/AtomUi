@@ -5,11 +5,13 @@
 import { BooleanVariants, NumericalVariants, OmitableVariants } from "../base/base";
 
 export const containerSizes = [
-  '5xs', '4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl',
+  '7xs', '6xs', '5xs', '4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl',
 ] as const
 export type ContainerSize = typeof containerSizes[number]
 
 export const maxWidthVariants: Record<ContainerSize | "full", string> = {
+  '7xs': "max-w-7xs",
+  '6xs': "max-w-6xs",
   '5xs': "max-w-5xs",
   '4xs': "max-w-4xs",
   '3xs': "max-w-3xs",

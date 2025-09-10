@@ -1,12 +1,17 @@
 'use client'
 
 import { LayoutHeaderFooter, Button, Text, Badge, Card, VStack } from "@uikit"
+import { useState } from "react"
 
 export default function HeaderFooterExamplePage() {
+
+  const [sticky, setSticky] = useState(false)
+  const [fullWidth, setFullWidth] = useState(true)
+
   return (
     <LayoutHeaderFooter
-      fullWidth
-      sticky
+      size={fullWidth ? "full" : "5xl"}
+      sticky={sticky}
       headerLeftContent={
         <div className="flex items-center gap-4">
           <div className="h-8 w-8 bg-primary rounded flex items-center justify-center">
@@ -17,7 +22,8 @@ export default function HeaderFooterExamplePage() {
       }
       headerRightContent={
         <div className="flex items-center gap-3">
-          <Badge>Full Width</Badge>
+          <Button size="sm" variant="subtle" colorTheme={fullWidth ? "success" : "light"} onClick={() => setFullWidth(!fullWidth)}>size = {fullWidth ? "full" : "5xl"}</Button>
+          <Button size="sm" variant="subtle" colorTheme={sticky ? "success" : "light"} onClick={() => setSticky(!sticky)}>Sticky = {sticky ? "true" : "false"}</Button>
           <Button size="sm" variant="outline">
             Documentation
           </Button>
@@ -26,7 +32,7 @@ export default function HeaderFooterExamplePage() {
       footerContent={
         <div className="flex flex-col items-center gap-4">
           <Text textSize="sm" textColor="muted" className="text-center">
-            Exemple d&apos;implémentation complète du LayoutHeader avec <Badge>fullWidth={true}</Badge>
+            Complete implementation example of LayoutHeader with <Badge>fullWidth={true}</Badge>
           </Text>
           <div className="flex items-center gap-6">
             <Text as="a" href="#" textSize="sm" textColor="muted" className="hover:text-foreground">
@@ -51,7 +57,7 @@ export default function HeaderFooterExamplePage() {
               LayoutHeader Full Width Demo
             </h1>
             <p className="text-lg text-muted-foreground">
-              Voici une implémentation complète du composant LayoutHeader
+              Here's a complete implementation of the LayoutHeader component
             </p>
           </div>
 
@@ -59,35 +65,35 @@ export default function HeaderFooterExamplePage() {
             <Card
               title="Container Mode (default)"
               subtitle="fullWidth={false}"
-              description="Header et footer centrés avec largeur maximale"
+              description="Header and footer centered with maximum width"
             >
               <VStack gap="sm">
-                <Text textSize="sm">✅ Contenu centré et limité en largeur</Text>
-                <Text textSize="sm">✅ Responsive design optimal</Text>
-                <Text textSize="sm">✅ Lecture confortable</Text>
+                <Text textSize="sm">✅ Centered content with limited width</Text>
+                <Text textSize="sm">✅ Optimal responsive design</Text>
+                <Text textSize="sm">✅ Comfortable reading</Text>
               </VStack>
             </Card>
 
             <Card
               title="Full Width Mode"
               subtitle="fullWidth={true}"
-              description="Header et footer utilisent toute la largeur"
+              description="Header and footer use full width"
             >
               <VStack gap="sm">
-                <Text textSize="sm">🎯 Utilise toute la largeur disponible</Text>
-                <Text textSize="sm">🎯 Parfait pour les apps et dashboards</Text>
-                <Text textSize="sm">🎯 Maximum d&apos;espace pour la navigation</Text>
+                <Text textSize="sm">🎯 Uses all available width</Text>
+                <Text textSize="sm">🎯 Perfect for apps and dashboards</Text>
+                <Text textSize="sm">🎯 Maximum space for navigation</Text>
               </VStack>
             </Card>
           </div>
 
           <Card
             title="Code Example"
-            description="Implémentation de cette page"
+            description="Implementation of this page"
           >
             <pre className="text-sm bg-muted p-4 rounded-lg overflow-x-auto">
               {`<LayoutHeader
-  fullWidth={true}
+  size="full"
   sticky={true}
   headerLeftContent={<Logo />}
   headerRightContent={<Menu />}
@@ -102,15 +108,9 @@ export default function HeaderFooterExamplePage() {
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-lg">
             <div className="text-center space-y-4">
-              <Text textSize="lg" weight="semibold">
-                Le header et footer de cette page utilisent fullWidth={true}
-              </Text>
-              <Text textColor="muted">
-                Regardez comme ils s&apos;étendent sur toute la largeur de l&apos;écran,
-                même si le contenu principal reste dans un container centré.
-              </Text>
-              <Button as="a" href="/uikit-doc/layout-structure/layout-header">
-                Voir la documentation complète
+
+              <Button as="a" href="/uikit-doc/layout-structure/layout-header-footer">
+                View full documentation
               </Button>
             </div>
           </div>

@@ -35,8 +35,12 @@ import {
 
 // Spacing
 import {
-  gapVariants,
+  gapVariants, Gap,
   noGapVariants,
+  marginVariants, marginXVariants, marginYVariants, marginTVariants, marginRVariants, marginBVariants, marginLVariants,
+  paddingVariants, paddingXVariants, paddingYVariants, paddingTVariants, paddingRVariants, paddingBVariants, paddingLVariants,
+  Margin, MarginX, MarginY, MarginT, MarginR, MarginB, MarginL,
+  Padding, PaddingX, PaddingY, PaddingT, PaddingR, PaddingB, PaddingL,
 } from "./spacing/spacing";
 
 
@@ -82,7 +86,7 @@ export const atomicVariantsTokens = [
   'maxW', 'display', 'flexDirection',    // Parent
   'flex',       // Child
   // Spacing
-  'gap',
+  'gap', 'm', 'mx', 'my', 'mt', 'mr', 'mb', 'ml', 'p', 'px', 'py', 'pt', 'pr', 'pb', 'pl',
   // Surface
   'surface', 'bgColor', 'borderColor', 'shadow', 'radius',
   //...
@@ -143,6 +147,24 @@ export const atomicVariants = {
   gap: gapVariants,
   noGap: noGapVariants,
 
+  // Margin
+  m: marginVariants,
+  mx: marginXVariants,
+  my: marginYVariants,
+  mt: marginTVariants,
+  mr: marginRVariants,
+  mb: marginBVariants,
+  ml: marginLVariants,
+
+  // Padding
+  p: paddingVariants,
+  px: paddingXVariants,
+  py: paddingYVariants,
+  pt: paddingTVariants,
+  pr: paddingRVariants,
+  pb: paddingBVariants,
+  pl: paddingLVariants,
+
   // Surface
   // --------------
   bgColor: bgColorVariants,
@@ -159,9 +181,12 @@ export const atomicRecipe = cva("", { variants: atomicVariants });
 
 // Later find a way to override the AtomicTokenProps with boolean and numerical variants (trucate, underline, gap, etc..)
 export type AtomicTokenProps = Omit<VariantProps<typeof atomicRecipe>,
-  "flex"
+  "flex" | "gap" | "m" | "mx" | "my" | "mt" | "mr" | "mb" | "ml" | "p" | "px" | "py" | "pt" | "pr" | "pb" | "pl"
 > & {
   [key in typeof atomicBooleanTokens[number]]?: BooleanVariants
 } & {
   flex?: Omit<Flex, "_n">, // flex is boolean and numerical (+ _n) variants
+  gap?: Gap,
+  m?: Margin, mx?: MarginX, my?: MarginY, mt?: MarginT, mr?: MarginR, mb?: MarginB, ml?: MarginL,
+  p?: Padding, px?: PaddingX, py?: PaddingY, pt?: PaddingT, pr?: PaddingR, pb?: PaddingB, pl?: PaddingL,
 };

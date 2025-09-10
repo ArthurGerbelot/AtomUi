@@ -4,7 +4,7 @@
 import * as React from "react"
 
 // Import from your UI Kit alias
-import { Stack, VStack, HStack, AutoGrid, SimpleGrid, Code, Header, Separator, SimpleSelect, Card, List, IconInfo } from "@uikit"
+import { Stack, VStack, HStack, AutoGrid, SimpleGrid, Code, Header, Separator, SimpleSelect, Card, List, IconInfo, Atom } from "@uikit"
 import { CardExample } from "../components/CardExample"
 
 export default function LayoutDocsPage() {
@@ -269,13 +269,34 @@ export default function LayoutDocsPage() {
         </CardExample>
       </section >
 
+      <Header variant="sub-section" title="Flex" subtitle="Children flexible handling" />
+
+      <CardExample
+        title="Basic Stack Usage"
+        description="A vertical and horizontal arrangement of items"
+      >
+        <VStack stretch>
+          <HStack stretch gap="md">
+            <Atom bgColor="amber" className="h-16" flex={25}>flex=25</Atom>
+            <Atom bgColor="red" className="h-16" flex={54}>flex=54</Atom>
+          </HStack>
+
+          <HStack stretch gap="md">
+            <Atom bgColor="amber" className="h-16" flex>flex</Atom>
+            <Atom bgColor="blue" className="h-16">not flex</Atom>
+            <Atom bgColor="amber" className="h-16" flex>flex</Atom>
+          </HStack>
+        </VStack>
+      </CardExample>
+
       {/* =============================================================================
           AUTOGRID
       ============================================================================= */}
       < section className="space-y-8" >
         <Header
-          variant="sub-section"
+          variant="section"
           title="AutoGrid"
+          align="center"
           subtitle="For fluid, responsive grids"
           description={<><Code>AutoGrid</Code> uses <Code>grid-template-columns: repeat(auto-fit, minmax(...))</Code>.
             It&apos;s best when you want cards or tiles that automatically wrap based on the container&apos;s width.
@@ -318,7 +339,8 @@ export default function LayoutDocsPage() {
       ============================================================================= */}
       < section className="space-y-8" >
         <Header
-          variant="sub-section"
+          variant="section"
+          align="center"
           title="SimpleGrid"
           subtitle="For fixed grid layouts with responsive control"
           description={<><Code>SimpleGrid</Code> lets you define a fixed number of columns,
@@ -336,6 +358,24 @@ export default function LayoutDocsPage() {
 </SimpleGrid>`}
         >
           <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <LayoutItemExample key={i} i={i + 1} />
+            ))}
+          </SimpleGrid>
+        </CardExample>
+
+
+        <CardExample
+          title="SimpleGrid Examplew with col size"
+          subtitle="Using Container Size, from 7xs to 7xl"
+          description="Responsive grid with fixed column counts and forced column size"
+          code={`<SimpleGrid size="5xs" cols={{ base: 1, md: 2, lg: 3 }}>
+  {Array.from({ length: 6 }).map((_, i) => (
+    <LayoutItemExample key={i} i={i + 1} />
+  ))}
+</SimpleGrid>`}
+        >
+          <SimpleGrid size="5xs" cols={{ base: 1, md: 2, lg: 3 }}>
             {Array.from({ length: 6 }).map((_, i) => (
               <LayoutItemExample key={i} i={i + 1} />
             ))}

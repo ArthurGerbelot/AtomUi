@@ -29,8 +29,290 @@
     @apply gap-8;
   }
 
-  /* Padding (+X/Y + L/R/T/B) */
+  /* Margin */
   /* -------------------------- */
 
+  .m-xs {
+    @apply m-1;
+  }
+
+  .m-sm {
+    @apply m-2;
+  }
+
+  .m-md {
+    @apply m-4;
+  }
+
+  .m-lg {
+    @apply m-6;
+  }
+
+  .m-xl {
+    @apply m-8;
+  }
+
+  .mx-xs {
+    @apply mx-1;
+  }
+
+  .mx-sm {
+    @apply mx-2;
+  }
+
+  .mx-md {
+    @apply mx-4;
+  }
+
+  .mx-lg {
+    @apply mx-6;
+  }
+
+  .mx-xl {
+    @apply mx-8;
+  }
+
+  .my-xs {
+    @apply my-1;
+  }
+
+  .my-sm {
+    @apply my-2;
+  }
+
+  .my-md {
+    @apply my-4;
+  }
+
+  .my-lg {
+    @apply my-6;
+  }
+
+  .my-xl {
+    @apply my-8;
+  }
+
+  .mt-xs {
+    @apply mt-1;
+  }
+
+  .mt-sm {
+    @apply mt-2;
+  }
+
+  .mt-md {
+    @apply mt-4;
+  }
+
+  .mt-lg {
+    @apply mt-6;
+  }
+
+  .mt-xl {
+    @apply mt-8;
+  }
+
+  .mr-xs {
+    @apply mr-1;
+  }
+
+  .mr-sm {
+    @apply mr-2;
+  }
+
+  .mr-md {
+    @apply mr-4;
+  }
+
+  .mr-lg {
+    @apply mr-6;
+  }
+
+  .mr-xl {
+    @apply mr-8;
+  }
+
+  .mb-xs {
+    @apply mb-1;
+  }
+
+  .mb-sm {
+    @apply mb-2;
+  }
+
+  .mb-md {
+    @apply mb-4;
+  }
+
+  .mb-lg {
+    @apply mb-6;
+  }
+
+  .mb-xl {
+    @apply mb-8;
+  }
+
+  .ml-xs {
+    @apply ml-1;
+  }
+
+  .ml-sm {
+    @apply ml-2;
+  }
+
+  .ml-md {
+    @apply ml-4;
+  }
+
+  .ml-lg {
+    @apply ml-6;
+  }
+
+  .ml-xl {
+    @apply ml-8;
+  }
+
+  /* Padding */
+  /* -------------------------- */
+
+  .p-xs {
+    @apply p-1;
+  }
+
+  .p-sm {
+    @apply p-2;
+  }
+
+  .p-md {
+    @apply p-4;
+  }
+
+  .p-lg {
+    @apply p-6;
+  }
+
+  .p-xl {
+    @apply p-8;
+  }
+
+  .px-xs {
+    @apply px-1;
+  }
+
+  .px-sm {
+    @apply px-2;
+  }
+
+  .px-md {
+    @apply px-4;
+  }
+
+  .px-lg {
+    @apply px-6;
+  }
+
+  .px-xl {
+    @apply px-8;
+  }
+
+  .py-xs {
+    @apply py-1;
+  }
+
+  .py-sm {
+    @apply py-2;
+  }
+
+  .py-md {
+    @apply py-4;
+  }
+
+  .py-lg {
+    @apply py-6;
+  }
+
+  .py-xl {
+    @apply py-8;
+  }
+
+  .pt-xs {
+    @apply pt-1;
+  }
+
+  .pt-sm {
+    @apply pt-2;
+  }
+
+  .pt-md {
+    @apply pt-4;
+  }
+
+  .pt-lg {
+    @apply pt-6;
+  }
+
+  .pt-xl {
+    @apply pt-8;
+  }
+
+  .pr-xs {
+    @apply pr-1;
+  }
+
+  .pr-sm {
+    @apply pr-2;
+  }
+
+  .pr-md {
+    @apply pr-4;
+  }
+
+  .pr-lg {
+    @apply pr-6;
+  }
+
+  .pr-xl {
+    @apply pr-8;
+  }
+
+  .pb-xs {
+    @apply pb-1;
+  }
+
+  .pb-sm {
+    @apply pb-2;
+  }
+
+  .pb-md {
+    @apply pb-4;
+  }
+
+  .pb-lg {
+    @apply pb-6;
+  }
+
+  .pb-xl {
+    @apply pb-8;
+  }
+
+  .pl-xs {
+    @apply pl-1;
+  }
+
+  .pl-sm {
+    @apply pl-2;
+  }
+
+  .pl-md {
+    @apply pl-4;
+  }
+
+  .pl-lg {
+    @apply pl-6;
+  }
+
+  .pl-xl {
+    @apply pl-8;
+  }
 
 }

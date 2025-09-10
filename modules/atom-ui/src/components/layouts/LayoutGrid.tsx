@@ -9,6 +9,7 @@ import { SimpleGrid, SimpleGridProps } from "../atoms/SimpleGrid"
 import {
   type Breakpoint,
 } from "./layout"
+import { ContainerSize } from "@uikit/tokens"
 
 // =============================================================================
 // LayoutGrid
@@ -32,7 +33,7 @@ export type LayoutGridProps = Omit<SimpleGridProps, "cols" | "size"> & {
   breakpointCollapse?: Breakpoint,
 
   // Cols size
-  size?: Size | "full",
+  size?: ContainerSize,
 }
 
 type LayoutGridPolymorphicProps<T extends React.ElementType = "div"> =
@@ -71,7 +72,7 @@ export const LayoutGrid = forwardRefPolymorphic<"div", LayoutGridProps>(
         as={as as any}
 
         // Grid props
-        size={size !== 'full' ? size : undefined} // full isn' a Size and act the same as no size
+        size={size} // full isn' a Size and act the same as no size
         cols={{ base: 1, [breakpointCollapse as string]: cols }}
         gap={gap}
 

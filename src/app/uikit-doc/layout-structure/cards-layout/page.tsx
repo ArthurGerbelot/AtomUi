@@ -9,9 +9,11 @@ import {
   Button, SimpleSelect,
   LayoutGrid,
   Code,
-  Size,
-  sizes
+  ContainerSize,
+  containerSizes,
+  Alert
 } from "@uikit"
+import Link from "next/link"
 
 
 // Sample cards for demonstrations
@@ -37,7 +39,7 @@ const SampleCard = ({ title, description, variant = "default" }: {
 
 export default function CardsLayoutDocsPage() {
 
-  const [colSize, setColSize] = useState<Size | "full" | undefined>(undefined)
+  const [colSize, setColSize] = useState<ContainerSize | undefined>(undefined)
   const [colCount, setColCount] = useState<"1" | "2" | "3" | "4" | undefined>("2")
 
   return (
@@ -49,10 +51,14 @@ export default function CardsLayoutDocsPage() {
         description="Composants layouts simples pour organiser des cards en colonnes avec des tailles de colonnes identiques."
       />
 
+      <Alert variant="info" className="max-w-md mx-auto" title="Full page implementation demo">
+        See full page implementation here <Text typo="link" colorTheme="brand" as={Link} href="/example-layouts/cards">Cards</Text>
+      </Alert>
+
       <Card title="Variant Control" className="max-w-md mx-auto">
         <HStack>
           <SimpleSelect
-            choices={[...sizes]}
+            choices={[...containerSizes]}
             value={colSize}
             onValueChange={(v) => setColSize(v)}
           />
@@ -98,7 +104,7 @@ export default function CardsLayoutDocsPage() {
       <Card title="Variant Control" className="max-w-md mx-auto">
         <HStack>
           <SimpleSelect
-            choices={[...sizes]}
+            choices={[...containerSizes]}
             value={colSize}
             onValueChange={(v) => setColSize(v)}
           />
@@ -135,7 +141,7 @@ export default function CardsLayoutDocsPage() {
       <Card title="Variant Control" className="max-w-md mx-auto">
         <HStack>
           <SimpleSelect
-            choices={[...sizes]}
+            choices={[...containerSizes]}
             value={colSize}
             onValueChange={(v) => setColSize(v)}
           />
