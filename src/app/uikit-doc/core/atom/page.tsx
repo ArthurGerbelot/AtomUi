@@ -2,7 +2,7 @@
 import * as React from "react"
 
 // Import from your UI Kit alias
-import { Atom, Code, Text } from "@uikit"
+import { Atom, Code, Link, Text } from "@uikit"
 import { CardExample } from "../../components/CardExample"
 
 
@@ -238,7 +238,7 @@ export default function AtomDocsPage() {
           title="Text Component"
           description="Text is an extended component of Atom, it's a helper wrapper around Atom that add custom variants and props."
           note={<div>
-            <strong>Note:</strong> To be sure that tokens and classes are resolve correctly (on the right order) you can use <a href="/uikit-doc/core/atom-polymorphism#resolveAtomTokens"><code>resolveAtomTokens()</code></a>.
+            <strong>Note:</strong> To be sure that tokens and classes are resolve correctly (on the right order) you can use <Link href="/uikit-doc/core/atom-polymorphism#resolveAtomTokens"><code>resolveAtomTokens()</code></Link>.
           </div>
           }>
 
