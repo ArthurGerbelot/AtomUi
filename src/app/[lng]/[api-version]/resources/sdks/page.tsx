@@ -1,12 +1,9 @@
 'use client'
 
 import { LayoutPage } from "@/components/layout/LayoutPage"
-import { useUrl } from "@/lib/url"
 import { Center, Header, Text } from "@uikit"
 
 export default function QuickstartPage() {
-  const { getUrl } = useUrl()
-
   return (
     <LayoutPage>
 
