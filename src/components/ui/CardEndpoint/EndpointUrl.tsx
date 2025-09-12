@@ -5,7 +5,9 @@ import { ApiSettingsHoverCard } from "../settings/ApiSettingsHoverCard"
 
 export const getEndpointUrl = ({ endpoint, env, authType }: { endpoint: Endpoint, env: ApiEnv, authType: ApiAuthType }) => {
   const host = env === 'prod' ? 'https://api.bullbitcoin.com' : 'https://api04.bullbitcoin.dev'
-  const prefix = authType === 'cookie' ? '' : 'ak/'
+  const prefix = endpoint.requireAuth
+    ? (authType === 'cookie' ? '' : 'ak/')
+    : 'public/'
   return `${host}/${prefix}${endpoint.service}`
 }
 

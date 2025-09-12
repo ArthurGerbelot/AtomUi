@@ -1,7 +1,9 @@
 'use client'
 
 import { LayoutPage } from "@/components/layout/LayoutPage"
-import { Center, Header, Text } from "@uikit"
+import { CardEndpoint } from "@/components/ui/CardEndpoint/CardEndpoint"
+import { getRateEndpoints } from "@/data/endpoints/getRate"
+import { Header } from "@uikit"
 
 export default function QuickstartPage() {
 
@@ -12,13 +14,12 @@ export default function QuickstartPage() {
       {/* Header */}
       <Header
         variant="main"
-        title="Title"
-        description="Description"
+        title="Current Rate"
+        description="Get the current exchange rate between two currencies."
       />
 
-      <Center className="h-[calc(100vh-200px)]">
-        <Text typo="main-title" textColor="low-contrast">@TODO</Text>
-      </Center>
+      <CardEndpoint endpoints={getRateEndpoints} />
+
 
     </LayoutPage >
   )

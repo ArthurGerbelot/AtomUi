@@ -6,7 +6,7 @@ export type Service =
   | 'orders'
   | 'ordertrigger'
   | 'permissions'
-  | 'pricer'
+  | 'price' // or pricer ?
   | 'publicgateway'
   | 'recipients'
   | 'users'

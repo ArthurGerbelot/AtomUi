@@ -14,11 +14,10 @@ export function EndpointCodeCurl({ endpoint, example, exampleIdx, space = 6, ...
   return (
     <VStack {...props}>
       <VStack noGap>
-        <Heading as="h5">CURL Request</Heading>
+        <Heading as="h5">cURL Request</Heading>
         <CodeHighlighter language="bash">{`curl -X POST ${getEndpointUrl({ endpoint, env, authType })} \\
   -H "Content-Type: application/json" \\
-  ${authType === 'cookie' ? '-H "Cookie: bb_session=SESSION_ID"' : '-H "X-API-Key: API_KEY"'} \\
-  -d '{
+  ${endpoint.requireAuth ? (authType === 'cookie' ? '-H "Cookie: bb_session=SESSION_ID"' : '-H "X-API-Key: API_KEY"') + `\\\n  ` : ''}-d '{
     "id": "123",
     "jsonrpc":"2.0",
     "method":"${endpoint.method}"${example.request ? `,

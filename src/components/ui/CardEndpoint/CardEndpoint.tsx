@@ -47,8 +47,6 @@ export function CardEndpoint({ endpoints }: CardEndpointProps) {
       }
     >
       <VStack>
-        {hasTsSdk ? "yes" : "no"}
-
         <VStack gap={1}>
           <HStack align="baseline">
             <Label className="min-w-[65px]">Method</Label>
@@ -69,7 +67,7 @@ export function CardEndpoint({ endpoints }: CardEndpointProps) {
             <TabsTrigger value="structure">Structure</TabsTrigger>
             {endpoint.examples && endpoint.examples.length > 0 && (
               <>
-                <TabsTrigger value="curl">CURL</TabsTrigger>
+                <TabsTrigger value="curl">cURL</TabsTrigger>
                 <TabsTrigger value="typescript">TypeScript</TabsTrigger>
                 {hasTsSdk && <TabsTrigger value="ts-sdk">TypeScript SDK</TabsTrigger>}
                 <TabsTrigger value="flutter">Flutter</TabsTrigger>
