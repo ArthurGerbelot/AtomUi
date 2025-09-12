@@ -58,7 +58,7 @@ export default function SidebarDocsPage() {
           description="Comprehensive sidebar system with Provider, Root, Content and many primitives for building navigation layouts."
         />
 
-        <VStack stretch gap="lg">
+        <VStack gap="lg">
 
 
           <Card

@@ -126,7 +126,7 @@ export default function CardsLayoutDocsPage() {
           <div className="w-full border rounded-lg p-6 bg-muted/20">
             <LayoutMultiCol size={colSize} cols={colCount}>
               {Array.from({ length: Number(colCount || "2") }).map((_, index) => (
-                <VStack key={index} stretch>
+                <VStack key={index}>
                   {Array.from({ length: Number(5 - index) }).map((_, index2) => (
                     <SampleCard key={index2} title={`${index2 + 1}`} description="Première card dans la colonne" />
                   ))}

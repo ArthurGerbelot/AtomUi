@@ -216,10 +216,10 @@ export default function ThemeSpacingPage() {
 
       {/* API Reference */}
       <Card title="API Reference" subtitle="All spacing props accept the same values">
-        <VStack stretch>
+        <VStack>
 
           {/* All spacing props */}
-          <VStack stretch>
+          <VStack>
             <Text weight="semibold" textColor="brand">Available Props</Text>
             <Text textSize="sm" textColor="muted">All these spacing props accept the same value types:</Text>
 
@@ -242,7 +242,7 @@ export default function ThemeSpacingPage() {
           </VStack>
 
           {/* Accepted Values */}
-          <VStack stretch>
+          <VStack>
             <Text weight="semibold" textColor="brand">Accepted Values</Text>
             <Text textSize="sm" textColor="muted">All spacing props accept these value types:</Text>
 
@@ -260,7 +260,7 @@ export default function ThemeSpacingPage() {
           </VStack>
 
           {/* Examples */}
-          <VStack stretch>
+          <VStack>
             <Text weight="semibold" textColor="brand">Usage Examples</Text>
             <Code as="pre" className="p-4 bg-muted/50 rounded text-sm">
               {`// All equivalent ways to set spacing

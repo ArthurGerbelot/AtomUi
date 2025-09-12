@@ -84,7 +84,7 @@ export default function DatePickerDocsPage() {
           </SimpleGrid>
 
           {/* Live Preview */}
-          <VStack gap="md" stretch full>
+          <VStack gap="md" full>
             <Text typo="label">Live Preview</Text>
 
             <DatePicker
@@ -102,7 +102,7 @@ export default function DatePickerDocsPage() {
 
       {/* Basic Examples */}
       <Card title="Basic Examples" description="Common DatePicker configurations">
-        <VStack gap="lg" stretch>
+        <VStack gap="lg">
           <VStack gap="md">
             <Text typo="label">Default DatePicker</Text>
             <DatePicker placeholder="Select a date" />
@@ -150,7 +150,7 @@ export default function DatePickerDocsPage() {
 
       {/* Size Variants */}
       <Card title="Size Variants" description="Different DatePicker sizes">
-        <VStack gap="lg" stretch>
+        <VStack gap="lg">
           <VStack gap="md">
             <Text typo="label">Extra Small</Text>
             <DatePicker size="xs" placeholder="Extra small datepicker" />
@@ -181,7 +181,7 @@ export default function DatePickerDocsPage() {
 
       {/* Advanced Examples */}
       <Card title="Advanced Examples" description="Advanced DatePicker configurations">
-        <VStack gap="lg" stretch>
+        <VStack gap="lg">
           <VStack gap="md">
             <Text typo="label">With Custom Calendar Props</Text>
             <DatePicker

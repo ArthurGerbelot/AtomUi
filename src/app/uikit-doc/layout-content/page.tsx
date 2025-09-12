@@ -237,7 +237,7 @@ export default function LayoutDocsPage() {
           <Stack
             direction={dir}
             wrap={wrap}
-            stretch={stretch}
+            noStretch={!stretch}
             align={align}
             className="bg-muted p-4 rounded-lg gap-2 content-start"
             style={
@@ -275,13 +275,13 @@ export default function LayoutDocsPage() {
         title="Basic Stack Usage"
         description="A vertical and horizontal arrangement of items"
       >
-        <VStack stretch>
-          <HStack stretch gap="md">
+        <VStack>
+          <HStack gap="md">
             <Atom bgColor="amber" className="h-16" flex={25}>flex=25</Atom>
             <Atom bgColor="red" className="h-16" flex={54}>flex=54</Atom>
           </HStack>
 
-          <HStack stretch gap="md">
+          <HStack gap="md">
             <Atom bgColor="amber" className="h-16" flex>flex</Atom>
             <Atom bgColor="blue" className="h-16">not flex</Atom>
             <Atom bgColor="amber" className="h-16" flex>flex</Atom>

@@ -23,7 +23,7 @@ export default function CheckboxDocsPage() {
 
       <Header variant="section" title="Composed API" description="Composed Component to easily set a checkbox" />
 
-      <VStack stretch>
+      <VStack>
 
         {/* Basic Usage */}
         <Card title="Simpler usage" description="string choice and label">
@@ -50,7 +50,7 @@ export default function CheckboxDocsPage() {
         </Card>
 
         <Card title="withCard" description="Wrap everything in a Card component">
-          <VStack gap="sm" stretch>
+          <VStack gap="sm">
             <Checkbox
               choice={{
                 value: "newsletter-3",

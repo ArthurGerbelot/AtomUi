@@ -25,7 +25,7 @@ export default function LayoutHeaderFooterDocsPage() {
         subtitle="Header avec contenu gauche/droite et footer"
         description="Layout minimal avec header et footer"
       >
-        <VStack gap="md" stretch>
+        <VStack gap="md">
           <div className="border rounded-lg overflow-auto w-full h-96">
             <LayoutHeaderFooter
               headerLeftContent={

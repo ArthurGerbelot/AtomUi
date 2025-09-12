@@ -3,8 +3,8 @@
 import { create } from 'zustand'
 import { useRouter, usePathname } from 'next/navigation'
 import { useEffect } from 'react'
-import { ApiVersion, versions } from './versions'
-import { Language, languages } from './languages'
+import { ApiVersion, toApiVersion, toVersionString, versions } from '../lib/versions'
+import { Language, languages } from '../lib/languages'
 
 // Combined store for both language and version
 interface NavigationStore {
@@ -47,12 +47,8 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     const urlLanguage = pathSegments[0]
     const urlVersion = pathSegments[1]
 
-    // Handle special redirects first
-    if (urlLanguage === 'latest-lang') {
-      const defaultLanguage = languages[0] // 'en'
-      const newPathSegments = [defaultLanguage, ...pathSegments.slice(1)]
-      const newPath = '/' + newPathSegments.join('/')
-      router.replace(newPath)
+    // Ne rien faire si l'URL commence par "uikit"
+    if (urlLanguage?.includes('uikit')) {
       return
     }
 
@@ -69,7 +65,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     }
 
     if (urlVersion && versions.includes(urlVersion as ApiVersion)) {
-      setVersion(urlVersion as ApiVersion)
+      setVersion(toApiVersion(urlVersion))
     }
 
     // Mark as initialized after first sync
@@ -80,16 +76,24 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     // Don't sync URL until store is initialized from URL
     if (!isInitialized) return
+    if (pathname?.includes('uikit')) {
+      return
+    }
 
     const pathSegments = pathname.split('/').filter(Boolean)
     const currentUrlLanguage = pathSegments[0]
     const currentUrlVersion = pathSegments[1]
 
+    // Ne rien faire si l'URL commence par "uikit"
+    if (currentUrlLanguage === 'uikit') {
+      return
+    }
+
     // Only update URL if store values are different from current URL
     if (currentUrlLanguage !== language || currentUrlVersion !== version) {
       const newPathSegments = [...pathSegments]
       newPathSegments[0] = language
-      newPathSegments[1] = version
+      newPathSegments[1] = toVersionString(version)
       const newPath = '/' + newPathSegments.join('/')
 
       router.push(newPath)

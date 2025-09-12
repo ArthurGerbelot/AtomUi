@@ -1,6 +1,6 @@
-import { ApiVersion } from "@/components/version";
-import { Language } from "@/components/version/languages";
-import { useVersionStore, useLanguageStore } from "@/components/version/NavigationProvider";
+import { Language } from "@/lib/languages";
+import { ApiVersion, toVersionString } from "@/lib/versions";
+import { useVersionStore, useLanguageStore } from "@/store/NavigationProvider";
 
 // Hook version - to be used inside React components
 export const useUrl = () => {
@@ -8,7 +8,7 @@ export const useUrl = () => {
   const { language } = useLanguageStore();
 
   const getUrl = (url?: string, customVersion?: ApiVersion, customLanguage?: Language) => {
-    const finalVersion = customVersion || version;
+    const finalVersion = customVersion || toVersionString(version);
     const finalLanguage = customLanguage || language;
 
     return `/${finalLanguage}/${finalVersion}/${url ?? ''}`.replace(/\/+/g, '/');

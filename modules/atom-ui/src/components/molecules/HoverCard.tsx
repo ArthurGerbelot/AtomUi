@@ -19,18 +19,22 @@ import { surfaceVariants } from "../../tokens/surface/surface"
 // Composed API
 // =============================================================================
 
+export type HoverCardProps = React.ComponentProps<typeof HoverCardPrimitive.Root> & {
+  children: React.ReactNode, // Trigger
+  content: React.ReactNode,  // HoverCard content
+  openDelay?: number,        // Délai d'ouverture en ms
+  closeDelay?: number,       // Délai de fermeture en ms
+  contentProps?: React.ComponentProps<typeof HoverCardPrimitive.Content>
+}
+
 function HoverCardComposed({
   children,
   content,
   openDelay = 100, // Plus rapide que défaut (700ms)
   closeDelay,
+  contentProps,
   ...props
-}: React.ComponentProps<typeof HoverCardPrimitive.Root> & {
-  children: React.ReactNode, // Trigger
-  content: React.ReactNode,  // HoverCard content
-  openDelay?: number,        // Délai d'ouverture en ms
-  closeDelay?: number,       // Délai de fermeture en ms
-}) {
+}: HoverCardProps) {
   return (
     <HoverCardPrimitive.Root
       data-slot="hover-card"
@@ -41,7 +45,7 @@ function HoverCardComposed({
       <HoverCardTrigger asChild>
         {children}
       </HoverCardTrigger>
-      <HoverCardContent>
+      <HoverCardContent {...contentProps}>
         {content}
       </HoverCardContent>
     </HoverCardPrimitive.Root>

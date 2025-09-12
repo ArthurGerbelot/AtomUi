@@ -14,7 +14,7 @@ const colorChoices: ChoiceObject[] = [
 export default function TestPage() {
 
   return (
-    <VStack stretch className="container mx-auto max-w-4xl">
+    <VStack className="container mx-auto max-w-4xl">
       <Header>🧪 Icon Component - Tests exhaustifs</Header>
 
       {/* Basic Usage Tests */}

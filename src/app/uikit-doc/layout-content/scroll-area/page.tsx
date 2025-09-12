@@ -19,7 +19,7 @@ export default function ScrollAreaDocsPage() {
 
       <Header variant="section" title="Composed API" description="Easy-to-use scrollable containers" />
 
-      <VStack stretch>
+      <VStack>
 
         {/* Basic Usage */}
         <Card title="Basic ScrollArea" description="Simple scrollable content with custom scrollbars">

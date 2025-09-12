@@ -67,7 +67,7 @@ export default function TooltipDocsPage() {
       </VStack>
 
 
-      <VStack stretch gap="lg">
+      <VStack gap="lg">
 
         {/* Tooltip Basics */}
         <Card

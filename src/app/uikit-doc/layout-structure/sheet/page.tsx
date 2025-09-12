@@ -21,7 +21,7 @@ export default function SheetDocsPage() {
 
       <Header variant="section" title="Primitives API" description="Build your own sheet with primitives" />
 
-      <VStack stretch>
+      <VStack>
 
         {/* Basic Sheet */}
         <Card title="Basic Sheet" description="Simple sheet that slides in from the right">

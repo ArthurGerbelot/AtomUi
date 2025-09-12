@@ -74,7 +74,7 @@ export default function ExampleCardsLayoutsPage() {
         <Header align="center" title="LayoutTwoCol - Responsive Grid" subtitle="Automatically adapts based on screen width" />
 
         <LayoutMultiCol size="md" cols={2}>
-          <VStack stretch>
+          <VStack>
             <ProductCard
               title="MacBook Pro 14"
               price="2,499.00 CAD"
@@ -87,7 +87,7 @@ export default function ExampleCardsLayoutsPage() {
               description="Light and powerful with M2 chip"
             />
           </VStack>
-          <VStack stretch>
+          <VStack>
             <ProductCard
               title="iMac 24"
               price="1,699.00 CAD"

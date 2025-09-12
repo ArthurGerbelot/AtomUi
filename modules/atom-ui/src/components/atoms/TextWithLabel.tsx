@@ -6,6 +6,7 @@ import { resolveAtomTokens } from "../../lib/core/atom"
 import { sizeVariants } from "../../tokens/base/base"
 import { asSmartSlot, Atom, AtomProps, createSmartSlotSpecs, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef, SmartSlot } from "../core"
 import { Text, SmartText, TextProps } from "./Text"
+import { SmartLabel } from "./Label"
 
 // =============================================================================
 // TEXT WITH LABEL
@@ -44,6 +45,7 @@ export type TextWithLabelOwnProps = VariantProps<typeof textWithLabelVariants>
   & TextWithLabelTextPart
   & TextWithLabelLabelPart
   & {
+    fixedWidth?: boolean,
     separator?: "arrow" | "colon" | "dash" | "space" | "none" | string
   }
 
@@ -91,6 +93,7 @@ export const TextWithLabel = forwardRefPolymorphic<"span", TextWithLabelProps>(
       children,
       separator = "arrow",
       size = "md",
+      fixedWidth = true,
       ...restProps
     } = props;
 
@@ -110,7 +113,12 @@ export const TextWithLabel = forwardRefPolymorphic<"span", TextWithLabelProps>(
         className={cn(textWithLabelVariants({ size }), className)}
         {...rest}
       >
-        <SmartText display="inline-block" typo="label" size={size} specs={labelSpecs} />
+        <SmartLabel
+          className={fixedWidth ? "min-w-[150px] inline-block" : "inline-block"}
+          typo="label"
+          size={size}
+          specs={labelSpecs}
+        />
         {separatorContent && (
           <Text
             className="mx-1"

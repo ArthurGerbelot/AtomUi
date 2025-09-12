@@ -234,6 +234,11 @@ export function Menu() {
               </Sidebar.MenuButton>
             </Sidebar.MenuItem>
             <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-content/tabs"}>
+                <Link href="/uikit-doc/layout-content/tabs">Tabs</Link>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+            <Sidebar.MenuItem>
               <Sidebar.MenuButton asChild isActive={pathname === "/uikit-doc/layout-content/scroll-area"}>
                 <Link href="/uikit-doc/layout-content/scroll-area">ScrollArea</Link>
               </Sidebar.MenuButton>

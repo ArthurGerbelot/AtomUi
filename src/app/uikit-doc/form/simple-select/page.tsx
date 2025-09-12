@@ -143,7 +143,7 @@ export default function SelectPage() {
         Icon={<IconCheckboxChecked textColor="success" />}
         avoidContent
       >
-        <VStack noGap full stretch>
+        <VStack noGap full>
 
           <Card.Content>
             <CodeRenderer

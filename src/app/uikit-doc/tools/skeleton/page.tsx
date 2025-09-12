@@ -18,7 +18,7 @@ export default function SkeletonDocsPage() {
         description="Simple skeleton component with pulse animation for indicating loading content."
       />
 
-      <VStack stretch>
+      <VStack>
 
         {/* Basic Skeletons */}
         <Card title="Basic Skeletons" description="Different shapes and sizes">

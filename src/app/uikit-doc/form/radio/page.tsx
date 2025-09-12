@@ -22,7 +22,7 @@ export default function RadioDocsPage() {
 
       <Header variant="section" title="Composed API" description="Composed Component to easily set a radio group" />
 
-      <VStack stretch>
+      <VStack>
 
         {/* Basic Usage */}
         <Card title="Simple usage" description="Radio group with multiple choices">

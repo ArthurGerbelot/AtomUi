@@ -27,11 +27,11 @@ export default function QuickstartPage() {
 
 
       {/* API Examples */}
-      <VStack gap={6} stretch>
+      <VStack gap={6}>
         <Heading as="h2" typo="section-title">API Examples</Heading>
 
         <Card title={"Public method"} description={"Get the current price of Bitcoin in CAD"}>
-          <VStack gap={4} stretch>
+          <VStack>
             <div>
               <Text typo="caption" className="font-medium">CURL Command</Text>
               <Code block>{`curl -X POST https://api.bullbitcoin.com/public/price  \\
@@ -60,10 +60,10 @@ export default function QuickstartPage() {
       </HStack>
 
 
-      <VStack gap={6} stretch>
+      <VStack gap={6}>
 
         <Card title={"Get User Data"} description={"Get information about the logged-in user"}>
-          <VStack gap={4} stretch>
+          <VStack>
             <div>
               <Text typo="caption" className="font-medium">CURL Command</Text>
               <Code block>{`curl -X POST https://api.bullbitcoin.com/ak/users  \\

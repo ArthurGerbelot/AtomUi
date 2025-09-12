@@ -48,59 +48,36 @@ export function ApiDocMenu() {
         <Sidebar.GroupLabel>Account Setup</Sidebar.GroupLabel>
         <Sidebar.GroupContent>
           <Sidebar.Menu>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rpc/wallet"}>
-                <Link href="/api-doc/rpc/wallet">Wallet Methods</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rpc/transactions"}>
-                <Link href="/api-doc/rpc/transactions">Transaction Methods</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rpc/lightning"}>
-                <Link href="/api-doc/rpc/lightning">Lightning Methods</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rpc/blockchain"}>
-                <Link href="/api-doc/rpc/blockchain">Blockchain Methods</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
+            <MenuItem href="/account/user">User</MenuItem>
+            <MenuItem href="/account/kyc">KYC</MenuItem>
+            <MenuItem href="/account/transactions">Transactions</MenuItem>
+            <MenuItem href="/account/settings">Settings</MenuItem>
           </Sidebar.Menu>
         </Sidebar.GroupContent>
       </Sidebar.Group>
 
       <Sidebar.Group>
-        <Sidebar.GroupLabel>REST API</Sidebar.GroupLabel>
+        <Sidebar.GroupLabel>Orders</Sidebar.GroupLabel>
         <Sidebar.GroupContent>
           <Sidebar.Menu>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rest/users"}>
-                <Link href="/api-doc/rest/users">Users</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rest/accounts"}>
-                <Link href="/api-doc/rest/accounts">Accounts</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rest/orders"}>
-                <Link href="/api-doc/rest/orders">Orders</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rest/payments"}>
-                <Link href="/api-doc/rest/payments">Payments</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/rest/webhooks"}>
-                <Link href="/api-doc/rest/webhooks">Webhooks</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
+            <MenuItem href="/orders/overview">Overview</MenuItem>
+            <MenuItem href="/orders/fund">Fund Account</MenuItem>
+            <MenuItem href="/orders/withdraw">Withdraw Funds</MenuItem>
+            <MenuItem href="/orders/buy-bitcoin">Buy Bitcoin</MenuItem>
+            <MenuItem href="/orders/sell-bitcoin">Sell Bitcoin</MenuItem>
+            <MenuItem href="/orders/pay-bills">Pay Bills with Bitcoin</MenuItem>
+            <MenuItem href="/orders/dca">Recurring Buy - DCA</MenuItem>
+            <MenuItem href="/orders/limit-order">Limit Order</MenuItem>
+            <MenuItem href="/orders/auto-buy">Auto-Buy</MenuItem>
+          </Sidebar.Menu>
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+
+      <Sidebar.Group>
+        <Sidebar.GroupLabel>Misc.</Sidebar.GroupLabel>
+        <Sidebar.GroupContent>
+          <Sidebar.Menu>
+            <MenuItem href="/misc/currency-and-rate">Currency & Rate</MenuItem>
           </Sidebar.Menu>
         </Sidebar.GroupContent>
       </Sidebar.Group>
@@ -109,21 +86,9 @@ export function ApiDocMenu() {
         <Sidebar.GroupLabel>WebSocket API</Sidebar.GroupLabel>
         <Sidebar.GroupContent>
           <Sidebar.Menu>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/websocket/overview"}>
-                <Link href="/api-doc/websocket/overview">WebSocket Overview</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/websocket/events"}>
-                <Link href="/api-doc/websocket/events">Real-time Events</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton asChild isActive={pathname === "/api-doc/websocket/subscriptions"}>
-                <Link href="/api-doc/websocket/subscriptions">Subscriptions</Link>
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
+            <MenuItem href="/websocket/overview">WebSocket Overview</MenuItem>
+            <MenuItem href="/websocket/events">Real-time Events</MenuItem>
+            <MenuItem href="/websocket/subscriptions">Subscriptions</MenuItem>
           </Sidebar.Menu>
         </Sidebar.GroupContent>
       </Sidebar.Group>

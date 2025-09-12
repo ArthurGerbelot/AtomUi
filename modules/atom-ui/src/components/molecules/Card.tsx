@@ -61,9 +61,6 @@ function CardComposed(props: CardComposedProps) {
 
   const _shouldShowHeader = shouldShowHeader(props as HeaderProps);
 
-  // Check if there's actual content to render
-  const hasActualChildren = React.Children.count(children) > 0;
-
   return (
     <CardBox {...{
       variant,
@@ -80,20 +77,15 @@ function CardComposed(props: CardComposedProps) {
           icon, iconProps, Icon,
           Action, BackLink,
           align,
-
-          // Pass info about content to adjust spacing
-          hasContent: hasActualChildren,
         }}
       />}
-      {!avoidContent && hasActualChildren
+      {!avoidContent
         ? (
           <CardContent hasHeader={!!_shouldShowHeader}  {...contentProps}>
             {children}
           </CardContent>
         )
-        : avoidContent && hasActualChildren
-          ? children
-          : null
+        : children
       }
     </CardBox>
   )
@@ -190,8 +182,6 @@ const CardBox = forwardRefPolymorphic<"div", CardBoxProps>(
 type CardHeaderOwnProps = {
   // Variant propre à CardHeader, pour injecter des specs dans Header
   variant?: CardBoxProps["variant"]
-  // Pour ajuster le spacing selon s'il y a du contenu ou non
-  hasContent?: boolean
 }
 
 type CardHeaderProps = Omit<HeaderProps, "variant"> & CardHeaderOwnProps
@@ -237,7 +227,7 @@ const cardHeaderVariantProps: SmartSlotVariantSpecs<CardHeaderOwnProps["variant"
 // SmartSlot is best for internal slots of a molecule, not for wrapping the whole molecule.
 
 
-function CardHeader({ variant = "default", hasContent = true, ...props }: CardHeaderProps) {
+function CardHeader({ variant = "default", ...props }: CardHeaderProps) {
 
   const variantProps = pickVariantSmartSlotSpecs(cardHeaderVariantProps, variant);
 
@@ -256,9 +246,6 @@ function CardHeader({ variant = "default", hasContent = true, ...props }: CardHe
     }
   }
 
-  // Adjust padding based on whether there's content below
-  const headerPadding = hasContent ? "px-4 pt-4 pb-2" : "p-4";
-
   const merged: HeaderProps = {
     ...v,
     ...p,
@@ -271,7 +258,7 @@ function CardHeader({ variant = "default", hasContent = true, ...props }: CardHe
     iconProps: mergeShallowNode(v.iconProps, p.iconProps),
 
     align: p.align ?? v.align,
-    className: cn(headerPadding, v.className, p.className),
+    className: cn('p-md', v.className, p.className),
   }
 
 

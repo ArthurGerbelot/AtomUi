@@ -2,8 +2,8 @@
 
 import { SimpleSelect } from "@uikit";
 
-import { Language, languages } from "./languages";
-import { useLanguageStore } from './NavigationProvider'
+import { Language, languages } from "@/lib/languages";
+import { useLanguageStore } from '@/store/NavigationProvider'
 
 
 

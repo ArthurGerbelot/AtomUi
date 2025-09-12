@@ -4,7 +4,7 @@ import { List, VStack, HStack, Card, Header, IconSuccess, IconPlus, IconMinus, T
 
 export default function ListDocPage() {
   return (
-    <VStack stretch gap="xl" className="p-8 max-w-6xl mx-auto">
+    <VStack gap="xl" className="p-8 max-w-6xl mx-auto">
       {/* Header */}
       <Header
         className="mb-8"

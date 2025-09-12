@@ -2,7 +2,7 @@
 
 import React from "react"
 import Link from "next/link"
-import { Header, Card, VStack, HStack, Text, Button, List, TextWithLabel } from "@uikit"
+import { Header, Card, VStack, HStack, Text, Button, List, TextWithLabel, Center } from "@uikit"
 import { useUrl } from "@/lib/url"
 import { LayoutPage } from "@/components/layout/LayoutPage"
 
@@ -47,7 +47,7 @@ export default function ApiDocHomePage() {
         subtitle="Understand the core concepts of the Bull Bitcoin API"
       />
 
-      <HStack>
+      <HStack noStretch>
         <Card
           flex
           title="JSON-RPC"
@@ -59,9 +59,11 @@ export default function ApiDocHomePage() {
               <List.Item>URL must point the right services (api-users, api-orders, ...)</List.Item>
               <List.Item>Method is specified in the JSON-RPC body request with params, ..</List.Item>
             </List>
-            <Button secondary asChild>
-              <Link href={getUrl('core/json-rpc')}>Explore JSON-RPC Doc</Link>
-            </Button>
+            <Center>
+              <Button secondary asChild>
+                <Link href={getUrl('core/json-rpc')}>Explore JSON-RPC Doc</Link>
+              </Button>
+            </Center>
           </VStack>
         </Card>
 
@@ -74,9 +76,11 @@ export default function ApiDocHomePage() {
         >
           <VStack gap="sm">
 
-            <Button secondary asChild>
-              <Link href={getUrl('core/websocket')}>Explore WebSocket</Link>
-            </Button>
+            <Center>
+              <Button secondary asChild>
+                <Link href={getUrl('core/websocket')}>Explore WebSocket</Link>
+              </Button>
+            </Center>
           </VStack>
         </Card>
       </HStack>

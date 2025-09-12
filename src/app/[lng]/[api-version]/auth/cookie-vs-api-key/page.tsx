@@ -3,8 +3,9 @@
 import NextLink from "next/link"
 
 import { LayoutPage } from "@/components/layout/LayoutPage"
-import { Badge, Button, Card, Code, Header, HStack, Text, VStack } from "@uikit"
+import { Badge, Button, Card, Center, Code, Fieldset, Header, HStack, Label, Link, Text, VStack } from "@uikit"
 import { useUrl } from "@/lib/url"
+import { ApiAuthTypeInput } from "@/components/ui/settings/ApiAuthTypeInput"
 
 export default function AuthOverviewPage() {
   const { getUrl } = useUrl()
@@ -20,11 +21,11 @@ export default function AuthOverviewPage() {
       />
 
       {/* Authentication Methods */}
-      <VStack gap={8} stretch>
+      <VStack gap={8}>
 
         {/* Method 1: Cookie-based Authentication */}
         <Card>
-          <VStack gap={4} stretch>
+          <VStack>
             <HStack className="items-start justify-between">
               <VStack gap={2} className="flex-1">
                 <HStack>
@@ -98,7 +99,7 @@ export default function AuthOverviewPage() {
 
         {/* Method 2: API Key Authentication */}
         <Card>
-          <VStack gap={4} stretch>
+          <VStack>
             <HStack className="items-start justify-between">
               <VStack gap={2} className="flex-1">
                 <HStack>
@@ -138,6 +139,15 @@ export default function AuthOverviewPage() {
                 <HStack className="items-start gap-3">
                   <Badge colorTheme="low-contrast" className="mt-1 min-w-[24px] text-center">3</Badge>
                   <VStack gap={1} className="flex-1">
+                    <Text className="font-medium">Add <Code>/ap</Code> to your request URL. <Link href={getUrl('core/json-rpc')}>View Request Format</Link></Text>
+                    <Text colorTheme="low-contrast" typo="caption">
+                      This will ensure that your requests are authenticated using API key
+                    </Text>
+                  </VStack>
+                </HStack>
+                <HStack className="items-start gap-3">
+                  <Badge colorTheme="low-contrast" className="mt-1 min-w-[24px] text-center">4</Badge>
+                  <VStack gap={1} className="flex-1">
                     <Text className="font-medium">Use API key in requests</Text>
                     <Text colorTheme="low-contrast" typo="caption">
                       Include your API key in the request headers
@@ -160,9 +170,17 @@ export default function AuthOverviewPage() {
           </VStack>
         </Card>
 
+        <Center className="text-center">
+          <Fieldset className="max-w-[225px]">
+            <Label>Authentication Type</Label>
+            <Text typo="caption">Choose the authentication type you want to use on the documentation.</Text>
+            <Center><ApiAuthTypeInput /></Center>
+          </Fieldset>
+        </Center>
+
         {/* Comparison Table */}
         <Card>
-          <VStack gap={4} stretch>
+          <VStack>
             <Text typo="card-title" className="font-semibold">Which method should you choose?</Text>
 
             <div className="overflow-x-auto">

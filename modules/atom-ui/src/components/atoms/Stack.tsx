@@ -40,8 +40,12 @@ const stackVariants = cva("flex items-start gap-md", {
       stretch: "items-stretch",
       baseline: "items-baseline",
     },
-    stretch: {  // default is "start" and add an helper for "stretch" (most used)
-      true: "items-stretch",
+    // stretch: {
+    //   true: "items-stretch",
+    //   false: "",
+    // },
+    noStretch: {  // default is "stretch" and add an helper for "no stretch":start (most used)
+      true: "items-start",
       false: "",
     },
     // For HStack to fill the parent width (and so children flex really spread the full width)
@@ -81,7 +85,7 @@ export const Stack = forwardRefPolymorphic<"div", StackProps>(
   function Stack<T extends React.ElementType = "div">(
     {
       // On variant
-      direction, wrap, align, stretch, full, center,
+      direction, wrap, align, noStretch, full, center,
       // Props with default
       gap = "md",
       ...props }: StackPolymorphicProps<T>,
@@ -98,7 +102,7 @@ export const Stack = forwardRefPolymorphic<"div", StackProps>(
         ref={ref}
         as={(as ?? "div") as any}
         asChild={asChild}
-        className={cn(stackVariants({ direction, wrap, align, stretch, center, full }), className)}
+        className={cn(stackVariants({ direction, wrap, align, noStretch, center, full }), className)}
         {...rest} // Spread remaining props (color theme, style, event handlers, etc.)
       />
     )

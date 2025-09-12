@@ -2,7 +2,9 @@
 
 import { LayoutPage } from "@/components/layout/LayoutPage"
 import NextLink from "next/link"
-import { Link, Card, Code, Header, List, Text, TextWithLabel, VStack, HStack, Button, Center } from "@uikit"
+import { Link, Card, Code, Header, List, Text, TextWithLabel, VStack, HStack, Button, Center, Fieldset, Label } from "@uikit"
+import { ApiAuthTypeInput } from "@/components/ui/settings/ApiAuthTypeInput"
+import { ApiEnvInput } from "@/components/ui/settings/ApiEnvInput"
 
 
 export default function QuickstartPage() {
@@ -20,11 +22,11 @@ export default function QuickstartPage() {
 
 
       {/* API Examples */}
-      <VStack gap={6} stretch>
+      <VStack gap={6}>
         <Header variant="section" title="Request" />
 
         <Card title={"Every Request follows the same format"}>
-          <VStack stretch>
+          <VStack>
             <div>
               <Text typo="caption" className="font-medium">CURL Command</Text>
               <Code block>{[`curl -X POST `, <Text key="url" textColor="brand">URL</Text>, `  \\
@@ -45,31 +47,58 @@ export default function QuickstartPage() {
 
 
         <Card title={"URL"} description={"Compose the URL of the method you want to call"}>
-          Base:
-          <List>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Prod"><Code>https://api.bullbitcoin.com</Code></TextWithLabel></List.Item>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Preprod (env 04)"><Code>https://api04.bullbitcoin.dev</Code></TextWithLabel></List.Item>
-          </List>
+          <HStack className="justify-between">
+            <VStack>
+              <div>
+                Base:
+                <List>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Prod"><Code>https://api.bullbitcoin.com</Code></TextWithLabel></List.Item>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Preprod (env 04)"><Code>https://api04.bullbitcoin.dev</Code></TextWithLabel></List.Item>
+                </List>
+              </div>
+              <div>
+                Prefix:
+                <List>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Public"><Code>/public</Code></TextWithLabel></List.Item>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Auth by API key"><Code>/ak</Code></TextWithLabel></List.Item>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Auth by Cookie"><Text textColor="light">none</Text></TextWithLabel></List.Item>
+                </List>
+              </div>
+              <div>
+                Service: <Text typo="caption">(Every method will inform you what service you need to use.)</Text>
+                <List>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Users"><Code>/users</Code></TextWithLabel></List.Item>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="KYCs"><Code>/kycs</Code></TextWithLabel></List.Item>
+                  <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Orders"><Code>/orders</Code></TextWithLabel></List.Item>
+                </List>
+              </div>
+            </VStack>
+            <VStack className="max-w-[225px]">
+
+              <Fieldset>
+                <Label>Environment</Label>
+                <Text typo="caption">Choose the environment you want to use on the documentation.</Text>
+                <ApiEnvInput />
+              </Fieldset>
+              <Fieldset>
+                <Label>Authentication Type</Label>
+                <Text typo="caption">Choose the authentication type you want to use on the documentation.</Text>
+                <ApiAuthTypeInput />
+              </Fieldset>
+            </VStack>
+          </HStack>
           <br />
-          Prefix:
-          <List>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Public"><Code>/public</Code></TextWithLabel></List.Item>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Auth by API key"><Code>/ak</Code></TextWithLabel></List.Item>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Auth by Cookie"><Text textColor="light">none</Text></TextWithLabel></List.Item>
-          </List>
+          <HStack className="justify-between">
+            <div>
+            </div>
+          </HStack>
           <br />
-          Service: <Text typo="caption">(Every method will inform you what service you need to use.)</Text>
-          <List>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Users"><Code>/users</Code></TextWithLabel></List.Item>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="KYCs"><Code>/kycs</Code></TextWithLabel></List.Item>
-            <List.Item><TextWithLabel labelProps={{ className: "min-w-[150px]" }} label="Orders"><Code>/orders</Code></TextWithLabel></List.Item>
-          </List>
         </Card>
 
         <Card title={"Auth"} description={"API key or Cookies"}>
           Based on the choice you made to authenticate, send one (and only one) of the headers below:
 
-          <HStack stretch>
+          <HStack>
             <Card surface="none" title={"X-API-Key"} flex>
               Your API Key. See <Link href="/core/api-key">API Key</Link>.
             </Card>
@@ -89,7 +118,7 @@ export default function QuickstartPage() {
 
 
         <Card title="Content">
-          <HStack stretch>
+          <HStack>
             <Card surface="none" title={"ID"} flex>
               Any string you want, it will be returned in the response.
             </Card>
@@ -118,7 +147,7 @@ export default function QuickstartPage() {
         </Card>
 
         <Card title="Content">
-          <HStack stretch>
+          <HStack>
             <Card surface="none" title={"ID"} flex>
               The same ID you sent in the request.
             </Card>
@@ -131,7 +160,7 @@ export default function QuickstartPage() {
 
 
         <Card title="Error">
-          <HStack stretch>
+          <HStack>
             <Card surface="none" title={"JSON-RPC Error"} flex>
               If the request you made is not valid in the transfer protocol, you will receive an <Link href="https://www.jsonrpc.org/specification#error_object" target="_blank">RPC error</Link>.
             </Card>
@@ -141,7 +170,7 @@ export default function QuickstartPage() {
             </Card>
           </HStack>
 
-          <HStack stretch className="justify-center">
+          <HStack className="justify-center">
             <Button asChild>
               <NextLink href="/core/errors">
                 Explore errors
