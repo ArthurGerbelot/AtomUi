@@ -31,10 +31,11 @@ export const toApiVersion = (version: string) => {
   const [major, minor, patch] = v.split('.').map(Number);
   return { major, minor, patch, release };
 }
-export const toVersionString = (version: ApiVersion) => {
-  if (version === 'lastest') return 'lastest';
+export const toVersionString = (version: ApiVersion, avoidLastest?: boolean) => {
+  const lasted: string = avoidLastest ? toVersionString(versions[versions.length - 2]) : 'lastest';
+  if (version === 'lastest') return lasted;
   if (typeof version === 'string') return version;
-  if (!version || typeof version !== 'object') return 'lastest';
+  if (!version || typeof version !== 'object') return lasted;
   return `${version.major}.${version.minor}.${version.patch}${version.release ? `-${version.release}` : ''}`;
 }
 

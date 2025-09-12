@@ -9,6 +9,7 @@ import { Button } from "../atoms/Button"
 import { HStack, StackProps } from "../atoms/Stack"
 import { Atom, AtomProps, forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../core"
 import Link, { LinkProps } from "next/link"
+import { ScrollArea } from "./ScrollArea"
 
 // Variants for different tab styles
 const tabsVariants = cva("flex flex-col", {
@@ -67,7 +68,7 @@ const tabsListVariants = cva("", {
   ]
 })
 
-const tabsTriggerVariants = cva("cursor-pointer transition-colors", {
+const tabsTriggerVariants = cva("cursor-pointer transition-colors min-w-fit", {
   variants: {
     variant: {
       line: "relative px-4 py-2 text-center text-foreground hover:text-muted-foreground data-[state=active]:text-foreground",
@@ -152,12 +153,21 @@ function TabsList({
 
   // Line variant uses HStack for distribution
   return (
-    <HStack
-      as={TabsPrimitive.List}
-      data-slot="tabs-list"
-      className={cn(tabsListVariants({ variant, borderDirection }), className)}
-      {...props}
-    />
+    <ScrollArea.Root className="w-full">
+      <ScrollArea.Viewport className="w-full">
+        <HStack
+          as={TabsPrimitive.List}
+          data-slot="tabs-list"
+          className={cn(
+            tabsListVariants({ variant, borderDirection }),
+            className
+          )}
+          {...props}
+        />
+      </ScrollArea.Viewport>
+      <ScrollArea.Bar orientation="horizontal" />
+      <ScrollArea.Corner />
+    </ScrollArea.Root>
   )
 }
 
@@ -194,6 +204,7 @@ const TabsTrigger = forwardRefPolymorphic<"div", TabsTriggerProps>(
         as={as ?? TabsPrimitive.Trigger}
         className={cn(tabsTriggerVariants({ variant, borderDirection }), className)}
         style={style}
+        ellipsis
         {...(typeof isActive === "boolean" && { "data-state": isActive ? "active" : undefined })}
         {...rest}
       >

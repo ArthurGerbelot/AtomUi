@@ -10,6 +10,7 @@ import { cn, resolveAtomTokens } from "../../lib"
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../../lib/core/polymorphic-helpers"
 import { Atom, type AtomProps } from "../core/Atom"
 import { asSmartSlot } from "../core/SmartSlot"
+import { CopyButton } from "./CopyButton"
 
 // Dynamic import pour optimiser le bundle
 const SyntaxHighlighter = dynamic(
@@ -98,47 +99,57 @@ export const CodeHighlighter = forwardRefPolymorphic<"pre", CodeHighlighterProps
           ref={ref}
           as={(as ?? "pre") as any}
           asChild={asChild}
-          className={cn("font-mono bg-gray-100 dark:bg-gray-800 p-4 rounded-lg", className)}
+          className={cn("font-mono bg-gray-100 dark:bg-gray-800 p-4 rounded-lg relative", className)}
           style={style}
           {...rest}
         >
           <pre>{String(children).trim()}</pre>
+          <CopyButton
+            size="xs"
+            copy={String(children).trim()}
+            className="absolute top-2 right-2"
+          />
         </Atom>
       )
     }
 
-    // If inline, use different component structure
-    if (inline || as === "span" || as === "code") {
-      return (
-        <Atom
-          ref={ref}
-          as={(as ?? "code") as any}
-          asChild={asChild}
-          className={cn("font-mono", className)}
-          style={{
-            ...style,
-            "--text-scale": textScale,
-          } as CSSProperties}
-          {...rest}
-        >
-          <SyntaxHighlighter
-            language={language}
-            style={syntaxTheme}
-            PreTag="span"
-            CodeTag="span"
-            customStyle={{
-              background: 'transparent',
-              padding: 0,
-              margin: 0,
-              fontSize: `calc(1em * var(--text-scale, 1))`,
-              fontFamily: 'inherit'
-            }}
-          >
-            {String(children).trim()}
-          </SyntaxHighlighter>
-        </Atom>
-      )
-    }
+    // // If inline, use different component structure
+    // if (inline || as === "span" || as === "code") {
+    //   return (
+    //     <Atom
+    //       ref={ref}
+    //       as={(as ?? "code") as any}
+    //       asChild={asChild}
+    //       className={cn("font-mono relative", className)}
+    //       style={{
+    //         ...style,
+    //         "--text-scale": textScale,
+    //       } as CSSProperties}
+    //       {...rest}
+    //     >
+    //       <SyntaxHighlighter
+    //         language={language}
+    //         style={syntaxTheme}
+    //         PreTag="span"
+    //         CodeTag="span"
+    //         customStyle={{
+    //           background: 'transparent',
+    //           padding: 0,
+    //           margin: 0,
+    //           fontSize: `calc(1em * var(--text-scale, 1))`,
+    //           fontFamily: 'inherit'
+    //         }}
+    //       >
+    //         {String(children).trim()}
+    //       </SyntaxHighlighter>
+    //       <CopyButton
+    //         size="xs"
+    //         copy={String(children).trim()}
+    //         className="absolute top-1 right-1"
+    //       />
+    //     </Atom>
+    //   )
+    // }
 
     // Block version (default)
     return (
@@ -146,7 +157,7 @@ export const CodeHighlighter = forwardRefPolymorphic<"pre", CodeHighlighterProps
         ref={ref}
         as={(as ?? "div") as any}
         asChild={asChild}
-        className={cn("font-mono rounded-lg overflow-hidden", className)}
+        className={cn("font-mono rounded-lg overflow-hidden relative", className)}
         style={style}
         {...rest}
       >
@@ -162,6 +173,11 @@ export const CodeHighlighter = forwardRefPolymorphic<"pre", CodeHighlighterProps
         >
           {String(children).trim()}
         </SyntaxHighlighter>
+        <CopyButton
+          size="xs"
+          copy={String(children).trim()}
+          className="absolute top-2.5 right-2.5"
+        />
       </Atom>
     )
   }

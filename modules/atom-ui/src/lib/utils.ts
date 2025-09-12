@@ -7,6 +7,12 @@ export const isPlainObject = (v: any) =>
   v !== null && typeof v === "object" && !Array.isArray(v);
 
 
+/**
+ * Copy an object
+ */
+export const clipboardCopy = async (value: string) => {
+  try { await navigator.clipboard.writeText(value) } catch { }
+}
 
 /**
  * Merges top-level keys only.
@@ -87,7 +93,9 @@ export function sanitizeToId(str: string): string {
 
   return sanitized;
 }
-
+/**
+ * Safe stringify for JSON.stringify
+ */
 export function safeStringify(obj: any, indent = 2): string {
   const seen = new WeakSet();
 

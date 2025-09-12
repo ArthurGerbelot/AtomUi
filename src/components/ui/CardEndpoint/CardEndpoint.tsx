@@ -56,7 +56,7 @@ export function CardEndpoint({ endpoints }: CardEndpointProps) {
             <Label className="min-w-[65px]">Service</Label>
             <Badge>{endpoint.service}</Badge>
           </HStack>
-          <HStack align="baseline">
+          <HStack align="baseline" className="max-w-full">
             <Label className="min-w-[65px]">URL</Label>
             <EndpointUrl endpoint={endpoint} />
           </HStack>

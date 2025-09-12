@@ -4,21 +4,31 @@ import { useApiSettingsStore } from "@/store/ApiSettingsProvider";
 import { formatJsonIndentation } from "./formatJsonIndentation";
 import { EndpointCodeResponse } from "./EndpointCodeResponse";
 import { getEndpointUrl } from "../EndpointUrl";
+import { toVersionString } from "@/lib/versions";
+import { useVersionStore } from "@/store/NavigationProvider";
 
 // (exampleIdx isn't used but we do not want to propagate it to the props)
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function EndpointCodeTypescript({ endpoint, example, exampleIdx, ...props }: EndpointCodeProps) {
+  const { version } = useVersionStore()
   const { env, authType } = useApiSettingsStore()
 
   const generateFetchCode = () => {
-    const headers = authType === 'cookie'
+
+    const sharedHeaders = `'Content-Type': 'application/json',
+    'X-API-Version': '${toVersionString(version, true)}',`;
+
+    const headers = endpoint.requireAuth ? (authType === 'cookie'
       ? `{
-    'Content-Type': 'application/json',
+    ${sharedHeaders}
     'Cookie': 'bb_session=SESSION_ID'
   }`
       : `{
-    'Content-Type': 'application/json',
+    ${sharedHeaders}
     'X-API-Key': 'API_KEY'
+  }`
+    ) : `{
+    ${sharedHeaders}
   }`
 
     const requestBody = example.request

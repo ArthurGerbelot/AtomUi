@@ -3,7 +3,7 @@ import { Input, InputProps } from "./Input";
 import { forwardRefPolymorphic, PolymorphicProps, PolymorphicRef } from "../core";
 import { IconButton } from "./IconButton";
 import { IconCopy } from "./IconLibrary";
-import { cn } from "../../lib";
+import { clipboardCopy, cn } from "../../lib";
 
 // =============================================================================
 // InputWithClipboard
@@ -86,7 +86,7 @@ export const InputWithClipboard = forwardRefPolymorphic<"input", InputWithClipbo
         AddonRight={
           <IconButton
             onClick={async () => {
-              try { await navigator.clipboard.writeText(value) } catch { }
+              await clipboardCopy(value)
             }}
             variant="ghost"
             icon={IconCopy}

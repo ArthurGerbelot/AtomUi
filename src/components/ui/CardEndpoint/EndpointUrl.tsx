@@ -1,6 +1,6 @@
 import { Endpoint } from "@/lib/endpoints"
 import { ApiAuthType, ApiEnv, useApiSettingsStore } from "@/store/ApiSettingsProvider"
-import { HStack, Text } from "@uikit"
+import { clipboardCopy, HStack, IconButton, IconCopy, Text } from "@uikit"
 import { ApiSettingsHoverCard } from "../settings/ApiSettingsHoverCard"
 
 export const getEndpointUrl = ({ endpoint, env, authType }: { endpoint: Endpoint, env: ApiEnv, authType: ApiAuthType }) => {
@@ -14,15 +14,17 @@ export const getEndpointUrl = ({ endpoint, env, authType }: { endpoint: Endpoint
 export const EndpointUrl = ({ endpoint }: { endpoint: Endpoint }) => {
 
   const { env, authType } = useApiSettingsStore()
-  const url = <Text typo="code">{getEndpointUrl({ endpoint, env, authType })}</Text>
+  const url = getEndpointUrl({ endpoint, env, authType });
 
-  if (endpoint.requireAuth) {
-    return (
-      <HStack noStretch noGap>
-        {url}
-        <ApiSettingsHoverCard iconButtonProps={{ size: 'xs', mt: -1 }} />
-      </HStack>)
-  }
+  return (
+    <>
+      <Text typo="code" ellipsis className="w-fit">{url}</Text>
+      {/* Avoid Gap between icons  */}
+      <HStack noGap>
+        <IconButton size="xs" icon={IconCopy} onClick={() => clipboardCopy(getEndpointUrl({ endpoint, env, authType }))} />
+        {endpoint.requireAuth && <ApiSettingsHoverCard iconButtonProps={{ size: 'xs' }} />}
+      </HStack>
+    </>
+  )
 
-  return url
 }

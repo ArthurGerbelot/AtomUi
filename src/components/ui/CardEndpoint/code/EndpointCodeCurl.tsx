@@ -4,11 +4,14 @@ import { getEndpointUrl } from "../EndpointUrl";
 import { useApiSettingsStore } from "@/store/ApiSettingsProvider";
 import { formatJsonIndentation } from "./formatJsonIndentation";
 import { EndpointCodeResponse } from "./EndpointCodeResponse";
+import { toVersionString } from "@/lib/versions";
+import { useVersionStore } from "@/store/NavigationProvider";
 
 // (exampleIdx isn't used but we do not want to propagate it to the props)
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function EndpointCodeCurl({ endpoint, example, exampleIdx, space = 6, ...props }: EndpointCodeProps & { space?: number }) {
 
+  const { version } = useVersionStore()
   const { env, authType } = useApiSettingsStore()
 
   return (
@@ -17,7 +20,8 @@ export function EndpointCodeCurl({ endpoint, example, exampleIdx, space = 6, ...
         <Heading as="h5">cURL Request</Heading>
         <CodeHighlighter language="bash">{`curl -X POST ${getEndpointUrl({ endpoint, env, authType })} \\
   -H "Content-Type: application/json" \\
-  ${endpoint.requireAuth ? (authType === 'cookie' ? '-H "Cookie: bb_session=SESSION_ID"' : '-H "X-API-Key: API_KEY"') + `\\\n  ` : ''}-d '{
+  -H "X-API-Version: ${toVersionString(version, true)}" \\
+  ${endpoint.requireAuth ? (authType === 'cookie' ? '-H "Cookie: bb_session=SESSION_ID"' : '-H "X-API-Key: API_KEY"') + ` \\\n  ` : ''}-d '{
     "id": "123",
     "jsonrpc":"2.0",
     "method":"${endpoint.method}"${example.request ? `,
